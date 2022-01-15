@@ -1,0 +1,76 @@
+<?php
+
+/** @var League\Plates\Template\Template $this */
+/** @var array[] $conversations */
+
+$title = 'Conversations';
+$this->layout('layouts/default', [
+    'title' => $title,
+]);
+
+/**
+ * @param array $conversation
+ * @return string
+ * @throws Exception
+ */
+$getConversationType = function(array $conversation): string
+{
+    if ($conversation['is_channel']) {
+        return 'channel';
+    } elseif ($conversation['is_mpim']) {
+        return 'mpim';
+    } elseif ($conversation['is_group']) {
+        return 'group';
+    } elseif ($conversation['is_im']) {
+        return 'im';
+    } else {
+        throw new Exception("Unknown type of conversation \"{$conversation['name']}\" ({$conversation['id']})");
+    }
+};
+
+$getUserTitle = function(array $user): string
+{
+    if ($user['profile']) {
+        if ($user['profile']['display_name'] != '') {
+            return $user['profile']['display_name'];
+        }
+        if ($user['profile']['real_name'] != '') {
+            return $user['profile']['real_name'];
+        }
+    }
+    if ($user['real_name'] != '') {
+        return $user['real_name'];
+    } elseif ($user['name'] != '') {
+        return $user['name'];
+    } else {
+        return $user['id'];
+    }
+};
+
+$getConversationTitle = function(array $conversation, string $type) use ($getUserTitle): string
+{
+    if ($type == 'channel' || $type == 'group') {
+        return $conversation['name'];
+    } elseif ($type == 'mpim') {
+        $mpimUserTitles = [];
+        foreach ($conversation['members'] as $user) {
+            $mpimUserTitles[] = $getUserTitle($user);
+        }
+        return implode(', ', $mpimUserTitles);
+    } elseif ($type == 'im') {
+        return $getUserTitle($conversation['user']);
+    } else {
+        return $conversation['id'];
+    }
+}
+
+?>
+<h1><?= $this->e($title) ?></h1>
+
+<ul>
+<?php foreach ($conversations as $conversation) {
+    $type = $getConversationType($conversation);
+?>
+    <li><?= $this->e($type) ?> <a href="<?= $this->e($conversation['id'] . '.html') ?>"><?= $this->e($getConversationTitle($conversation, $type)) ?></a></li>
+<?php } ?>
+</ul>

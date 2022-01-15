@@ -1,0 +1,33 @@
+<?php
+
+/** @var League\Plates\Template\Template $this */
+/** @var \App\Iterators\MessageIterator $messages */
+/** @var array[] $users */
+
+$title = 'History';
+$this->layout('layouts/default', [
+    'title' => $title,
+]);
+
+$getUserTitle = function(array $user): string
+{
+    if ($user['profile']) {
+        if ($user['profile']['display_name'] != '') {
+            return $user['profile']['display_name'];
+        }
+        if ($user['profile']['real_name'] != '') {
+            return $user['profile']['real_name'];
+        }
+    }
+    if ($user['real_name'] != '') {
+        return $user['real_name'];
+    } elseif ($user['name'] != '') {
+        return $user['name'];
+    } else {
+        return $user['id'];
+    }
+};
+
+foreach ($messages as $message) { ?>
+    <?= $this->e(date('Y-m-d H:i:s', (int) $message['ts'])) ?> <?= $this->e($message['user'] != null ? $getUserTitle($users[$message['user']]) : 'Bot') ?>: <?= $this->e($message['text']); ?><br>
+<?php } ?>

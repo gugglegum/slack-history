@@ -1,0 +1,21 @@
+<?php
+
+/** @var League\Plates\Template\Template $this */
+/** @var string $title */
+
+?>
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title><?= $this->e($title) ?></title>
+    <meta charset="utf-8">
+<!--    <link href="/styles.css" rel="stylesheet">-->
+</head>
+<body>
+
+<div id="contents">
+<?= $this->section('content') ?>
+</div>
+
+</body>
+</html>
