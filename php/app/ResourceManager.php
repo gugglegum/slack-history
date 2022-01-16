@@ -27,6 +27,10 @@ class ResourceManager
         return $this->config;
     }
 
+    /**
+     * @return \Aura\Sql\ExtendedPdo
+     * @throws \Exception
+     */
     public function getSqliteDb(): \Aura\Sql\ExtendedPdo
     {
         if (!isset($this->sqliteDb)) {
@@ -38,7 +42,7 @@ class ResourceManager
                 echo "Create SQLite database at {$dbRelativePath}\n";
                 $sqliteDbHelper->initDb();
             }
-            $sqliteDbHelper->rolloverMigrations();
+            $sqliteDbHelper->rolloverMigrations($sqliteDbFile);
             $this->sqliteDb->exec('PRAGMA foreign_keys=on');
         }
         return $this->sqliteDb;

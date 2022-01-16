@@ -32,7 +32,7 @@ class SqliteDbHelper
      * @return void
      * @throws \Exception
      */
-    public function rolloverMigrations()
+    public function rolloverMigrations(string $sqliteDbFile)
     {
         $version = $this->pdo->fetchValue("SELECT IFNULL(MAX(version), 0) FROM migrations");
         do {
@@ -45,6 +45,7 @@ class SqliteDbHelper
                 if (class_exists($migrationClassName)) {
                     $migration = new $migrationClassName($this->pdo);
                     if ($migration instanceof AbstractMigration) {
+                        copy($sqliteDbFile, $sqliteDbFile . "-backup_before_upgrade_to_version_{$version}");
                         $migration();
                     } else {
                         throw new \Exception("Found migration {$migrationClassName} but it's not inherited from AbstractMigration");
