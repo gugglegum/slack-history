@@ -28,21 +28,33 @@ class SqliteDbHelper
         )');
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function rolloverMigrations()
     {
         $version = $this->pdo->fetchValue("SELECT IFNULL(MAX(version), 0) FROM migrations");
         do {
             $version++;
             $migrationClassName = "Migration" . str_pad((string) $version, 3, '0', STR_PAD_LEFT);
-            if (class_exists($migrationClassName)) {
+            $migrationFileName = PROJECT_ROOT_DIR . '/migrations/' . $migrationClassName . '.php';
+            if (file_exists($migrationFileName)) {
                 echo "Rolling over {$migrationClassName}\n";
-                $migration = new $migrationClassName($this->pdo);
-                if ($migration instanceof AbstractMigration) {
-                    $migration();
-                }
-                $this->pdo->exec("INSERT INTO migrations (version, ts) VALUES (
+                require_once $migrationFileName;
+                if (class_exists($migrationClassName)) {
+                    $migration = new $migrationClassName($this->pdo);
+                    if ($migration instanceof AbstractMigration) {
+                        $migration();
+                    } else {
+                        throw new \Exception("Found migration {$migrationClassName} but it's not inherited from AbstractMigration");
+                    }
+                    $this->pdo->exec("INSERT INTO migrations (version, ts) VALUES (
                     " . $this->quote($version) . ",
                     " . $this->quote(time()) . ")");
+                } else {
+                    throw new \Exception("Found migration {$migrationClassName} but it's not contain class {$migrationClassName}");
+                }
             } else {
                 break;
             }

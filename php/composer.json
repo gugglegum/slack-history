@@ -12,7 +12,6 @@
         "league/plates": "^3.4"
     },
     "autoload": {
-        "classmap": ["migrations"],
         "psr-4": {
             "App\\": "app/"
         }
