@@ -225,13 +225,14 @@ class SqliteDbHelper
         return $lastRowId != $this->getTableMaxRowId('messages');
     }
 
-    public function upsertAttachment(ObjsMessageAttachmentsItem $attachment, string $messageTs, int $num): bool
+    public function upsertAttachment(ObjsMessageAttachmentsItem $attachment, string $messageTs, string $conversationId, int $num): bool
     {
         $lastRowId = $this->getTableMaxRowId('attachments');
-        $this->pdo->exec("INSERT INTO attachments (message_ts, num, author_icon, author_link, author_name,
+        $this->pdo->exec("INSERT INTO attachments (message_ts, conversation_id, num, author_icon, author_link, author_name,
             color, fallback, image_bytes, image_width, image_height, image_url, pretext, text, thumb_url,
             title, title_link, ts) VALUES (
                 " . SqliteDbHelper::quote($messageTs) . ",
+                " . SqliteDbHelper::quote($conversationId) . ",
                 " . SqliteDbHelper::quote($num) . ",
                 " . SqliteDbHelper::quoteNullable($attachment->getAuthorIcon()) . ",
                 " . SqliteDbHelper::quoteNullable($attachment->getAuthorLink()) . ",
@@ -248,7 +249,7 @@ class SqliteDbHelper
                 " . SqliteDbHelper::quoteNullable($attachment->getTitle()) . ",
                 " . SqliteDbHelper::quoteNullable($attachment->getTitleLink()) . ",
                 " . SqliteDbHelper::quoteNullable($attachment->getTs()) . "
-            ) ON CONFLICT (message_ts, num) DO UPDATE SET
+            ) ON CONFLICT (message_ts, conversation_id, num) DO UPDATE SET
                 author_icon = excluded.author_icon,
                 author_link = excluded.author_link,
                 author_name = excluded.author_name,
@@ -268,10 +269,10 @@ class SqliteDbHelper
         return $lastRowId != $this->getTableMaxRowId('attachments');
     }
 
-    public function upsertFile(ObjsFile $file, string $messageTs): bool
+    public function upsertFile(ObjsFile $file, string $messageTs, string $conversationId): bool
     {
         $lastRowId = $this->getTableMaxRowId('files');
-        $this->pdo->exec("INSERT INTO files (id, message_ts, user, filetype, mimetype, pretty_type, size, name,
+        $this->pdo->exec("INSERT INTO files (id, message_ts, conversation_id, user, filetype, mimetype, pretty_type, size, name,
                 title, mode, permalink, permalink_public, url_private, url_private_download, preview, has_rich_preview,
                 is_external, external_id, external_type, external_url, is_public, original_w, original_h, thumb_64,
                 thumb_80, thumb_160, thumb_360, thumb_360_gif, thumb_360_w, thumb_360_h, thumb_480, thumb_480_w,
@@ -280,6 +281,7 @@ class SqliteDbHelper
             ) VALUES (
                 " . SqliteDbHelper::quote($file->getId()) . ",
                 " . SqliteDbHelper::quote($messageTs) . ",
+                " . SqliteDbHelper::quote($conversationId) . ",
                 " . SqliteDbHelper::quote($file->getUser()) . ",
                 " . SqliteDbHelper::quote($file->getFiletype()) . ",
                 " . SqliteDbHelper::quote($file->getMimetype()) . ",
@@ -327,6 +329,7 @@ class SqliteDbHelper
                 " . SqliteDbHelper::quote($file->getCreated()) . "
             ) ON CONFLICT (id) DO UPDATE SET
                 message_ts = excluded.message_ts,
+                conversation_id = excluded.conversation_id,
                 user = excluded.user,
                 filetype = excluded.filetype,
                 mimetype = excluded.mimetype,

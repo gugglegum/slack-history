@@ -134,12 +134,12 @@ class ImportDataToDbAction extends AbstractAction
                     $this->sqliteDbHelper->upsertMessage($message, $conversationId);
                     if ($attachments = $message->getAttachments()) {
                         foreach ($attachments as $index => $attachment) {
-                            $this->sqliteDbHelper->upsertAttachment($attachment, $message->getTs(), $index);
+                            $this->sqliteDbHelper->upsertAttachment($attachment, $message->getTs(), $conversationId, $index);
                         }
                     }
                     if ($files = $message->getFiles()) {
                         foreach ($files as $file) {
-                            $this->sqliteDbHelper->upsertFile($file, $message->getTs());
+                            $this->sqliteDbHelper->upsertFile($file, $message->getTs(), $conversationId);
                         }
                     }
                 }

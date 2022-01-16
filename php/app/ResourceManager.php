@@ -39,7 +39,7 @@ class ResourceManager
                 $sqliteDbHelper->initDb();
             }
             $sqliteDbHelper->rolloverMigrations();
-
+            $this->sqliteDb->exec('PRAGMA foreign_keys=on');
         }
         return $this->sqliteDb;
     }

@@ -201,12 +201,12 @@ class FetchHistoryToDbAction extends AbstractAction
 
                 if ($attachments = $message->getAttachments()) {
                     foreach ($attachments as $index => $attachment) {
-                        $this->sqliteDbHelper->upsertAttachment($attachment, $message->getTs(), $index);
+                        $this->sqliteDbHelper->upsertAttachment($attachment, $message->getTs(), $conversation->getId(), $index);
                     }
                 }
                 if ($files = $message->getFiles()) {
                     foreach ($files as $file) {
-                        $this->sqliteDbHelper->upsertFile($file, $message->getTs());
+                        $this->sqliteDbHelper->upsertFile($file, $message->getTs(), $conversation->getId());
                     }
                 }
             }
@@ -300,7 +300,7 @@ class FetchHistoryToDbAction extends AbstractAction
                         if (isset($attachmentAssoc['ts'])) {
                             $attachment->setTs($attachmentAssoc['ts']);
                         }
-                        $this->sqliteDbHelper->upsertAttachment($attachment, $message->getTs(), $index);
+                        $this->sqliteDbHelper->upsertAttachment($attachment, $message->getTs(), $conversation->getId(), $index);
                     }
                 }
 
@@ -409,7 +409,7 @@ class FetchHistoryToDbAction extends AbstractAction
                         if (isset($fileAssoc['thumb_tiny'])) {
                             $file->setThumbTiny($fileAssoc['thumb_tiny']);
                         }
-                        $this->sqliteDbHelper->upsertFile($file, $message->getTs());
+                        $this->sqliteDbHelper->upsertFile($file, $message->getTs(), $conversation->getId());
                     }
                 }
             }
