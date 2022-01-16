@@ -11,6 +11,7 @@ use JoliCode\Slack\Api\Model\ObjsConversation;
 use JoliCode\Slack\Api\Model\ObjsFile;
 use JoliCode\Slack\Api\Model\ObjsMessage;
 use JoliCode\Slack\Api\Model\ObjsMessageAttachmentsItem;
+use JoliCode\Slack\Api\Model\ObjsReaction;
 use JoliCode\Slack\Api\Model\ObjsUser;
 use JoliCode\Slack\Api\Model\ObjsUserProfile;
 
@@ -34,6 +35,10 @@ class FetchHistoryToDbAction extends AbstractAction
     private int $totalMessagesAdded = 0;
     private int $totalMessagesFetched = 0;
 
+    /**
+     * @param ResourceManager $resourceManager
+     * @throws \Exception
+     */
     public function __construct(ResourceManager $resourceManager)
     {
         parent::__construct($resourceManager);
@@ -195,6 +200,12 @@ class FetchHistoryToDbAction extends AbstractAction
                     $messagesAdded++;
                 }
 
+                if ($message->getReactions() != null) {
+                    foreach ($message->getReactions() as $reaction) {
+                        $this->sqliteDbHelper->upsertReaction($reaction, $message->getTs(), $conversation->getId());
+                    }
+                }
+
                 if ($message->getThreadTs() !== null) {
                     $this->fetchReplies($conversation, $message->getThreadTs());
                 }
@@ -251,6 +262,16 @@ class FetchHistoryToDbAction extends AbstractAction
                     ->setUser($messageAssoc['user']);
 
                 $this->sqliteDbHelper->upsertMessage($message, $conversation->getId());
+
+                if (!empty($messageAssoc['reactions'])) {
+                    foreach ($messageAssoc['reactions'] as $reactionAssoc) {
+                        $reaction = (new ObjsReaction())
+                            ->setName($reactionAssoc['name'])
+                            ->setUsers($reactionAssoc['users'])
+                            ->setCount($reactionAssoc['count']);
+                        $this->sqliteDbHelper->upsertReaction($reaction, $message->getTs(), $conversation->getId());
+                    }
+                }
 
                 if (isset($messageAssoc['attachments'])) {
                     foreach ($messageAssoc['attachments'] as $index => $attachmentAssoc) {

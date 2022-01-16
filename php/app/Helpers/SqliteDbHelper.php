@@ -7,6 +7,7 @@ use JoliCode\Slack\Api\Model\ObjsConversation;
 use JoliCode\Slack\Api\Model\ObjsFile;
 use JoliCode\Slack\Api\Model\ObjsMessage;
 use JoliCode\Slack\Api\Model\ObjsMessageAttachmentsItem;
+use JoliCode\Slack\Api\Model\ObjsReaction;
 use JoliCode\Slack\Api\Model\ObjsUser;
 use JoliCode\Slack\Api\Model\ObjsUserProfile;
 
@@ -379,6 +380,21 @@ class SqliteDbHelper
         );
         return $lastRowId != $this->getTableMaxRowId('files');
     }
+
+    public function upsertReaction(ObjsReaction $reaction, string $messageTs, string $conversationId): bool
+    {
+        $lastRowId = $this->getTableMaxRowId('reactions');
+        $this->pdo->exec("INSERT INTO reactions (message_ts, conversation_id, name, users) VALUES (
+                " . SqliteDbHelper::quote($messageTs) . ",
+                " . SqliteDbHelper::quote($conversationId) . ",
+                " . SqliteDbHelper::quote($reaction->getName()) . ",
+                " . SqliteDbHelper::quoteNullable(implode(',', $reaction->getUsers())) . "
+            ) ON CONFLICT (message_ts, conversation_id, name) DO UPDATE SET
+                users = excluded.users"
+        );
+        return $lastRowId != $this->getTableMaxRowId('reactions');
+    }
+
 
     public function getTableMaxRowId(string $table): int
     {

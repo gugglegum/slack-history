@@ -19,6 +19,10 @@ class CompileHtmlAction extends AbstractAction
 
     private string $htmlDir;
 
+    /**
+     * @param ResourceManager $resourceManager
+     * @throws \Exception
+     */
     public function __construct(ResourceManager $resourceManager)
     {
         parent::__construct($resourceManager);

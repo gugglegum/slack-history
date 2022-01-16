@@ -7,6 +7,7 @@ namespace App\Console\Actions;
 use App\Helpers\ConfigHelper;
 use App\Helpers\SqliteDbHelper;
 use App\ResourceManager;
+use JoliCode\Slack\Api\Model\ObjsConversation;
 use JoliCode\Slack\Api\Model\ObjsUser;
 use JoliCode\Slack\Api\Model\ObjsUserProfile;
 
@@ -25,6 +26,10 @@ class ImportDataToDbAction extends AbstractAction
      */
     private array $profiles;
 
+    /**
+     * @param ResourceManager $resourceManager
+     * @throws \Exception
+     */
     public function __construct(ResourceManager $resourceManager)
     {
         parent::__construct($resourceManager);
@@ -104,7 +109,7 @@ class ImportDataToDbAction extends AbstractAction
                     }
                     echo ' ';
                     $this->sqliteDbHelper->upsertConversation($conversation);
-                    $this->importConversationHistory($conversation->getId(), PROJECT_ROOT_DIR . "/../data/conversations.history/{$folder}");
+                    $this->importConversationHistory($conversation, PROJECT_ROOT_DIR . "/../data/conversations.history/{$folder}");
                     echo "\n";
                 }
                 $listNumber++;
@@ -115,13 +120,11 @@ class ImportDataToDbAction extends AbstractAction
     }
 
     /**
-     * TODO: reactions, replies
-     *
-     * @param string $conversationId
+     * @param ObjsConversation $conversation
      * @param string $dir
      * @return void
      */
-    private function importConversationHistory(string $conversationId, string $dir)
+    private function importConversationHistory(ObjsConversation $conversation, string $dir)
     {
         $historyNumber = 1;
         do {
@@ -131,15 +134,22 @@ class ImportDataToDbAction extends AbstractAction
                 /** @var \JoliCode\Slack\Api\Model\ConversationsHistoryGetResponse200 $list */
                 $list = unserialize(file_get_contents($file));
                 foreach ($list->getMessages() as $message) {
-                    $this->sqliteDbHelper->upsertMessage($message, $conversationId);
+                    $this->sqliteDbHelper->upsertMessage($message, $conversation->getId());
+
+                    if ($message->getReactions() != null) {
+                        foreach ($message->getReactions() as $reaction) {
+                            $this->sqliteDbHelper->upsertReaction($reaction, $message->getTs(), $conversation->getId());
+                        }
+                    }
+
                     if ($attachments = $message->getAttachments()) {
                         foreach ($attachments as $index => $attachment) {
-                            $this->sqliteDbHelper->upsertAttachment($attachment, $message->getTs(), $conversationId, $index);
+                            $this->sqliteDbHelper->upsertAttachment($attachment, $message->getTs(), $conversation->getId(), $index);
                         }
                     }
                     if ($files = $message->getFiles()) {
                         foreach ($files as $file) {
-                            $this->sqliteDbHelper->upsertFile($file, $message->getTs(), $conversationId);
+                            $this->sqliteDbHelper->upsertFile($file, $message->getTs(), $conversation->getId());
                         }
                     }
                 }
