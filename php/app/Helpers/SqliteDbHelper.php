@@ -282,7 +282,7 @@ class SqliteDbHelper
                 " . SqliteDbHelper::quote($file->getId()) . ",
                 " . SqliteDbHelper::quote($messageTs) . ",
                 " . SqliteDbHelper::quote($conversationId) . ",
-                " . SqliteDbHelper::quote($file->getUser()) . ",
+                " . SqliteDbHelper::quoteNullable($file->getUser()) . ",
                 " . SqliteDbHelper::quote($file->getFiletype()) . ",
                 " . SqliteDbHelper::quote($file->getMimetype()) . ",
                 " . SqliteDbHelper::quote($file->getPrettyType()) . ",
