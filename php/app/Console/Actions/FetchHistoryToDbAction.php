@@ -71,7 +71,6 @@ class FetchHistoryToDbAction extends AbstractAction
             $list = $this->slackClient->usersList($query);
             foreach ($list->getMembers() as $user) {
                 if ($this->sqliteDbHelper->upsertUser($user)) {
-                    echo "\tAdded user {$user->getId()}\n";
                     $usersAdded++;
                 }
                 $this->users[$user->getId()] = $user;
@@ -133,7 +132,7 @@ class FetchHistoryToDbAction extends AbstractAction
                 echo ' ';
                 $members = $this->fetchMembers($conversation);
                 if ($this->sqliteDbHelper->upsertConversation($conversation, $members)) {
-                    echo "\t(new conversation)\n";
+                    echo "(new conversation) ";
                     $conversationsAdded++;
                 }
                 $this->fetchConversationHistory($conversation);
