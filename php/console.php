@@ -5,9 +5,6 @@ require_once __DIR__ . '/init.php';
 
 (function() {
     $resources = new \App\ResourceManager();
-    if (isset($_SERVER['argv'][2])) {
-        $resources->getGeoRegion()->setCurrentRegion($_SERVER['argv'][2]);
-    }
     $actionClass = 'App\\Console\\Actions\\'
         . implode('', array_map(function($w) { return ucfirst($w); }, explode('-', $_SERVER['argv'][1])))
         . 'Action';
