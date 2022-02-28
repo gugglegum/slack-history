@@ -344,9 +344,9 @@ class FetchHistoryToDbAction extends AbstractAction
                             ->setUrlPrivateDownload($fileAssoc['url_private_download'])
                             ->setPermalink($fileAssoc['permalink'])
                             ->setPermalinkPublic($fileAssoc['permalink_public'])
-                            ->setPreview($fileAssoc['preview']);
-                        if (isset($fileAssoc['has_rich_preview'])) {
-                            $file->setHasRichPreview($fileAssoc['has_rich_preview']);
+                            ->setHasRichPreview($fileAssoc['has_rich_preview'] ?? false);
+                        if (isset($fileAssoc['preview'])) {
+                            $file->setPreview($fileAssoc['preview']);
                         }
                         if (isset($fileAssoc['external_id'])) {
                             $file->setExternalId($fileAssoc['external_id']);
