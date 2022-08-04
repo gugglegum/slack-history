@@ -258,7 +258,7 @@ class FetchHistoryToDbAction extends AbstractAction
                     ->setThreadTs($messageAssoc['thread_ts'])
                     ->setText($messageAssoc['text'])
                     ->setType($messageAssoc['type'])
-                    ->setUser($messageAssoc['user']);
+                    ->setUser($messageAssoc['user'] ?? null);
 
                 $this->sqliteDbHelper->upsertMessage($message, $conversation->getId());
 
