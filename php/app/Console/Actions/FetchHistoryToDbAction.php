@@ -7,6 +7,8 @@ namespace App\Console\Actions;
 use App\Helpers\ConfigHelper;
 use App\Helpers\SqliteDbHelper;
 use App\ResourceManager;
+use Exception;
+use gugglegum\RetryHelper\RetryHelper;
 use JoliCode\Slack\Api\Model\ObjsConversation;
 use JoliCode\Slack\Api\Model\ObjsFile;
 use JoliCode\Slack\Api\Model\ObjsMessage;
@@ -14,6 +16,7 @@ use JoliCode\Slack\Api\Model\ObjsMessageAttachmentsItem;
 use JoliCode\Slack\Api\Model\ObjsReaction;
 use JoliCode\Slack\Api\Model\ObjsUser;
 use JoliCode\Slack\Api\Model\ObjsUserProfile;
+use Throwable;
 
 class FetchHistoryToDbAction extends AbstractAction
 {
@@ -35,9 +38,11 @@ class FetchHistoryToDbAction extends AbstractAction
     private int $totalMessagesAdded = 0;
     private int $totalMessagesFetched = 0;
 
+    private RetryHelper $retryHelper;
+
     /**
      * @param ResourceManager $resourceManager
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct(ResourceManager $resourceManager)
     {
@@ -45,17 +50,35 @@ class FetchHistoryToDbAction extends AbstractAction
         $this->sqliteDbHelper = new SqliteDbHelper($this->resourceManager->getSqliteDb());
         $this->configHelper = new ConfigHelper($this->resourceManager->getConfig());
         $this->slackClient = $this->resourceManager->getSlackClient();
+        $this->retryHelper = (new RetryHelper())
+            ->setLogger(new class extends \Psr\Log\AbstractLogger {
+                public function log($level, string|\Stringable $message, array $context = []): void {
+                    echo "[" . strtoupper($level) . "] {$message}\n";
+                }
+            })
+            ->setDelayBeforeNextAttempt(function (int $attempt) {
+                return 30 * $attempt;
+            });
     }
 
-    public function __invoke()
+    /**
+     * @return int
+     * @throws Throwable
+     */
+    public function __invoke(): int
     {
         $this->fetchUsers();
         $this->fetchConversations();
         echo "\nTotal {$this->totalMessagesAdded} new messages of {$this->totalMessagesFetched} messages fetched\n";
         echo "Well done!\n";
+        return 0;
     }
 
-    private function fetchUsers()
+    /**
+     * @return void
+     * @throws Throwable
+     */
+    private function fetchUsers(): void
     {
         echo "Fetch users\n";
         $listNumber = 0;
@@ -68,7 +91,9 @@ class FetchHistoryToDbAction extends AbstractAction
             $listNumber++;
             echo "Users list #{$listNumber}\n";
             usleep(self::SLACK_DELAY * 1000);
-            $list = $this->slackClient->usersList($query);
+            $list = $this->retryHelper->execute(function() use ($query) {
+                return $this->slackClient->usersList($query);
+            }, 10);
             foreach ($list->getMembers() as $user) {
                 if ($this->sqliteDbHelper->upsertUser($user)) {
                     $usersAdded++;
@@ -92,7 +117,11 @@ class FetchHistoryToDbAction extends AbstractAction
         echo "Users fetched: {$usersFetched}, new users: {$usersAdded}\n";
     }
 
-    private function fetchConversations()
+    /**
+     * @return void
+     * @throws Throwable
+     */
+    private function fetchConversations(): void
     {
         echo "Fetch conversations\n";
 
@@ -104,7 +133,9 @@ class FetchHistoryToDbAction extends AbstractAction
             $listNumber++;
             echo "Conversations list #{$listNumber}\n";
             usleep(self::SLACK_DELAY * 1000);
-            $list = $this->slackClient->conversationsList($query);
+            $list = $this->retryHelper->execute(function() use ($query) {
+                return $this->slackClient->conversationsList($query);
+            }, 10);
             foreach ($list->getChannels() as $conversation) {
                 if ($conversation->getName() != '') {
                     if ($this->configHelper->isSkipChannel($conversation->getName())) {
@@ -130,7 +161,7 @@ class FetchHistoryToDbAction extends AbstractAction
                     }
                 }
                 echo ' ';
-                $members = $this->fetchMembers($conversation);
+                $members = $this->getMembers($conversation);
                 if ($this->sqliteDbHelper->upsertConversation($conversation, $members)) {
                     echo "(new conversation) ";
                     $conversationsAdded++;
@@ -153,8 +184,9 @@ class FetchHistoryToDbAction extends AbstractAction
     /**
      * @param ObjsConversation $conversation
      * @return array
+     * @throws Throwable
      */
-    private function fetchMembers(ObjsConversation $conversation): array
+    private function getMembers(ObjsConversation $conversation): array
     {
         $listNumber = 0;
         $members = [];
@@ -162,7 +194,10 @@ class FetchHistoryToDbAction extends AbstractAction
         do {
             $listNumber++;
             usleep(self::SLACK_DELAY * 1000);
-            $list = $this->slackClient->conversationsMembers($query);
+            $list = $this->retryHelper->execute(function() use ($query) {
+                return $this->slackClient->conversationsMembers($query);
+            }, 10);
+
             foreach ($list->getMembers() as $member) {
                 $members[] = $member;
             }
@@ -179,8 +214,9 @@ class FetchHistoryToDbAction extends AbstractAction
     /**
      * @param ObjsConversation $conversation
      * @return void
+     * @throws Throwable
      */
-    private function fetchConversationHistory(ObjsConversation $conversation)
+    private function fetchConversationHistory(ObjsConversation $conversation): void
     {
         $queryNumber = 0;
         $query = [
@@ -193,7 +229,9 @@ class FetchHistoryToDbAction extends AbstractAction
 //            echo "\tQuery #{$queryNumber}\n";
             echo '.';
             usleep(self::SLACK_DELAY * 1000);
-            $history = $this->slackClient->conversationsHistory($query);
+            $history = $this->retryHelper->execute(function() use ($query) {
+                return $this->slackClient->conversationsHistory($query);
+            }, 10);
             foreach ($history->getMessages() as $message) {
                 if ($this->sqliteDbHelper->upsertMessage($message, $conversation->getId())) {
                     $messagesAdded++;
@@ -240,15 +278,18 @@ class FetchHistoryToDbAction extends AbstractAction
      * @param ObjsConversation $conversation
      * @param string $threadTs
      * @return void
+     * @throws Throwable
      */
-    private function fetchReplies(ObjsConversation $conversation, string $threadTs)
+    private function fetchReplies(ObjsConversation $conversation, string $threadTs): void
     {
         $listNumber = 0;
         $query = ['channel' => $conversation->getId(), 'ts' => $threadTs];
         do {
             $listNumber++;
             usleep(self::SLACK_DELAY * 1000);
-            $thread = $this->slackClient->conversationsReplies($query);
+            $thread = $this->retryHelper->execute(function() use ($query) {
+                return $this->slackClient->conversationsReplies($query);
+            }, 10);
             foreach ($thread->getMessages() as $messageAssoc) {
                 if ($messageAssoc['ts'] == $threadTs) {
                     continue;
