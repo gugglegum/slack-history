@@ -57,21 +57,20 @@ class FetchHistoryToDbAction extends AbstractAction
                 }
             })
             ->setDelayBeforeNextAttempt(function (int $attempt) {
-                return 30 * $attempt;
+                return 60 * $attempt;
             });
     }
 
     /**
-     * @return int
      * @throws Throwable
      */
-    public function __invoke(): int
+    public function __invoke(): void
     {
+        echo "Start fetching message history\n\n";
         $this->fetchUsers();
         $this->fetchConversations();
         echo "\nTotal {$this->totalMessagesAdded} new messages of {$this->totalMessagesFetched} messages fetched\n";
         echo "Well done!\n";
-        return 0;
     }
 
     /**
@@ -188,11 +187,11 @@ class FetchHistoryToDbAction extends AbstractAction
      */
     private function getMembers(ObjsConversation $conversation): array
     {
-        $listNumber = 0;
+//        $listNumber = 0;
         $members = [];
         $query = ['channel' => $conversation->getId()];
         do {
-            $listNumber++;
+//            $listNumber++;
             usleep(self::SLACK_DELAY * 1000);
             $list = $this->retryHelper->execute(function() use ($query) {
                 return $this->slackClient->conversationsMembers($query);
@@ -218,17 +217,18 @@ class FetchHistoryToDbAction extends AbstractAction
      */
     private function fetchConversationHistory(ObjsConversation $conversation): void
     {
-        $queryNumber = 0;
+//        $queryNumber = 0;
         $query = [
             'channel' => $conversation->getId(),
         ];
         $messagesFetched = 0;
         $messagesAdded = 0;
         do {
-            $queryNumber++;
+//            $queryNumber++;
 //            echo "\tQuery #{$queryNumber}\n";
             echo '.';
             usleep(self::SLACK_DELAY * 1000);
+            /** @var \JoliCode\Slack\Api\Model\ConversationsHistoryGetResponse200 $history */
             $history = $this->retryHelper->execute(function() use ($query) {
                 return $this->slackClient->conversationsHistory($query);
             }, 10);
@@ -282,10 +282,10 @@ class FetchHistoryToDbAction extends AbstractAction
      */
     private function fetchReplies(ObjsConversation $conversation, string $threadTs): void
     {
-        $listNumber = 0;
+//        $listNumber = 0;
         $query = ['channel' => $conversation->getId(), 'ts' => $threadTs];
         do {
-            $listNumber++;
+//            $listNumber++;
             usleep(self::SLACK_DELAY * 1000);
             $thread = $this->retryHelper->execute(function() use ($query) {
                 return $this->slackClient->conversationsReplies($query);
