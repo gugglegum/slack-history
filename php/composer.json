@@ -7,7 +7,6 @@
         "jolicode/slack-php-api": "=4.4",
         "aura/sqlquery": "^2.7",
         "aura/sql": "^4.0",
-        "phpfastcache/phpfastcache": "^8.1",
         "vlucas/phpdotenv": "^2.6",
         "luracast/config": "^2.0",
         "league/plates": "^3.4",
