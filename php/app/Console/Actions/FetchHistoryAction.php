@@ -18,7 +18,7 @@ use JoliCode\Slack\Api\Model\ObjsUser;
 use JoliCode\Slack\Api\Model\ObjsUserProfile;
 use Throwable;
 
-class FetchHistoryToDbAction extends AbstractAction
+class FetchHistoryAction extends AbstractAction
 {
     const SLACK_DELAY = 250;
     private SqliteDbHelper $sqliteDbHelper;
