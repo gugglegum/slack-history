@@ -11,11 +11,11 @@ class ConfigHelper
         $this->config = $config;
     }
 
-    public function isSkipChannel(string $channel): bool
+    public function isSkipHistoryChannel(string $channel): bool
     {
         static $skipChannels;
         if (!isset($skipChannels)) {
-            $skipChannels = preg_split('/\s*,\s*/', (string) $this->config->get('slack.skipChannels'), -1, PREG_SPLIT_NO_EMPTY);
+            $skipChannels = preg_split('/\s*,\s*/', (string) $this->config->get('slack.skipHistoryChannels'), -1, PREG_SPLIT_NO_EMPTY);
         }
         return in_array($channel, $skipChannels);
     }

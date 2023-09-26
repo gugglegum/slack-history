@@ -2,5 +2,5 @@
 
 return [
     'token' => getenv('SLACK_TOKEN'),
-    'skipChannels' => getenv('SLACK_SKIP_CHANNELS'),
+    'skipHistoryChannels' => getenv('SLACK_SKIP_HISTORY_CHANNELS'),
 ];

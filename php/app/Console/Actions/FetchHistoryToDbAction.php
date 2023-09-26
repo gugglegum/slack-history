@@ -138,7 +138,7 @@ class FetchHistoryToDbAction extends AbstractAction
             }, 10);
             foreach ($list->getChannels() as $conversation) {
                 if ($conversation->getName() != '') {
-                    if ($this->configHelper->isSkipChannel($conversation->getName())) {
+                    if ($this->configHelper->isSkipHistoryChannel($conversation->getName())) {
                         continue;
                     }
                     echo "  Channel " . $conversation->getName();
