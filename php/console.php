@@ -13,7 +13,8 @@ require_once __DIR__ . '/init.php';
         $statusCode = $action();
     } catch (Throwable $e) {
         echo "Error: {$e->getMessage()}\n";
-        echo "\nException was thrown in file {$e->getFile()} at line {$e->getLine()}\nDebug backtrace:\n{$e->getTraceAsString()}\n";
+        echo "Code: {$e->getCode()}\n";
+        echo "\nException " . get_class($e) . " was thrown in file {$e->getFile()} at line {$e->getLine()}\nDebug backtrace:\n{$e->getTraceAsString()}\n";
 
         if ($e->getCode() != 0) {
             $statusCode = $e->getCode();
