@@ -13,7 +13,7 @@ class Migration003 extends \App\AbstractMigration
             "name" TEXT NOT NULL,
             "users" TEXT,
             PRIMARY KEY("message_ts","conversation_id","name"),
-            FOREIGN KEY (message_ts, conversation_id) REFERENCES messages(ts, conversation_id)
+            CONSTRAINT "fk_message_ts_conversation_id" FOREIGN KEY (message_ts, conversation_id) REFERENCES messages(ts, conversation_id)
         )');
     }
 

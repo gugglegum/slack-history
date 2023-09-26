@@ -49,7 +49,7 @@ class Migration001 extends \App\AbstractMigration
             "image_512" TEXT,
             "team" TEXT NOT NULL,
             PRIMARY KEY("user_id"),
-            CONSTRAINT "fk_user_id" FOREIGN KEY("user_id") REFERENCES "users"("id")
+            CONSTRAINT "fk_user_id" FOREIGN KEY("user_id") REFERENCES "users"("id") ON UPDATE CASCADE ON DELETE CASCADE
         )');
         $this->pdo->exec('CREATE TABLE "conversations" (
             "id" TEXT NOT NULL,

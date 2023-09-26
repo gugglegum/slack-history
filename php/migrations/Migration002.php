@@ -38,7 +38,7 @@ class Migration002 extends \App\AbstractMigration
             "title_link" INTEGER,
             "ts" TEXT,
             PRIMARY KEY("message_ts","num","conversation_id"),
-            FOREIGN KEY (message_ts, conversation_id) REFERENCES messages(ts, conversation_id)
+            CONSTRAINT "fk_message_ts_conversation_id" FOREIGN KEY (message_ts, conversation_id) REFERENCES messages(ts, conversation_id) ON UPDATE CASCADE ON DELETE CASCADE
         )');
         $this->pdo->exec('INSERT INTO attachments_new (message_ts, conversation_id, num, author_icon,
                 author_link, author_name, color, fallback, image_bytes, image_width, image_height,
@@ -126,8 +126,8 @@ class Migration002 extends \App\AbstractMigration
             "created" INTEGER NOT NULL,
             PRIMARY KEY("id"),
             UNIQUE("message_ts", "conversation_id", "id"),    
-            FOREIGN KEY (message_ts, conversation_id) REFERENCES messages(ts, conversation_id),
-            FOREIGN KEY (user) REFERENCES users(id)
+            CONSTRAINT "fk_message_ts_conversation_id" FOREIGN KEY (message_ts, conversation_id) REFERENCES messages(ts, conversation_id) ON UPDATE CASCADE ON DELETE CASCADE,
+            CONSTRAINT "fk_user_id" FOREIGN KEY (user) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
         )');
         $this->pdo->exec('CREATE INDEX message_conversation ON files_new("message_ts", "conversation_id")');
         $this->pdo->exec('INSERT INTO files_new (id, message_ts, conversation_id, user, filetype, mimetype,
@@ -208,8 +208,8 @@ class Migration002 extends \App\AbstractMigration
             "user" TEXT,
             "thread_ts" TEXT,
             PRIMARY KEY("ts","conversation_id"),
-            FOREIGN KEY (conversation_id) REFERENCES conversations(id),
-            FOREIGN KEY (user) REFERENCES users(id)
+            CONSTRAINT "fk_conversation_id" FOREIGN KEY (conversation_id) REFERENCES conversations(id) ON UPDATE CASCADE ON DELETE CASCADE,
+            CONSTRAINT "fk_user_id" FOREIGN KEY (user) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
         )');
         $this->pdo->exec('INSERT INTO messages_new SELECT * FROM messages');
         $this->pdo->exec('DROP TABLE messages');
@@ -237,7 +237,7 @@ class Migration002 extends \App\AbstractMigration
             "is_mpim" INTEGER NOT NULL,
             "members" TEXT,
             PRIMARY KEY("id"),
-            FOREIGN KEY (user) REFERENCES users(id)
+            CONSTRAINT "fk_user_id" FOREIGN KEY (user) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
         )');
         $this->pdo->exec('INSERT INTO conversations_new SELECT * FROM conversations');
         $this->pdo->exec('DROP TABLE conversations');
