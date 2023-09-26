@@ -20,7 +20,7 @@ class SqliteDbHelper
         $this->pdo = $pdo;
     }
 
-    public function initDb()
+    public function initDb(): void
     {
         $this->pdo->exec('CREATE TABLE "migrations" (
             "version"	INTEGER NOT NULL,
@@ -30,10 +30,11 @@ class SqliteDbHelper
     }
 
     /**
+     * @param string $sqliteDbFile
      * @return void
      * @throws \Exception
      */
-    public function rolloverMigrations(string $sqliteDbFile)
+    public function rolloverMigrations(string $sqliteDbFile): void
     {
         $version = (int) $this->pdo->fetchValue("SELECT IFNULL(MAX(version), 0) FROM migrations");
         do {
@@ -176,20 +177,20 @@ class SqliteDbHelper
         $lastRowId = $this->getTableMaxRowId('conversations');
         $this->pdo->exec("INSERT INTO conversations (id, name, is_channel, is_group, is_im, created, creator,
             user, is_archived, is_general, is_member, is_private, is_mpim, members) VALUES (
-                " . SqliteDbHelper::quote($conversation->getId()) . ",
-                " . SqliteDbHelper::quoteNullable($conversation->getName()) . ",
-                " . SqliteDbHelper::quote((int) $conversation->getIsChannel()) . ",
-                " . SqliteDbHelper::quote((int) $conversation->getIsGroup()) . ",
-                " . SqliteDbHelper::quote((int) $conversation->getIsIm()) . ",
-                " . SqliteDbHelper::quote($conversation->getCreated()) . ",
-                " . SqliteDbHelper::quoteNullable($conversation->getCreator()) . ",
-                " . SqliteDbHelper::quoteNullable($conversation->getUser()) . ",
-                " . SqliteDbHelper::quote((int) $conversation->getIsArchived()) . ",
-                " . SqliteDbHelper::quote((int) $conversation->getIsGeneral()) . ",
-                " . SqliteDbHelper::quote((int) $conversation->getIsMember()) . ",
-                " . SqliteDbHelper::quote((int) $conversation->getIsPrivate()) . ",
-                " . SqliteDbHelper::quote((int) $conversation->getIsMpim()) . ",
-                " . SqliteDbHelper::quoteNullable($members !== null ? implode(',', $members) : null) . "
+                " . $this->quote($conversation->getId()) . ",
+                " . $this->quoteNullable($conversation->getName()) . ",
+                " . $this->quote((int) $conversation->getIsChannel()) . ",
+                " . $this->quote((int) $conversation->getIsGroup()) . ",
+                " . $this->quote((int) $conversation->getIsIm()) . ",
+                " . $this->quote($conversation->getCreated()) . ",
+                " . $this->quoteNullable($conversation->getCreator()) . ",
+                " . $this->quoteNullable($conversation->getUser()) . ",
+                " . $this->quote((int) $conversation->getIsArchived()) . ",
+                " . $this->quote((int) $conversation->getIsGeneral()) . ",
+                " . $this->quote((int) $conversation->getIsMember()) . ",
+                " . $this->quote((int) $conversation->getIsPrivate()) . ",
+                " . $this->quote((int) $conversation->getIsMpim()) . ",
+                " . $this->quoteNullable($members !== null ? implode(',', $members) : null) . "
             ) ON CONFLICT (id) DO UPDATE SET
                 name = excluded.name,
                 is_channel = excluded.is_channel,
@@ -213,13 +214,13 @@ class SqliteDbHelper
         $lastRowId = $this->getTableMaxRowId('messages');
         $this->pdo->exec("INSERT INTO messages (ts, conversation_id, type, subtype, text, user, thread_ts)
             VALUES (
-                " . SqliteDbHelper::quote($message->getTs()) . ",
-                " . SqliteDbHelper::quoteNullable($conversationId) . ",
-                " . SqliteDbHelper::quote($message->getType()) . ",
-                " . SqliteDbHelper::quoteNullable($message->getSubtype()) . ",
-                " . SqliteDbHelper::quote($message->getText()) . ",
-                " . SqliteDbHelper::quoteNullable($message->getUser()) . ",
-                " . SqliteDbHelper::quoteNullable($message->getThreadTs()) . "
+                " . $this->quote($message->getTs()) . ",
+                " . $this->quoteNullable($conversationId) . ",
+                " . $this->quote($message->getType()) . ",
+                " . $this->quoteNullable($message->getSubtype()) . ",
+                " . $this->quote($message->getText()) . ",
+                " . $this->quoteNullable($message->getUser()) . ",
+                " . $this->quoteNullable($message->getThreadTs()) . "
             ) ON CONFLICT (ts, conversation_id) DO UPDATE SET
                 type = excluded.type,
                 subtype = excluded.subtype,
@@ -236,24 +237,24 @@ class SqliteDbHelper
         $this->pdo->exec("INSERT INTO attachments (message_ts, conversation_id, num, author_icon, author_link, author_name,
             color, fallback, image_bytes, image_width, image_height, image_url, pretext, text, thumb_url,
             title, title_link, ts) VALUES (
-                " . SqliteDbHelper::quote($messageTs) . ",
-                " . SqliteDbHelper::quote($conversationId) . ",
-                " . SqliteDbHelper::quote($num) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getAuthorIcon()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getAuthorLink()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getAuthorName()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getColor()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getFallback()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getImageBytes()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getImageWidth()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getImageHeight()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getImageUrl()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getPretext()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getText()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getThumbUrl()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getTitle()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getTitleLink()) . ",
-                " . SqliteDbHelper::quoteNullable($attachment->getTs()) . "
+                " . $this->quote($messageTs) . ",
+                " . $this->quote($conversationId) . ",
+                " . $this->quote($num) . ",
+                " . $this->quoteNullable($attachment->getAuthorIcon()) . ",
+                " . $this->quoteNullable($attachment->getAuthorLink()) . ",
+                " . $this->quoteNullable($attachment->getAuthorName()) . ",
+                " . $this->quoteNullable($attachment->getColor()) . ",
+                " . $this->quoteNullable($attachment->getFallback()) . ",
+                " . $this->quoteNullable($attachment->getImageBytes()) . ",
+                " . $this->quoteNullable($attachment->getImageWidth()) . ",
+                " . $this->quoteNullable($attachment->getImageHeight()) . ",
+                " . $this->quoteNullable($attachment->getImageUrl()) . ",
+                " . $this->quoteNullable($attachment->getPretext()) . ",
+                " . $this->quoteNullable($attachment->getText()) . ",
+                " . $this->quoteNullable($attachment->getThumbUrl()) . ",
+                " . $this->quoteNullable($attachment->getTitle()) . ",
+                " . $this->quoteNullable($attachment->getTitleLink()) . ",
+                " . $this->quoteNullable($attachment->getTs()) . "
             ) ON CONFLICT (message_ts, conversation_id, num) DO UPDATE SET
                 author_icon = excluded.author_icon,
                 author_link = excluded.author_link,
@@ -284,54 +285,54 @@ class SqliteDbHelper
                 thumb_480_h, thumb_720, thumb_720_w, thumb_720_h, thumb_800, thumb_800_w, thumb_800_h, thumb_960,
                 thumb_960_w, thumb_960_h, thumb_1024, thumb_1024_w, thumb_1024_h, thumb_tiny, created        
             ) VALUES (
-                " . SqliteDbHelper::quote($file->getId()) . ",
-                " . SqliteDbHelper::quote($messageTs) . ",
-                " . SqliteDbHelper::quote($conversationId) . ",
-                " . SqliteDbHelper::quoteNullable($file->getUser()) . ",
-                " . SqliteDbHelper::quote($file->getFiletype()) . ",
-                " . SqliteDbHelper::quote($file->getMimetype()) . ",
-                " . SqliteDbHelper::quote($file->getPrettyType()) . ",
-                " . SqliteDbHelper::quote($file->getSize()) . ",
-                " . SqliteDbHelper::quote($file->getName()) . ",
-                " . SqliteDbHelper::quote($file->getTitle()) . ",
-                " . SqliteDbHelper::quote($file->getMode()) . ",
-                " . SqliteDbHelper::quote($file->getPermalink()) . ",
-                " . SqliteDbHelper::quote($file->getPermalinkPublic()) . ",
-                " . SqliteDbHelper::quote($file->getUrlPrivate()) . ",
-                " . SqliteDbHelper::quote($file->getUrlPrivateDownload()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getPreview()) . ",
-                " . SqliteDbHelper::quote($file->getHasRichPreview()) . ",
-                " . SqliteDbHelper::quote($file->getIsExternal()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getExternalId()) . ",
-                " . SqliteDbHelper::quote($file->getExternalType()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getExternalUrl()) . ",
-                " . SqliteDbHelper::quote($file->getIsPublic()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getOriginalW()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getOriginalH()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb64()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb80()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb160()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb360()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb360Gif()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb360W()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb360H()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb480()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb480W()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb480H()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb720()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb720W()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb720H()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb800()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb800W()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb800H()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb960()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb960W()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb960H()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb1024()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb1024W()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumb1024H()) . ",
-                " . SqliteDbHelper::quoteNullable($file->getThumbTiny()) . ",
-                " . SqliteDbHelper::quote($file->getCreated()) . "
+                " . $this->quote($file->getId()) . ",
+                " . $this->quote($messageTs) . ",
+                " . $this->quote($conversationId) . ",
+                " . $this->quoteNullable($file->getUser()) . ",
+                " . $this->quote($file->getFiletype()) . ",
+                " . $this->quote($file->getMimetype()) . ",
+                " . $this->quote($file->getPrettyType()) . ",
+                " . $this->quote($file->getSize()) . ",
+                " . $this->quote($file->getName()) . ",
+                " . $this->quote($file->getTitle()) . ",
+                " . $this->quote($file->getMode()) . ",
+                " . $this->quote($file->getPermalink()) . ",
+                " . $this->quote($file->getPermalinkPublic()) . ",
+                " . $this->quote($file->getUrlPrivate()) . ",
+                " . $this->quote($file->getUrlPrivateDownload()) . ",
+                " . $this->quoteNullable($file->getPreview()) . ",
+                " . $this->quote($file->getHasRichPreview()) . ",
+                " . $this->quote($file->getIsExternal()) . ",
+                " . $this->quoteNullable($file->getExternalId()) . ",
+                " . $this->quote($file->getExternalType()) . ",
+                " . $this->quoteNullable($file->getExternalUrl()) . ",
+                " . $this->quote($file->getIsPublic()) . ",
+                " . $this->quoteNullable($file->getOriginalW()) . ",
+                " . $this->quoteNullable($file->getOriginalH()) . ",
+                " . $this->quoteNullable($file->getThumb64()) . ",
+                " . $this->quoteNullable($file->getThumb80()) . ",
+                " . $this->quoteNullable($file->getThumb160()) . ",
+                " . $this->quoteNullable($file->getThumb360()) . ",
+                " . $this->quoteNullable($file->getThumb360Gif()) . ",
+                " . $this->quoteNullable($file->getThumb360W()) . ",
+                " . $this->quoteNullable($file->getThumb360H()) . ",
+                " . $this->quoteNullable($file->getThumb480()) . ",
+                " . $this->quoteNullable($file->getThumb480W()) . ",
+                " . $this->quoteNullable($file->getThumb480H()) . ",
+                " . $this->quoteNullable($file->getThumb720()) . ",
+                " . $this->quoteNullable($file->getThumb720W()) . ",
+                " . $this->quoteNullable($file->getThumb720H()) . ",
+                " . $this->quoteNullable($file->getThumb800()) . ",
+                " . $this->quoteNullable($file->getThumb800W()) . ",
+                " . $this->quoteNullable($file->getThumb800H()) . ",
+                " . $this->quoteNullable($file->getThumb960()) . ",
+                " . $this->quoteNullable($file->getThumb960W()) . ",
+                " . $this->quoteNullable($file->getThumb960H()) . ",
+                " . $this->quoteNullable($file->getThumb1024()) . ",
+                " . $this->quoteNullable($file->getThumb1024W()) . ",
+                " . $this->quoteNullable($file->getThumb1024H()) . ",
+                " . $this->quoteNullable($file->getThumbTiny()) . ",
+                " . $this->quote($file->getCreated()) . "
             ) ON CONFLICT (id) DO UPDATE SET
                 message_ts = excluded.message_ts,
                 conversation_id = excluded.conversation_id,
@@ -388,10 +389,10 @@ class SqliteDbHelper
     {
         $lastRowId = $this->getTableMaxRowId('reactions');
         $this->pdo->exec("INSERT INTO reactions (message_ts, conversation_id, name, users) VALUES (
-                " . SqliteDbHelper::quote($messageTs) . ",
-                " . SqliteDbHelper::quote($conversationId) . ",
-                " . SqliteDbHelper::quote($reaction->getName()) . ",
-                " . SqliteDbHelper::quoteNullable(implode(',', $reaction->getUsers())) . "
+                " . $this->quote($messageTs) . ",
+                " . $this->quote($conversationId) . ",
+                " . $this->quote($reaction->getName()) . ",
+                " . $this->quoteNullable(implode(',', $reaction->getUsers())) . "
             ) ON CONFLICT (message_ts, conversation_id, name) DO UPDATE SET
                 users = excluded.users"
         );
