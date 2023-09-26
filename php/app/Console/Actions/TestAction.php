@@ -6,7 +6,7 @@ namespace App\Console\Actions;
 
 class TestAction extends AbstractAction
 {
-    public function __invoke()
+    public function __invoke(): void
     {
         echo "hello\n";
     }
