@@ -68,7 +68,7 @@ class FetchFilesAction extends AbstractAction
         $query = $this->queryFactory->newSelect()->cols(['files.*'])
             ->from('files')
             ->join('inner', 'conversations', 'conversations.id = files.conversation_id')
-            ->where("files.mode = 'hosted'")
+            ->where("files.mode IN ('hosted', 'snippet')")
             ->where("(conversations.name IS NULL OR conversations.name not in (" . implode(', ', $skipChannelsQuoted) . "))");
         $stmt = $this->pdo->prepare($query->getStatement());
         $stmt->execute($query->getBindValues());
@@ -93,17 +93,9 @@ class FetchFilesAction extends AbstractAction
                 @unlink($tmpLocalFile);
             }
 
+            echo (++$fileIndex) . ". ID={$file['id']} \"{$file['name']}\" (" . self::formatFileSize((int) $file['size']) . " bytes)\n";
             if (!file_exists($localFile) /*|| filesize($localFile) != $file['size']*/) {
-                echo (++$fileIndex) . ". ID={$file['id']} \"{$file['name']}\" (" . self::formatFileSize((int) $file['size']) . " bytes)\n";
-
-                $this->fetchFile($file, $tmpLocalFile);
-
-                if (file_exists($localFile)) {
-                    if (!@unlink($localFile)) {
-                        throw new Exception("Failed to delete \"{$localFile}\" to replace by tmp file");
-                    }
-                }
-                rename($tmpLocalFile, $localFile);
+                $this->downloadFile($file, 'url_private', $localFile, $tmpLocalFile);
                 $this->summary['downloaded']++;
 
                 if (($localFileSize = filesize($localFile)) != $file['size']) {
@@ -112,7 +104,25 @@ class FetchFilesAction extends AbstractAction
 
                 usleep(self::DOWNLOAD_DELAY * 1000);
             } else {
+                echo "\tAlready exists\n";
                 $this->summary['exists']++;
+            }
+
+            // Download thumbnails
+
+            foreach ([/*64, 80, 160,*/ 360, /*480, 720, 800, 960, 1024*/] as $thumbRes) {
+                if ($file['thumb_' . $thumbRes] != '') {
+                    $localFile = $this->getLocalFile($file, $filesDir, 'thumb_' . $thumbRes);
+                    $tmpLocalFile = $localFile . '.tmp';
+                    if (file_exists($tmpLocalFile)) {
+                        @unlink($tmpLocalFile);
+                    }
+                    if (!file_exists($localFile)) {
+                        echo "\tThumbnail {$thumbRes}\n";
+                        $this->downloadFile($file, 'thumb_' . $thumbRes, $localFile, $tmpLocalFile);
+                        usleep(self::DOWNLOAD_DELAY * 1000);
+                    }
+                }
             }
         }
         echo "Finished scanning\n";
@@ -123,27 +133,55 @@ class FetchFilesAction extends AbstractAction
         echo "    Total files: {$this->summary['total']}\n";
     }
 
-    private function getLocalFile(array $file, string $filesDir): string
+    private function getLocalFile(array $file, string $filesDir, string $suffix = ''): string
     {
-        return $filesDir . '/' . $file['id'] . '-' . str_replace([':'], ['_'], $file['name']);
+        $fileName = str_replace([':'], ['_'], $file['name']);
+        if (preg_match('/^(.+)(\.\w+)$/i', $fileName, $m)) {
+            $fileName = $m[1] . ($suffix != '' ? '.' . $suffix : ''). $m[2];
+        } else {
+            $fileName .= ($suffix != '' ? '.' . $suffix : '');
+        }
+        return $filesDir . '/' . $file['id'] . '-' . $fileName;
     }
 
     /**
      * @param array $file
+     * @param string $urlField
+     * @param string $localFile
      * @param string $tmpLocalFile
      * @return void
      * @throws Throwable
      */
-    private function fetchFile(array $file, string $tmpLocalFile): void
+    private function downloadFile(array $file, string $urlField, string $localFile, string $tmpLocalFile): void
     {
+        $this->fetchFile($file, $urlField, $tmpLocalFile);
+
+        if (file_exists($localFile)) {
+            if (!@unlink($localFile)) {
+                throw new Exception("Failed to delete \"{$localFile}\" to replace by tmp file");
+            }
+        }
+        rename($tmpLocalFile, $localFile);
+    }
+
+    /**
+     * @param array $file
+     * @param string $urlField
+     * @param string $tmpLocalFile
+     * @return void
+     * @throws Throwable
+     */
+    private function fetchFile(array $file, string $urlField, string $tmpLocalFile): void
+    {
+        echo "\tDownloading {$file[$urlField]}\n";
         $retryHelper = clone $this->retryHelper;
         $retryHelper->setOnFailure(function() use ($tmpLocalFile) {
             @unlink($tmpLocalFile);
         });
-        $retryHelper->execute(function() use ($tmpLocalFile, $file) {
-            $remoteHandler = @fopen($file['url_private'], 'r', false, $this->downloadContext);
+        $retryHelper->execute(function() use ($tmpLocalFile, $file, $urlField) {
+            $remoteHandler = @fopen($file[$urlField], 'r', false, $this->downloadContext);
             if (!$remoteHandler) {
-                throw new Exception("Failed to open remote URL \"{$file['url_private']}\"");
+                throw new Exception("Failed to open remote URL \"{$file[$urlField]}\"");
             }
             $localHandler = @fopen($tmpLocalFile, 'w');
             if (!$localHandler) {
@@ -152,7 +190,7 @@ class FetchFilesAction extends AbstractAction
             while (!feof($remoteHandler)) {
                 $buffer = @fread($remoteHandler, 1024 * 1024);
                 if ($buffer === false) {
-                    throw new Exception("Failed to read from remote URL \"{$file['url_private']}\"");
+                    throw new Exception("Failed to read from remote URL \"{$file[$urlField]}\"");
                 }
                 $result = @fwrite($localHandler, $buffer);
                 if ($result === false || $result != strlen($buffer)) {
