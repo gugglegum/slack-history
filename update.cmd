@@ -1,5 +1,6 @@
 @echo off
-"%~dp0bin\php.exe" -c "%~dp0bin\php.ini" -n "%~dp0php\console.php" "fetch-history"
-"%~dp0bin\php.exe" -c "%~dp0bin\php.ini" -n "%~dp0php\console.php" "fetch-files"
-"%~dp0bin\php.exe" -c "%~dp0bin\php.ini" -n "%~dp0php\console.php" "compile-html"
+@cd %~dp0
+.\bin\php.exe -c .\bin\php.ini -n .\php\console.php fetch-history
+.\bin\php.exe -c .\bin\php.ini -n .\php\console.php fetch-files
+.\bin\php.exe -c .\bin\php.ini -n .\php\console.php compile-html
 @pause
