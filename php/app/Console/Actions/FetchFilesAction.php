@@ -135,7 +135,7 @@ class FetchFilesAction extends AbstractAction
 
     private function getLocalFile(array $file, string $filesDir, string $suffix = ''): string
     {
-        $fileName = str_replace([':'], ['_'], $file['name']);
+        $fileName = str_replace([':', '>', '<'], '_', $file['name']);
         if (preg_match('/^(.+)(\.\w+)$/i', $fileName, $m)) {
             $fileName = $m[1] . ($suffix != '' ? '.' . $suffix : ''). $m[2];
         } else {
