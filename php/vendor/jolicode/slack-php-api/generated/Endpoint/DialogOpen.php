@@ -22,14 +22,14 @@ class DialogOpen extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impleme
      *
      * @param array $queryParameters {
      *
-     *     @var string $dialog The dialog definition. This must be a JSON-encoded string.
-     *     @var string $trigger_id Exchange a trigger to post to the user.
-     * }
+     * @var string $dialog The dialog definition. This must be a JSON-encoded string.
+     * @var string $trigger_id Exchange a trigger to post to the user.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      */
     public function __construct(array $queryParameters = [], array $headerParameters = [])
     {
@@ -68,8 +68,8 @@ class DialogOpen extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impleme
         $optionsResolver->setDefined(['dialog', 'trigger_id']);
         $optionsResolver->setRequired(['dialog', 'trigger_id']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('dialog', ['string']);
-        $optionsResolver->setAllowedTypes('trigger_id', ['string']);
+        $optionsResolver->addAllowedTypes('dialog', ['string']);
+        $optionsResolver->addAllowedTypes('trigger_id', ['string']);
 
         return $optionsResolver;
     }
@@ -80,18 +80,18 @@ class DialogOpen extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impleme
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\DialogOpenGetResponse200|\JoliCode\Slack\Api\Model\DialogOpenGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\DialogOpenGetResponse200', 'json');
         }

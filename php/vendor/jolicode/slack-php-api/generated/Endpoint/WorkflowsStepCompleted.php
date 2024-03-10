@@ -20,26 +20,26 @@ class WorkflowsStepCompleted extends \JoliCode\Slack\Api\Runtime\Client\BaseEndp
     /**
      * Indicate that an app's step in a workflow completed execution.
      *
-     * @param array $queryParameters {
+     * @param array $formParameters {
      *
-     *     @var string $outputs Key-value object of outputs from your step. Keys of this object reflect the configured `key` properties of your [`outputs`](/reference/workflows/workflow_step#output) array from your `workflow_step` object.
-     *     @var string $workflow_step_execute_id Context identifier that maps to the correct workflow step execution.
-     * }
+     * @var string $outputs Key-value object of outputs from your step. Keys of this object reflect the configured `key` properties of your [`outputs`](/reference/workflows/workflow_step#output) array from your `workflow_step` object.
+     * @var string $workflow_step_execute_id Context identifier that maps to the correct workflow step execution.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `workflow.steps:execute`
-     * }
+     * @var string $token Authentication token. Requires scope: `workflow.steps:execute`
+     *             }
      */
-    public function __construct(array $queryParameters = [], array $headerParameters = [])
+    public function __construct(array $formParameters = [], array $headerParameters = [])
     {
-        $this->queryParameters = $queryParameters;
+        $this->formParameters = $formParameters;
         $this->headerParameters = $headerParameters;
     }
 
     public function getMethod(): string
     {
-        return 'GET';
+        return 'POST';
     }
 
     public function getUri(): string
@@ -49,7 +49,7 @@ class WorkflowsStepCompleted extends \JoliCode\Slack\Api\Runtime\Client\BaseEndp
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        return [[], null];
+        return $this->getFormBody();
     }
 
     public function getExtraHeaders(): array
@@ -62,14 +62,14 @@ class WorkflowsStepCompleted extends \JoliCode\Slack\Api\Runtime\Client\BaseEndp
         return ['slackAuth'];
     }
 
-    protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
+    protected function getFormOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
-        $optionsResolver = parent::getQueryOptionsResolver();
+        $optionsResolver = parent::getFormOptionsResolver();
         $optionsResolver->setDefined(['outputs', 'workflow_step_execute_id']);
         $optionsResolver->setRequired(['workflow_step_execute_id']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('outputs', ['string']);
-        $optionsResolver->setAllowedTypes('workflow_step_execute_id', ['string']);
+        $optionsResolver->addAllowedTypes('outputs', ['string']);
+        $optionsResolver->addAllowedTypes('workflow_step_execute_id', ['string']);
 
         return $optionsResolver;
     }
@@ -80,22 +80,22 @@ class WorkflowsStepCompleted extends \JoliCode\Slack\Api\Runtime\Client\BaseEndp
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \JoliCode\Slack\Api\Model\WorkflowsStepCompletedGetResponse200|\JoliCode\Slack\Api\Model\WorkflowsStepCompletedGetResponsedefault|null
+     * @return \JoliCode\Slack\Api\Model\WorkflowsStepCompletedPostResponse200|\JoliCode\Slack\Api\Model\WorkflowsStepCompletedPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
-            return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\WorkflowsStepCompletedGetResponse200', 'json');
+            return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\WorkflowsStepCompletedPostResponse200', 'json');
         }
 
-        return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\WorkflowsStepCompletedGetResponsedefault', 'json');
+        return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\WorkflowsStepCompletedPostResponsedefault', 'json');
     }
 }

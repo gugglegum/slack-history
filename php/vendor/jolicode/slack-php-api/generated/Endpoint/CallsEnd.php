@@ -22,14 +22,14 @@ class CallsEnd extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implement
      *
      * @param array $formParameters {
      *
-     *     @var int $duration Call duration in seconds
-     *     @var string $id `id` returned when registering the call using the [`calls.add`](/methods/calls.add) method.
-     * }
+     * @var int    $duration Call duration in seconds
+     * @var string $id `id` returned when registering the call using the [`calls.add`](/methods/calls.add) method.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `calls:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `calls:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -68,8 +68,8 @@ class CallsEnd extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implement
         $optionsResolver->setDefined(['duration', 'id']);
         $optionsResolver->setRequired(['id']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('duration', ['int']);
-        $optionsResolver->setAllowedTypes('id', ['string']);
+        $optionsResolver->addAllowedTypes('duration', ['int']);
+        $optionsResolver->addAllowedTypes('id', ['string']);
 
         return $optionsResolver;
     }
@@ -80,18 +80,18 @@ class CallsEnd extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implement
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\CallsEndPostResponse200|\JoliCode\Slack\Api\Model\CallsEndPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\CallsEndPostResponse200', 'json');
         }

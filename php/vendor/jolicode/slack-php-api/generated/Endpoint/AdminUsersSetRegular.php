@@ -22,14 +22,14 @@ class AdminUsersSetRegular extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoi
      *
      * @param array $formParameters {
      *
-     *     @var string $team_id the ID (`T1234`) of the workspace
-     *     @var string $user_id The ID of the user to designate as a regular user.
-     * }
+     * @var string $team_id the ID (`T1234`) of the workspace
+     * @var string $user_id The ID of the user to designate as a regular user.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.users:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -68,8 +68,8 @@ class AdminUsersSetRegular extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoi
         $optionsResolver->setDefined(['team_id', 'user_id']);
         $optionsResolver->setRequired(['team_id', 'user_id']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('team_id', ['string']);
-        $optionsResolver->setAllowedTypes('user_id', ['string']);
+        $optionsResolver->addAllowedTypes('team_id', ['string']);
+        $optionsResolver->addAllowedTypes('user_id', ['string']);
 
         return $optionsResolver;
     }
@@ -80,18 +80,18 @@ class AdminUsersSetRegular extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoi
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AdminUsersSetRegularPostResponse200|\JoliCode\Slack\Api\Model\AdminUsersSetRegularPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AdminUsersSetRegularPostResponse200', 'json');
         }

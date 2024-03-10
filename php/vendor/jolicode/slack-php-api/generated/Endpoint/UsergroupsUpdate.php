@@ -22,18 +22,18 @@ class UsergroupsUpdate extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
      *
      * @param array $formParameters {
      *
-     *     @var string $channels a comma separated string of encoded channel IDs for which the User Group uses as a default
-     *     @var string $description a short description of the User Group
-     *     @var string $handle A mention handle. Must be unique among channels, users and User Groups.
-     *     @var bool $include_count include the number of users in the User Group
-     *     @var string $name A name for the User Group. Must be unique among User Groups.
-     *     @var string $usergroup The encoded ID of the User Group to update.
-     * }
+     * @var string $channels a comma separated string of encoded channel IDs for which the User Group uses as a default
+     * @var string $description a short description of the User Group
+     * @var string $handle A mention handle. Must be unique among channels, users and User Groups.
+     * @var bool   $include_count include the number of users in the User Group
+     * @var string $name A name for the User Group. Must be unique among User Groups.
+     * @var string $usergroup The encoded ID of the User Group to update.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `usergroups:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `usergroups:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -72,12 +72,12 @@ class UsergroupsUpdate extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
         $optionsResolver->setDefined(['channels', 'description', 'handle', 'include_count', 'name', 'usergroup']);
         $optionsResolver->setRequired(['usergroup']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channels', ['string']);
-        $optionsResolver->setAllowedTypes('description', ['string']);
-        $optionsResolver->setAllowedTypes('handle', ['string']);
-        $optionsResolver->setAllowedTypes('include_count', ['bool']);
-        $optionsResolver->setAllowedTypes('name', ['string']);
-        $optionsResolver->setAllowedTypes('usergroup', ['string']);
+        $optionsResolver->addAllowedTypes('channels', ['string']);
+        $optionsResolver->addAllowedTypes('description', ['string']);
+        $optionsResolver->addAllowedTypes('handle', ['string']);
+        $optionsResolver->addAllowedTypes('include_count', ['bool']);
+        $optionsResolver->addAllowedTypes('name', ['string']);
+        $optionsResolver->addAllowedTypes('usergroup', ['string']);
 
         return $optionsResolver;
     }
@@ -88,18 +88,18 @@ class UsergroupsUpdate extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\UsergroupsUpdatePostResponse200|\JoliCode\Slack\Api\Model\UsergroupsUpdatePostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\UsergroupsUpdatePostResponse200', 'json');
         }

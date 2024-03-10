@@ -15,6 +15,8 @@ namespace JoliCode\Slack\Api\Normalizer;
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use JoliCode\Slack\Api\Runtime\Normalizer\CheckArray;
+use JoliCode\Slack\Api\Runtime\Normalizer\ValidatorTrait;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -22,63 +24,123 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class ObjsConversationDisplayCountsNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use CheckArray;
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) || (Kernel::MAJOR_VERSION >= 7 || Kernel::MAJOR_VERSION === 6 && Kernel::MINOR_VERSION === 4)) {
+    class ObjsConversationDisplayCountsNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return 'JoliCode\\Slack\\Api\\Model\\ObjsConversationDisplayCounts' === $type;
-    }
+        use CheckArray;
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return \is_object($data) && 'JoliCode\\Slack\\Api\\Model\\ObjsConversationDisplayCounts' === \get_class($data);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
+        {
+            return 'JoliCode\\Slack\\Api\\Model\\ObjsConversationDisplayCounts' === $type;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
+        {
+            return \is_object($data) && 'JoliCode\\Slack\\Api\\Model\\ObjsConversationDisplayCounts' === \get_class($data);
         }
-        $object = new \JoliCode\Slack\Api\Model\ObjsConversationDisplayCounts();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \JoliCode\Slack\Api\Model\ObjsConversationDisplayCounts();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('display_counts', $data) && null !== $data['display_counts']) {
+                $object->setDisplayCounts($data['display_counts']);
+            } elseif (\array_key_exists('display_counts', $data) && null === $data['display_counts']) {
+                $object->setDisplayCounts(null);
+            }
+            if (\array_key_exists('guest_counts', $data) && null !== $data['guest_counts']) {
+                $object->setGuestCounts($data['guest_counts']);
+            } elseif (\array_key_exists('guest_counts', $data) && null === $data['guest_counts']) {
+                $object->setGuestCounts(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('display_counts', $data) && null !== $data['display_counts']) {
-            $object->setDisplayCounts($data['display_counts']);
-        } elseif (\array_key_exists('display_counts', $data) && null === $data['display_counts']) {
-            $object->setDisplayCounts(null);
-        }
-        if (\array_key_exists('guest_counts', $data) && null !== $data['guest_counts']) {
-            $object->setGuestCounts($data['guest_counts']);
-        } elseif (\array_key_exists('guest_counts', $data) && null === $data['guest_counts']) {
-            $object->setGuestCounts(null);
+
+        public function normalize(mixed $object, string $format = null, array $context = []): null|array|\ArrayObject|bool|float|int|string
+        {
+            $data = [];
+            $data['display_counts'] = $object->getDisplayCounts();
+            $data['guest_counts'] = $object->getGuestCounts();
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(string $format = null): array
+        {
+            return ['JoliCode\\Slack\\Api\\Model\\ObjsConversationDisplayCounts' => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class ObjsConversationDisplayCountsNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['display_counts'] = $object->getDisplayCounts();
-        $data['guest_counts'] = $object->getGuestCounts();
+        use CheckArray;
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use ValidatorTrait;
 
-        return $data;
+        public function supportsDenormalization($data, $type, string $format = null, array $context = []): bool
+        {
+            return 'JoliCode\\Slack\\Api\\Model\\ObjsConversationDisplayCounts' === $type;
+        }
+
+        public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
+        {
+            return \is_object($data) && 'JoliCode\\Slack\\Api\\Model\\ObjsConversationDisplayCounts' === \get_class($data);
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \JoliCode\Slack\Api\Model\ObjsConversationDisplayCounts();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('display_counts', $data) && null !== $data['display_counts']) {
+                $object->setDisplayCounts($data['display_counts']);
+            } elseif (\array_key_exists('display_counts', $data) && null === $data['display_counts']) {
+                $object->setDisplayCounts(null);
+            }
+            if (\array_key_exists('guest_counts', $data) && null !== $data['guest_counts']) {
+                $object->setGuestCounts($data['guest_counts']);
+            } elseif (\array_key_exists('guest_counts', $data) && null === $data['guest_counts']) {
+                $object->setGuestCounts(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['display_counts'] = $object->getDisplayCounts();
+            $data['guest_counts'] = $object->getGuestCounts();
+
+            return $data;
+        }
+
+        public function getSupportedTypes(string $format = null): array
+        {
+            return ['JoliCode\\Slack\\Api\\Model\\ObjsConversationDisplayCounts' => false];
+        }
     }
 }

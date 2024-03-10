@@ -22,12 +22,12 @@ class UsersSetPhoto extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impl
      *
      * @param array $formParameters {
      *
-     *     @var string $crop_w Width/height of crop box (always square)
-     *     @var string $crop_x X coordinate of top-left corner of crop box
-     *     @var string $crop_y Y coordinate of top-left corner of crop box
-     *     @var string $image file contents via `multipart/form-data`
-     *     @var string $token Authentication token. Requires scope: `users.profile:write`
-     * }
+     * @var string $crop_w Width/height of crop box (always square)
+     * @var string $crop_x X coordinate of top-left corner of crop box
+     * @var string $crop_y Y coordinate of top-left corner of crop box
+     * @var string $image file contents via `multipart/form-data`
+     * @var string $token Authentication token. Requires scope: `users.profile:write`
+     *             }
      */
     public function __construct(array $formParameters = [])
     {
@@ -65,22 +65,22 @@ class UsersSetPhoto extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impl
         $optionsResolver->setDefined(['crop_w', 'crop_x', 'crop_y', 'image', 'token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('crop_w', ['string']);
-        $optionsResolver->setAllowedTypes('crop_x', ['string']);
-        $optionsResolver->setAllowedTypes('crop_y', ['string']);
-        $optionsResolver->setAllowedTypes('image', ['string']);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('crop_w', ['string']);
+        $optionsResolver->addAllowedTypes('crop_x', ['string']);
+        $optionsResolver->addAllowedTypes('crop_y', ['string']);
+        $optionsResolver->addAllowedTypes('image', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\UsersSetPhotoPostResponse200|\JoliCode\Slack\Api\Model\UsersSetPhotoPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\UsersSetPhotoPostResponse200', 'json');
         }

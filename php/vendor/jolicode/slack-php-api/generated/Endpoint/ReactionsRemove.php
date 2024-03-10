@@ -22,17 +22,17 @@ class ReactionsRemove extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint im
      *
      * @param array $formParameters {
      *
-     *     @var string $channel channel where the message to remove reaction from was posted
-     *     @var string $file file to remove reaction from
-     *     @var string $file_comment file comment to remove reaction from
-     *     @var string $name reaction (emoji) name
-     *     @var string $timestamp Timestamp of the message to remove reaction from.
-     * }
+     * @var string $channel channel where the message to remove reaction from was posted
+     * @var string $file file to remove reaction from
+     * @var string $file_comment file comment to remove reaction from
+     * @var string $name reaction (emoji) name
+     * @var string $timestamp Timestamp of the message to remove reaction from.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `reactions:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `reactions:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -71,11 +71,11 @@ class ReactionsRemove extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint im
         $optionsResolver->setDefined(['channel', 'file', 'file_comment', 'name', 'timestamp']);
         $optionsResolver->setRequired(['name']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel', ['string']);
-        $optionsResolver->setAllowedTypes('file', ['string']);
-        $optionsResolver->setAllowedTypes('file_comment', ['string']);
-        $optionsResolver->setAllowedTypes('name', ['string']);
-        $optionsResolver->setAllowedTypes('timestamp', ['string']);
+        $optionsResolver->addAllowedTypes('channel', ['string']);
+        $optionsResolver->addAllowedTypes('file', ['string']);
+        $optionsResolver->addAllowedTypes('file_comment', ['string']);
+        $optionsResolver->addAllowedTypes('name', ['string']);
+        $optionsResolver->addAllowedTypes('timestamp', ['string']);
 
         return $optionsResolver;
     }
@@ -86,18 +86,18 @@ class ReactionsRemove extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint im
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\ReactionsRemovePostResponse200|\JoliCode\Slack\Api\Model\ReactionsRemovePostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\ReactionsRemovePostResponse200', 'json');
         }

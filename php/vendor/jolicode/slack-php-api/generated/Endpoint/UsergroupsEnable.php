@@ -22,14 +22,14 @@ class UsergroupsEnable extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
      *
      * @param array $formParameters {
      *
-     *     @var bool $include_count include the number of users in the User Group
-     *     @var string $usergroup The encoded ID of the User Group to enable.
-     * }
+     * @var bool   $include_count include the number of users in the User Group
+     * @var string $usergroup The encoded ID of the User Group to enable.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `usergroups:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `usergroups:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -68,8 +68,8 @@ class UsergroupsEnable extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
         $optionsResolver->setDefined(['include_count', 'usergroup']);
         $optionsResolver->setRequired(['usergroup']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('include_count', ['bool']);
-        $optionsResolver->setAllowedTypes('usergroup', ['string']);
+        $optionsResolver->addAllowedTypes('include_count', ['bool']);
+        $optionsResolver->addAllowedTypes('usergroup', ['string']);
 
         return $optionsResolver;
     }
@@ -80,18 +80,18 @@ class UsergroupsEnable extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\UsergroupsEnablePostResponse200|\JoliCode\Slack\Api\Model\UsergroupsEnablePostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\UsergroupsEnablePostResponse200', 'json');
         }

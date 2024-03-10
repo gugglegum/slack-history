@@ -22,15 +22,15 @@ class AdminUsergroupsAddTeams extends \JoliCode\Slack\Api\Runtime\Client\BaseEnd
      *
      * @param array $formParameters {
      *
-     *     @var bool $auto_provision when `true`, this method automatically creates new workspace accounts for the IDP group members
-     *     @var string $team_ids A comma separated list of encoded team (workspace) IDs. Each workspace *MUST* belong to the organization associated with the token.
-     *     @var string $usergroup_id An encoded usergroup (IDP Group) ID.
-     * }
+     * @var bool   $auto_provision when `true`, this method automatically creates new workspace accounts for the IDP group members
+     * @var string $team_ids A comma separated list of encoded team (workspace) IDs. Each workspace *MUST* belong to the organization associated with the token.
+     * @var string $usergroup_id An encoded usergroup (IDP Group) ID.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -69,9 +69,9 @@ class AdminUsergroupsAddTeams extends \JoliCode\Slack\Api\Runtime\Client\BaseEnd
         $optionsResolver->setDefined(['auto_provision', 'team_ids', 'usergroup_id']);
         $optionsResolver->setRequired(['team_ids', 'usergroup_id']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('auto_provision', ['bool']);
-        $optionsResolver->setAllowedTypes('team_ids', ['string']);
-        $optionsResolver->setAllowedTypes('usergroup_id', ['string']);
+        $optionsResolver->addAllowedTypes('auto_provision', ['bool']);
+        $optionsResolver->addAllowedTypes('team_ids', ['string']);
+        $optionsResolver->addAllowedTypes('usergroup_id', ['string']);
 
         return $optionsResolver;
     }
@@ -82,18 +82,18 @@ class AdminUsergroupsAddTeams extends \JoliCode\Slack\Api\Runtime\Client\BaseEnd
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AdminUsergroupsAddTeamsPostResponse200|\JoliCode\Slack\Api\Model\AdminUsergroupsAddTeamsPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AdminUsergroupsAddTeamsPostResponse200', 'json');
         }

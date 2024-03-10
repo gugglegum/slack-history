@@ -22,15 +22,15 @@ class AdminAppsRestrict extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint 
      *
      * @param array $formParameters {
      *
-     *     @var string $app_id the id of the app to restrict
-     *     @var string $request_id the id of the request to restrict
-     *     @var string $team_id
-     * }
+     * @var string $app_id the id of the app to restrict
+     * @var string $request_id the id of the request to restrict
+     * @var string $team_id
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.apps:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.apps:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -69,9 +69,9 @@ class AdminAppsRestrict extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint 
         $optionsResolver->setDefined(['app_id', 'request_id', 'team_id']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('app_id', ['string']);
-        $optionsResolver->setAllowedTypes('request_id', ['string']);
-        $optionsResolver->setAllowedTypes('team_id', ['string']);
+        $optionsResolver->addAllowedTypes('app_id', ['string']);
+        $optionsResolver->addAllowedTypes('request_id', ['string']);
+        $optionsResolver->addAllowedTypes('team_id', ['string']);
 
         return $optionsResolver;
     }
@@ -82,18 +82,18 @@ class AdminAppsRestrict extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint 
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AdminAppsRestrictPostResponse200|\JoliCode\Slack\Api\Model\AdminAppsRestrictPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AdminAppsRestrictPostResponse200', 'json');
         }

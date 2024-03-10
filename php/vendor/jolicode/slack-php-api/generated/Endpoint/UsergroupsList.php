@@ -22,11 +22,12 @@ class UsergroupsList extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint imp
      *
      * @param array $queryParameters {
      *
-     *     @var bool $include_count include the number of users in each User Group
-     *     @var bool $include_disabled include disabled User Groups
-     *     @var bool $include_users include the list of users for each User Group
-     *     @var string $token Authentication token. Requires scope: `usergroups:read`
-     * }
+     * @var bool   $include_count include the number of users in each User Group
+     * @var bool   $include_disabled include disabled User Groups
+     * @var bool   $include_users include the list of users for each User Group
+     * @var string $team_id Encoded team id to list user groups in, required if org token is used
+     * @var string $token Authentication token. Requires scope: `usergroups:read`
+     *             }
      */
     public function __construct(array $queryParameters = [])
     {
@@ -61,24 +62,25 @@ class UsergroupsList extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint imp
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(['include_count', 'include_disabled', 'include_users', 'token']);
+        $optionsResolver->setDefined(['include_count', 'include_disabled', 'include_users', 'team_id', 'token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('include_count', ['bool']);
-        $optionsResolver->setAllowedTypes('include_disabled', ['bool']);
-        $optionsResolver->setAllowedTypes('include_users', ['bool']);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('include_count', ['bool']);
+        $optionsResolver->addAllowedTypes('include_disabled', ['bool']);
+        $optionsResolver->addAllowedTypes('include_users', ['bool']);
+        $optionsResolver->addAllowedTypes('team_id', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\UsergroupsListGetResponse200|\JoliCode\Slack\Api\Model\UsergroupsListGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\UsergroupsListGetResponse200', 'json');
         }

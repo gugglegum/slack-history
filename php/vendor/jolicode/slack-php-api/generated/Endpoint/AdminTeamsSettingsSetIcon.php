@@ -22,10 +22,10 @@ class AdminTeamsSettingsSetIcon extends \JoliCode\Slack\Api\Runtime\Client\BaseE
      *
      * @param array $formParameters {
      *
-     *     @var string $image_url Image URL for the icon
-     *     @var string $team_id ID for the workspace to set the icon for
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     * }
+     * @var string $image_url Image URL for the icon
+     * @var string $team_id ID for the workspace to set the icon for
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     *             }
      */
     public function __construct(array $formParameters = [])
     {
@@ -63,20 +63,20 @@ class AdminTeamsSettingsSetIcon extends \JoliCode\Slack\Api\Runtime\Client\BaseE
         $optionsResolver->setDefined(['image_url', 'team_id', 'token']);
         $optionsResolver->setRequired(['image_url', 'team_id']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('image_url', ['string']);
-        $optionsResolver->setAllowedTypes('team_id', ['string']);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('image_url', ['string']);
+        $optionsResolver->addAllowedTypes('team_id', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AdminTeamsSettingsSetIconPostResponse200|\JoliCode\Slack\Api\Model\AdminTeamsSettingsSetIconPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AdminTeamsSettingsSetIconPostResponse200', 'json');
         }

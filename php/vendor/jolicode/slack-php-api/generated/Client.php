@@ -13,22 +13,22 @@ declare(strict_types=1);
 
 namespace JoliCode\Slack\Api;
 
-class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
+class Client extends Runtime\Client\Client
 {
     /**
      * Approve an app for installation on a workspace.
      *
      * @param array $formParameters {
      *
-     *     @var string $app_id the id of the app to approve
-     *     @var string $request_id the id of the request to approve
-     *     @var string $team_id
-     * }
+     * @var string $app_id the id of the app to approve
+     * @var string $request_id the id of the request to approve
+     * @var string $team_id
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.apps:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.apps:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -36,7 +36,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminAppsApprove(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminAppsApprove($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminAppsApprove($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -44,12 +44,12 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
-     *     @var string $enterprise_id
-     *     @var int $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-     *     @var string $team_id
-     *     @var string $token Authentication token. Requires scope: `admin.apps:read`
-     * }
+     * @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * @var string $enterprise_id
+     * @var int    $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+     * @var string $team_id
+     * @var string $token Authentication token. Requires scope: `admin.apps:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -57,7 +57,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminAppsApprovedList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminAppsApprovedList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminAppsApprovedList($queryParameters), $fetch);
     }
 
     /**
@@ -65,11 +65,11 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
-     *     @var int $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-     *     @var string $team_id
-     *     @var string $token Authentication token. Requires scope: `admin.apps:read`
-     * }
+     * @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * @var int    $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+     * @var string $team_id
+     * @var string $token Authentication token. Requires scope: `admin.apps:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -77,7 +77,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminAppsRequestsList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminAppsRequestsList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminAppsRequestsList($queryParameters), $fetch);
     }
 
     /**
@@ -85,15 +85,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $app_id the id of the app to restrict
-     *     @var string $request_id the id of the request to restrict
-     *     @var string $team_id
-     * }
+     * @var string $app_id the id of the app to restrict
+     * @var string $request_id the id of the request to restrict
+     * @var string $team_id
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.apps:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.apps:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -101,7 +101,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminAppsRestrict(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminAppsRestrict($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminAppsRestrict($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -109,12 +109,12 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
-     *     @var string $enterprise_id
-     *     @var int $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-     *     @var string $team_id
-     *     @var string $token Authentication token. Requires scope: `admin.apps:read`
-     * }
+     * @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * @var string $enterprise_id
+     * @var int    $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+     * @var string $team_id
+     * @var string $token Authentication token. Requires scope: `admin.apps:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -122,7 +122,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminAppsRestrictedList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminAppsRestrictedList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminAppsRestrictedList($queryParameters), $fetch);
     }
 
     /**
@@ -130,13 +130,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_id The channel to archive.
-     * }
+     * @var string $channel_id The channel to archive.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -144,7 +144,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsArchive(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsArchive($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsArchive($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -152,13 +152,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_id The channel to convert to private.
-     * }
+     * @var string $channel_id The channel to convert to private.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -166,7 +166,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsConvertToPrivate(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsConvertToPrivate($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsConvertToPrivate($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -174,17 +174,17 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $description description of the public or private channel to create
-     *     @var bool $is_private When `true`, creates a private channel instead of a public channel
-     *     @var string $name name of the public or private channel to create
-     *     @var bool $org_wide When `true`, the channel will be available org-wide. Note: if the channel is not `org_wide=true`, you must specify a `team_id` for this channel
-     *     @var string $team_id The workspace to create the channel in. Note: this argument is required unless you set `org_wide=true`.
-     * }
+     * @var string $description description of the public or private channel to create
+     * @var bool   $is_private When `true`, creates a private channel instead of a public channel
+     * @var string $name name of the public or private channel to create
+     * @var bool   $org_wide When `true`, the channel will be available org-wide. Note: if the channel is not `org_wide=true`, you must specify a `team_id` for this channel
+     * @var string $team_id The workspace to create the channel in. Note: this argument is required unless you set `org_wide=true`.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -192,7 +192,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsCreate(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsCreate($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsCreate($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -200,13 +200,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_id The channel to delete.
-     * }
+     * @var string $channel_id The channel to delete.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -214,7 +214,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsDelete(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsDelete($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsDelete($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -222,14 +222,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_id the channel to be disconnected from some workspaces
-     *     @var string $leaving_team_ids The team to be removed from the channel. Currently only a single team id can be specified.
-     * }
+     * @var string $channel_id the channel to be disconnected from some workspaces
+     * @var string $leaving_team_ids The team to be removed from the channel. Currently only a single team id can be specified.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -237,7 +237,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsDisconnectShared(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsDisconnectShared($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsDisconnectShared($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -245,12 +245,12 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel_ids a comma-separated list of channels to filter to
-     *     @var string $cursor set `cursor` to `next_cursor` returned by the previous call to list items in the next page
-     *     @var int $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-     *     @var string $team_ids a comma-separated list of the workspaces to which the channels you would like returned belong
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:read`
-     * }
+     * @var string $channel_ids a comma-separated list of channels to filter to
+     * @var string $cursor set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * @var int    $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+     * @var string $team_ids a comma-separated list of the workspaces to which the channels you would like returned belong
+     * @var string $token Authentication token. Requires scope: `admin.conversations:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -258,7 +258,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsEkmListOriginalConnectedChannelInfo(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsEkmListOriginalConnectedChannelInfo($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsEkmListOriginalConnectedChannelInfo($queryParameters), $fetch);
     }
 
     /**
@@ -266,13 +266,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel_id The channel to get preferences for.
-     * }
+     * @var string $channel_id The channel to get preferences for.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -280,7 +280,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsGetConversationPrefs(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsGetConversationPrefs($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsGetConversationPrefs($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -288,15 +288,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel_id the channel to determine connected workspaces within the organization for
-     *     @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
-     *     @var int $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-     * }
+     * @var string $channel_id the channel to determine connected workspaces within the organization for
+     * @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * @var int    $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -304,7 +304,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsGetTeams(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsGetTeams($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsGetTeams($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -312,14 +312,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_id the channel that the users will be invited to
-     *     @var string $user_ids The users to invite.
-     * }
+     * @var string $channel_id the channel that the users will be invited to
+     * @var string $user_ids The users to invite.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -327,7 +327,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsInvite(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsInvite($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsInvite($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -335,14 +335,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_id the channel to rename
-     *     @var string $name
-     * }
+     * @var string $channel_id the channel to rename
+     * @var string $name
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -350,7 +350,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsRename(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsRename($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsRename($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -358,11 +358,11 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_id the channel to link this group to
-     *     @var string $group_id The [IDP Group](https://slack.com/help/articles/115001435788-Connect-identity-provider-groups-to-your-Enterprise-Grid-org) ID to be an allowlist for the private channel.
-     *     @var string $team_id The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:write`
-     * }
+     * @var string $channel_id the channel to link this group to
+     * @var string $group_id The [IDP Group](https://slack.com/help/articles/115001435788-Connect-identity-provider-groups-to-your-Enterprise-Grid-org) ID to be an allowlist for the private channel.
+     * @var string $team_id The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.
+     * @var string $token Authentication token. Requires scope: `admin.conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -370,7 +370,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsRestrictAccessAddGroup(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsRestrictAccessAddGroup($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsRestrictAccessAddGroup($formParameters), $fetch);
     }
 
     /**
@@ -378,10 +378,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel_id
-     *     @var string $team_id The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:read`
-     * }
+     * @var string $channel_id
+     * @var string $team_id The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.
+     * @var string $token Authentication token. Requires scope: `admin.conversations:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -389,7 +389,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsRestrictAccessListGroups(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsRestrictAccessListGroups($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsRestrictAccessListGroups($queryParameters), $fetch);
     }
 
     /**
@@ -397,11 +397,11 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_id the channel to remove the linked group from
-     *     @var string $group_id The [IDP Group](https://slack.com/help/articles/115001435788-Connect-identity-provider-groups-to-your-Enterprise-Grid-org) ID to remove from the private channel.
-     *     @var string $team_id The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:write`
-     * }
+     * @var string $channel_id the channel to remove the linked group from
+     * @var string $group_id The [IDP Group](https://slack.com/help/articles/115001435788-Connect-identity-provider-groups-to-your-Enterprise-Grid-org) ID to remove from the private channel.
+     * @var string $team_id The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization.
+     * @var string $token Authentication token. Requires scope: `admin.conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -409,7 +409,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsRestrictAccessRemoveGroup(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsRestrictAccessRemoveGroup($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsRestrictAccessRemoveGroup($formParameters), $fetch);
     }
 
     /**
@@ -417,19 +417,19 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor set `cursor` to `next_cursor` returned by the previous call to list items in the next page
-     *     @var int $limit Maximum number of items to be returned. Must be between 1 - 20 both inclusive. Default is 10.
-     *     @var string $query name of the the channel to query by
-     *     @var string $search_channel_types The type of channel to include or exclude in the search. For example `private` will search private channels, while `private_exclude` will exclude them. For a full list of types, check the [Types section](#types).
-     *     @var string $sort Possible values are `relevant` (search ranking based on what we think is closest), `name` (alphabetical), `member_count` (number of users in the channel), and `created` (date channel was created). You can optionally pair this with the `sort_dir` arg to change how it is sorted
-     *     @var string $sort_dir Sort direction. Possible values are `asc` for ascending order like (1, 2, 3) or (a, b, c), and `desc` for descending order like (3, 2, 1) or (c, b, a)
-     *     @var string $team_ids Comma separated string of team IDs, signifying the workspaces to search through.
-     * }
+     * @var string $cursor set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * @var int    $limit Maximum number of items to be returned. Must be between 1 - 20 both inclusive. Default is 10.
+     * @var string $query name of the the channel to query by
+     * @var string $search_channel_types The type of channel to include or exclude in the search. For example `private` will search private channels, while `private_exclude` will exclude them. For a full list of types, check the [Types section](#types).
+     * @var string $sort Possible values are `relevant` (search ranking based on what we think is closest), `name` (alphabetical), `member_count` (number of users in the channel), and `created` (date channel was created). You can optionally pair this with the `sort_dir` arg to change how it is sorted
+     * @var string $sort_dir Sort direction. Possible values are `asc` for ascending order like (1, 2, 3) or (a, b, c), and `desc` for descending order like (3, 2, 1) or (c, b, a)
+     * @var string $team_ids Comma separated string of team IDs, signifying the workspaces to search through.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -437,7 +437,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsSearch(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsSearch($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsSearch($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -445,14 +445,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_id The channel to set the prefs for
-     *     @var string $prefs The prefs for this channel in a stringified JSON format.
-     * }
+     * @var string $channel_id The channel to set the prefs for
+     * @var string $prefs The prefs for this channel in a stringified JSON format.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -460,7 +460,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsSetConversationPrefs(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsSetConversationPrefs($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsSetConversationPrefs($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -468,16 +468,16 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_id the encoded `channel_id` to add or remove to workspaces
-     *     @var bool $org_channel True if channel has to be converted to an org channel
-     *     @var string $target_team_ids A comma-separated list of workspaces to which the channel should be shared. Not required if the channel is being shared org-wide.
-     *     @var string $team_id The workspace to which the channel belongs. Omit this argument if the channel is a cross-workspace shared channel.
-     * }
+     * @var string $channel_id the encoded `channel_id` to add or remove to workspaces
+     * @var bool   $org_channel True if channel has to be converted to an org channel
+     * @var string $target_team_ids A comma-separated list of workspaces to which the channel should be shared. Not required if the channel is being shared org-wide.
+     * @var string $team_id The workspace to which the channel belongs. Omit this argument if the channel is a cross-workspace shared channel.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -485,7 +485,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsSetTeams(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsSetTeams($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsSetTeams($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -493,13 +493,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_id The channel to unarchive.
-     * }
+     * @var string $channel_id The channel to unarchive.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -507,7 +507,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminConversationsUnarchive(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminConversationsUnarchive($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminConversationsUnarchive($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -515,10 +515,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $name The name of the emoji to be removed. Colons (`:myemoji:`) around the value are not required, although they may be included.
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     *     @var string $url The URL of a file to use as an image for the emoji. Square images under 128KB and with transparent backgrounds work best.
-     * }
+     * @var string $name The name of the emoji to be removed. Colons (`:myemoji:`) around the value are not required, although they may be included.
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     * @var string $url The URL of a file to use as an image for the emoji. Square images under 128KB and with transparent backgrounds work best.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -526,7 +526,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminEmojiAdd(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminEmojiAdd($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminEmojiAdd($formParameters), $fetch);
     }
 
     /**
@@ -534,10 +534,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $alias_for the alias of the emoji
-     *     @var string $name The name of the emoji to be aliased. Colons (`:myemoji:`) around the value are not required, although they may be included.
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     * }
+     * @var string $alias_for the alias of the emoji
+     * @var string $name The name of the emoji to be aliased. Colons (`:myemoji:`) around the value are not required, although they may be included.
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -545,7 +545,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminEmojiAddAlias(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminEmojiAddAlias($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminEmojiAddAlias($formParameters), $fetch);
     }
 
     /**
@@ -553,10 +553,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
-     *     @var int $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-     *     @var string $token Authentication token. Requires scope: `admin.teams:read`
-     * }
+     * @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * @var int    $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+     * @var string $token Authentication token. Requires scope: `admin.teams:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -564,7 +564,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminEmojiList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminEmojiList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminEmojiList($queryParameters), $fetch);
     }
 
     /**
@@ -572,9 +572,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $name The name of the emoji to be removed. Colons (`:myemoji:`) around the value are not required, although they may be included.
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     * }
+     * @var string $name The name of the emoji to be removed. Colons (`:myemoji:`) around the value are not required, although they may be included.
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -582,7 +582,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminEmojiRemove(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminEmojiRemove($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminEmojiRemove($formParameters), $fetch);
     }
 
     /**
@@ -590,10 +590,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $name The name of the emoji to be renamed. Colons (`:myemoji:`) around the value are not required, although they may be included.
-     *     @var string $new_name the new name of the emoji
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     * }
+     * @var string $name The name of the emoji to be renamed. Colons (`:myemoji:`) around the value are not required, although they may be included.
+     * @var string $new_name the new name of the emoji
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -601,7 +601,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminEmojiRename(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminEmojiRename($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminEmojiRename($formParameters), $fetch);
     }
 
     /**
@@ -609,14 +609,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $invite_request_id ID of the request to invite
-     *     @var string $team_id ID for the workspace where the invite request was made.
-     * }
+     * @var string $invite_request_id ID of the request to invite
+     * @var string $team_id ID for the workspace where the invite request was made.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.invites:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.invites:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -624,7 +624,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminInviteRequestsApprove(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminInviteRequestsApprove($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminInviteRequestsApprove($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -632,15 +632,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Value of the `next_cursor` field sent as part of the previous API response
-     *     @var int $limit The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive
-     *     @var string $team_id ID for the workspace where the invite requests were made.
-     * }
+     * @var string $cursor Value of the `next_cursor` field sent as part of the previous API response
+     * @var int    $limit The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive
+     * @var string $team_id ID for the workspace where the invite requests were made.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.invites:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.invites:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -648,7 +648,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminInviteRequestsApprovedList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminInviteRequestsApprovedList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminInviteRequestsApprovedList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -656,15 +656,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Value of the `next_cursor` field sent as part of the previous api response
-     *     @var int $limit The number of results that will be returned by the API on each invocation. Must be between 1 - 1000 both inclusive
-     *     @var string $team_id ID for the workspace where the invite requests were made.
-     * }
+     * @var string $cursor Value of the `next_cursor` field sent as part of the previous api response
+     * @var int    $limit The number of results that will be returned by the API on each invocation. Must be between 1 - 1000 both inclusive
+     * @var string $team_id ID for the workspace where the invite requests were made.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.invites:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.invites:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -672,7 +672,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminInviteRequestsDeniedList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminInviteRequestsDeniedList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminInviteRequestsDeniedList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -680,14 +680,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $invite_request_id ID of the request to invite
-     *     @var string $team_id ID for the workspace where the invite request was made.
-     * }
+     * @var string $invite_request_id ID of the request to invite
+     * @var string $team_id ID for the workspace where the invite request was made.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.invites:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.invites:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -695,7 +695,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminInviteRequestsDeny(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminInviteRequestsDeny($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminInviteRequestsDeny($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -703,15 +703,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Value of the `next_cursor` field sent as part of the previous API response
-     *     @var int $limit The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive
-     *     @var string $team_id ID for the workspace where the invite requests were made.
-     * }
+     * @var string $cursor Value of the `next_cursor` field sent as part of the previous API response
+     * @var int    $limit The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive
+     * @var string $team_id ID for the workspace where the invite requests were made.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.invites:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.invites:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -719,7 +719,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminInviteRequestsList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminInviteRequestsList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminInviteRequestsList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -727,11 +727,11 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor set `cursor` to `next_cursor` returned by the previous call to list items in the next page
-     *     @var int $limit the maximum number of items to return
-     *     @var string $team_id
-     *     @var string $token Authentication token. Requires scope: `admin.teams:read`
-     * }
+     * @var string $cursor set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * @var int    $limit the maximum number of items to return
+     * @var string $team_id
+     * @var string $token Authentication token. Requires scope: `admin.teams:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -739,7 +739,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminTeamsAdminsList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminTeamsAdminsList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminTeamsAdminsList($queryParameters), $fetch);
     }
 
     /**
@@ -747,16 +747,16 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $team_description description for the team
-     *     @var string $team_discoverability Who can join the team. A team's discoverability can be `open`, `closed`, `invite_only`, or `unlisted`.
-     *     @var string $team_domain team domain (for example, slacksoftballteam)
-     *     @var string $team_name Team name (for example, Slack Softball Team).
-     * }
+     * @var string $team_description description for the team
+     * @var string $team_discoverability Who can join the team. A team's discoverability can be `open`, `closed`, `invite_only`, or `unlisted`.
+     * @var string $team_domain team domain (for example, slacksoftballteam)
+     * @var string $team_name Team name (for example, Slack Softball Team).
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -764,7 +764,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminTeamsCreate(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminTeamsCreate($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminTeamsCreate($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -772,14 +772,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor set `cursor` to `next_cursor` returned by the previous call to list items in the next page
-     *     @var int $limit The maximum number of items to return. Must be between 1 - 100 both inclusive.
-     * }
+     * @var string $cursor set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * @var int    $limit The maximum number of items to return. Must be between 1 - 100 both inclusive.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.teams:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.teams:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -787,7 +787,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminTeamsList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminTeamsList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminTeamsList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -795,11 +795,11 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor set `cursor` to `next_cursor` returned by the previous call to list items in the next page
-     *     @var int $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-     *     @var string $team_id
-     *     @var string $token Authentication token. Requires scope: `admin.teams:read`
-     * }
+     * @var string $cursor set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * @var int    $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+     * @var string $team_id
+     * @var string $token Authentication token. Requires scope: `admin.teams:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -807,7 +807,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminTeamsOwnersList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminTeamsOwnersList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminTeamsOwnersList($queryParameters), $fetch);
     }
 
     /**
@@ -815,13 +815,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $team_id
-     * }
+     * @var string $team_id
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.teams:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.teams:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -829,7 +829,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminTeamsSettingsInfo(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminTeamsSettingsInfo($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminTeamsSettingsInfo($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -837,10 +837,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_ids an array of channel IDs
-     *     @var string $team_id ID for the workspace to set the default channel for
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     * }
+     * @var string $channel_ids an array of channel IDs
+     * @var string $team_id ID for the workspace to set the default channel for
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -848,7 +848,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminTeamsSettingsSetDefaultChannels(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminTeamsSettingsSetDefaultChannels($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminTeamsSettingsSetDefaultChannels($formParameters), $fetch);
     }
 
     /**
@@ -856,14 +856,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $description the new description for the workspace
-     *     @var string $team_id ID for the workspace to set the description for.
-     * }
+     * @var string $description the new description for the workspace
+     * @var string $team_id ID for the workspace to set the description for.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -871,7 +871,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminTeamsSettingsSetDescription(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminTeamsSettingsSetDescription($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminTeamsSettingsSetDescription($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -879,14 +879,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $discoverability This workspace's discovery setting. It must be set to one of `open`, `invite_only`, `closed`, or `unlisted`.
-     *     @var string $team_id The ID of the workspace to set discoverability on.
-     * }
+     * @var string $discoverability This workspace's discovery setting. It must be set to one of `open`, `invite_only`, `closed`, or `unlisted`.
+     * @var string $team_id The ID of the workspace to set discoverability on.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -894,7 +894,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminTeamsSettingsSetDiscoverability(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminTeamsSettingsSetDiscoverability($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminTeamsSettingsSetDiscoverability($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -902,10 +902,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $image_url Image URL for the icon
-     *     @var string $team_id ID for the workspace to set the icon for
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     * }
+     * @var string $image_url Image URL for the icon
+     * @var string $team_id ID for the workspace to set the icon for
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -913,7 +913,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminTeamsSettingsSetIcon(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminTeamsSettingsSetIcon($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminTeamsSettingsSetIcon($formParameters), $fetch);
     }
 
     /**
@@ -921,14 +921,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $name the new name of the workspace
-     *     @var string $team_id ID for the workspace to set the name for.
-     * }
+     * @var string $name the new name of the workspace
+     * @var string $team_id ID for the workspace to set the name for.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -936,7 +936,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminTeamsSettingsSetName(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminTeamsSettingsSetName($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminTeamsSettingsSetName($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -944,15 +944,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_ids comma separated string of channel IDs
-     *     @var string $team_id the workspace to add default channels in
-     *     @var string $usergroup_id ID of the IDP group to add default channels for.
-     * }
+     * @var string $channel_ids comma separated string of channel IDs
+     * @var string $team_id the workspace to add default channels in
+     * @var string $usergroup_id ID of the IDP group to add default channels for.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.usergroups:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.usergroups:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -960,7 +960,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsergroupsAddChannels(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsergroupsAddChannels($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsergroupsAddChannels($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -968,15 +968,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var bool $auto_provision when `true`, this method automatically creates new workspace accounts for the IDP group members
-     *     @var string $team_ids A comma separated list of encoded team (workspace) IDs. Each workspace *MUST* belong to the organization associated with the token.
-     *     @var string $usergroup_id An encoded usergroup (IDP Group) ID.
-     * }
+     * @var bool   $auto_provision when `true`, this method automatically creates new workspace accounts for the IDP group members
+     * @var string $team_ids A comma separated list of encoded team (workspace) IDs. Each workspace *MUST* belong to the organization associated with the token.
+     * @var string $usergroup_id An encoded usergroup (IDP Group) ID.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -984,7 +984,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsergroupsAddTeams(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsergroupsAddTeams($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsergroupsAddTeams($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -992,15 +992,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var bool $include_num_members flag to include or exclude the count of members per channel
-     *     @var string $team_id ID of the the workspace
-     *     @var string $usergroup_id ID of the IDP group to list default channels for.
-     * }
+     * @var bool   $include_num_members flag to include or exclude the count of members per channel
+     * @var string $team_id ID of the the workspace
+     * @var string $usergroup_id ID of the IDP group to list default channels for.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.usergroups:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.usergroups:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1008,7 +1008,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsergroupsListChannels(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsergroupsListChannels($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsergroupsListChannels($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1016,14 +1016,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_ids Comma-separated string of channel IDs
-     *     @var string $usergroup_id ID of the IDP Group
-     * }
+     * @var string $channel_ids Comma-separated string of channel IDs
+     * @var string $usergroup_id ID of the IDP Group
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.usergroups:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.usergroups:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1031,7 +1031,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsergroupsRemoveChannels(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsergroupsRemoveChannels($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsergroupsRemoveChannels($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1039,17 +1039,17 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_ids comma separated values of channel IDs to add user in the new workspace
-     *     @var bool $is_restricted true if user should be added to the workspace as a guest
-     *     @var bool $is_ultra_restricted true if user should be added to the workspace as a single-channel guest
-     *     @var string $team_id the ID (`T1234`) of the workspace
-     *     @var string $user_id The ID of the user to add to the workspace.
-     * }
+     * @var string $channel_ids comma separated values of channel IDs to add user in the new workspace
+     * @var bool   $is_restricted true if user should be added to the workspace as a guest
+     * @var bool   $is_ultra_restricted true if user should be added to the workspace as a single-channel guest
+     * @var string $team_id the ID (`T1234`) of the workspace
+     * @var string $user_id The ID of the user to add to the workspace.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.users:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1057,7 +1057,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsersAssign(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsersAssign($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsersAssign($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1065,21 +1065,21 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_ids A comma-separated list of `channel_id`s for this user to join. At least one channel is required.
-     *     @var string $custom_message an optional message to send to the user in the invite email
-     *     @var string $email the email address of the person to invite
-     *     @var string $guest_expiration_ts Timestamp when guest account should be disabled. Only include this timestamp if you are inviting a guest user and you want their account to expire on a certain date.
-     *     @var bool $is_restricted Is this user a multi-channel guest user? (default: false)
-     *     @var bool $is_ultra_restricted Is this user a single channel guest user? (default: false)
-     *     @var string $real_name full name of the user
-     *     @var bool $resend Allow this invite to be resent in the future if a user has not signed up yet. (default: false)
-     *     @var string $team_id The ID (`T1234`) of the workspace.
-     * }
+     * @var string $channel_ids A comma-separated list of `channel_id`s for this user to join. At least one channel is required.
+     * @var string $custom_message an optional message to send to the user in the invite email
+     * @var string $email the email address of the person to invite
+     * @var string $guest_expiration_ts Timestamp when guest account should be disabled. Only include this timestamp if you are inviting a guest user and you want their account to expire on a certain date.
+     * @var bool   $is_restricted Is this user a multi-channel guest user? (default: false)
+     * @var bool   $is_ultra_restricted Is this user a single channel guest user? (default: false)
+     * @var string $real_name full name of the user
+     * @var bool   $resend Allow this invite to be resent in the future if a user has not signed up yet. (default: false)
+     * @var string $team_id The ID (`T1234`) of the workspace.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.users:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1087,7 +1087,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsersInvite(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsersInvite($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsersInvite($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1095,15 +1095,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor set `cursor` to `next_cursor` returned by the previous call to list items in the next page
-     *     @var int $limit Limit for how many users to be retrieved per page
-     *     @var string $team_id The ID (`T1234`) of the workspace.
-     * }
+     * @var string $cursor set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * @var int    $limit Limit for how many users to be retrieved per page
+     * @var string $team_id The ID (`T1234`) of the workspace.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.users:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.users:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1111,7 +1111,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsersList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsersList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsersList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1119,14 +1119,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $team_id the ID (`T1234`) of the workspace
-     *     @var string $user_id The ID of the user to remove.
-     * }
+     * @var string $team_id the ID (`T1234`) of the workspace
+     * @var string $user_id The ID of the user to remove.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.users:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1134,7 +1134,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsersRemove(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsersRemove($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsersRemove($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1142,14 +1142,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var int $session_id
-     *     @var string $team_id ID of the team that the session belongs to
-     * }
+     * @var int    $session_id
+     * @var string $team_id ID of the team that the session belongs to
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.users:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1157,7 +1157,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsersSessionInvalidate(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsersSessionInvalidate($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsersSessionInvalidate($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1165,15 +1165,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var bool $mobile_only Only expire mobile sessions (default: false)
-     *     @var string $user_id The ID of the user to wipe sessions for
-     *     @var bool $web_only Only expire web sessions (default: false)
-     * }
+     * @var bool   $mobile_only Only expire mobile sessions (default: false)
+     * @var string $user_id The ID of the user to wipe sessions for
+     * @var bool   $web_only Only expire web sessions (default: false)
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.users:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1181,7 +1181,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsersSessionReset(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsersSessionReset($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsersSessionReset($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1189,14 +1189,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $team_id the ID (`T1234`) of the workspace
-     *     @var string $user_id The ID of the user to designate as an admin.
-     * }
+     * @var string $team_id the ID (`T1234`) of the workspace
+     * @var string $user_id The ID of the user to designate as an admin.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.users:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1204,7 +1204,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsersSetAdmin(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsersSetAdmin($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsersSetAdmin($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1212,15 +1212,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var int $expiration_ts timestamp when guest account should be disabled
-     *     @var string $team_id the ID (`T1234`) of the workspace
-     *     @var string $user_id The ID of the user to set an expiration for.
-     * }
+     * @var int    $expiration_ts timestamp when guest account should be disabled
+     * @var string $team_id the ID (`T1234`) of the workspace
+     * @var string $user_id The ID of the user to set an expiration for.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.users:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1228,7 +1228,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsersSetExpiration(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsersSetExpiration($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsersSetExpiration($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1236,14 +1236,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $team_id the ID (`T1234`) of the workspace
-     *     @var string $user_id Id of the user to promote to owner.
-     * }
+     * @var string $team_id the ID (`T1234`) of the workspace
+     * @var string $user_id Id of the user to promote to owner.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.users:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1251,7 +1251,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsersSetOwner(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsersSetOwner($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsersSetOwner($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1259,14 +1259,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $team_id the ID (`T1234`) of the workspace
-     *     @var string $user_id The ID of the user to designate as a regular user.
-     * }
+     * @var string $team_id the ID (`T1234`) of the workspace
+     * @var string $user_id The ID of the user to designate as a regular user.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.users:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1274,7 +1274,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function adminUsersSetRegular(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AdminUsersSetRegular($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdminUsersSetRegular($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1282,9 +1282,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $error Error response to return
-     *     @var string $foo example property to return
-     * }
+     * @var string $error Error response to return
+     * @var string $foo example property to return
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1292,7 +1292,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function apiTest(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ApiTest($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ApiTest($queryParameters), $fetch);
     }
 
     /**
@@ -1300,15 +1300,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor
-     *     @var string $event_context
-     *     @var int $limit
-     * }
+     * @var string $cursor
+     * @var string $event_context
+     * @var int    $limit
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `authorizations:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `authorizations:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1316,7 +1316,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function appsEventAuthorizationsList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AppsEventAuthorizationsList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AppsEventAuthorizationsList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1324,8 +1324,8 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1333,7 +1333,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function appsPermissionsInfo(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AppsPermissionsInfo($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AppsPermissionsInfo($queryParameters), $fetch);
     }
 
     /**
@@ -1341,10 +1341,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $scopes A comma separated list of scopes to request for
-     *     @var string $token Authentication token. Requires scope: `none`
-     *     @var string $trigger_id Token used to trigger the permissions API
-     * }
+     * @var string $scopes A comma separated list of scopes to request for
+     * @var string $token Authentication token. Requires scope: `none`
+     * @var string $trigger_id Token used to trigger the permissions API
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1352,7 +1352,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function appsPermissionsRequest(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AppsPermissionsRequest($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AppsPermissionsRequest($queryParameters), $fetch);
     }
 
     /**
@@ -1360,10 +1360,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-     *     @var int $limit the maximum number of items to return
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * @var int    $limit the maximum number of items to return
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1371,7 +1371,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function appsPermissionsResourcesList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AppsPermissionsResourcesList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AppsPermissionsResourcesList($queryParameters), $fetch);
     }
 
     /**
@@ -1379,8 +1379,8 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1388,7 +1388,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function appsPermissionsScopesList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AppsPermissionsScopesList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AppsPermissionsScopesList($queryParameters), $fetch);
     }
 
     /**
@@ -1396,10 +1396,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-     *     @var int $limit the maximum number of items to return
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * @var int    $limit the maximum number of items to return
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1407,7 +1407,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function appsPermissionsUsersList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AppsPermissionsUsersList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AppsPermissionsUsersList($queryParameters), $fetch);
     }
 
     /**
@@ -1415,11 +1415,11 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $scopes A comma separated list of user scopes to request for
-     *     @var string $token Authentication token. Requires scope: `none`
-     *     @var string $trigger_id Token used to trigger the request
-     *     @var string $user The user this scope is being requested for
-     * }
+     * @var string $scopes A comma separated list of user scopes to request for
+     * @var string $token Authentication token. Requires scope: `none`
+     * @var string $trigger_id Token used to trigger the request
+     * @var string $user The user this scope is being requested for
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1427,7 +1427,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function appsPermissionsUsersRequest(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AppsPermissionsUsersRequest($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AppsPermissionsUsersRequest($queryParameters), $fetch);
     }
 
     /**
@@ -1435,10 +1435,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $client_id issued when you created your application
-     *     @var string $client_secret issued when you created your application
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $client_id issued when you created your application
+     * @var string $client_secret issued when you created your application
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1446,7 +1446,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function appsUninstall(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AppsUninstall($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AppsUninstall($queryParameters), $fetch);
     }
 
     /**
@@ -1454,9 +1454,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var bool $test setting this parameter to `1` triggers a _testing mode_ where the specified token will not actually be revoked
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var bool   $test setting this parameter to `1` triggers a _testing mode_ where the specified token will not actually be revoked
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1464,7 +1464,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function authRevoke(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AuthRevoke($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AuthRevoke($queryParameters), $fetch);
     }
 
     /**
@@ -1472,8 +1472,8 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1481,7 +1481,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function authTest(array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\AuthTest($headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AuthTest($headerParameters), $fetch);
     }
 
     /**
@@ -1489,9 +1489,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $bot Bot user to get info on
-     *     @var string $token Authentication token. Requires scope: `users:read`
-     * }
+     * @var string $bot Bot user to get info on
+     * @var string $token Authentication token. Requires scope: `users:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1499,7 +1499,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function botsInfo(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\BotsInfo($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\BotsInfo($queryParameters), $fetch);
     }
 
     /**
@@ -1507,20 +1507,20 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $created_by The valid Slack user ID of the user who created this Call. When this method is called with a user token, the `created_by` field is optional and defaults to the authed user of the token. Otherwise, the field is required.
-     *     @var int $date_start Call start time in UTC UNIX timestamp format
-     *     @var string $desktop_app_join_url when supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL
-     *     @var string $external_display_id An optional, human-readable ID supplied by the 3rd-party Call provider. If supplied, this ID will be displayed in the Call object.
-     *     @var string $external_unique_id An ID supplied by the 3rd-party Call provider. It must be unique across all Calls from that service.
-     *     @var string $join_url the URL required for a client to join the Call
-     *     @var string $title the name of the Call
-     *     @var string $users The list of users to register as participants in the Call. [Read more on how to specify users here](/apis/calls#users).
-     * }
+     * @var string $created_by The valid Slack user ID of the user who created this Call. When this method is called with a user token, the `created_by` field is optional and defaults to the authed user of the token. Otherwise, the field is required.
+     * @var int    $date_start Call start time in UTC UNIX timestamp format
+     * @var string $desktop_app_join_url when supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL
+     * @var string $external_display_id An optional, human-readable ID supplied by the 3rd-party Call provider. If supplied, this ID will be displayed in the Call object.
+     * @var string $external_unique_id An ID supplied by the 3rd-party Call provider. It must be unique across all Calls from that service.
+     * @var string $join_url the URL required for a client to join the Call
+     * @var string $title the name of the Call
+     * @var string $users The list of users to register as participants in the Call. [Read more on how to specify users here](/apis/calls#users).
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `calls:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `calls:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1528,7 +1528,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function callsAdd(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\CallsAdd($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CallsAdd($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1536,14 +1536,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var int $duration Call duration in seconds
-     *     @var string $id `id` returned when registering the call using the [`calls.add`](/methods/calls.add) method.
-     * }
+     * @var int    $duration Call duration in seconds
+     * @var string $id `id` returned when registering the call using the [`calls.add`](/methods/calls.add) method.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `calls:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `calls:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1551,7 +1551,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function callsEnd(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\CallsEnd($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CallsEnd($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1559,13 +1559,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $id `id` of the Call returned by the [`calls.add`](/methods/calls.add) method.
-     * }
+     * @var string $id `id` of the Call returned by the [`calls.add`](/methods/calls.add) method.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `calls:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `calls:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1573,7 +1573,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function callsInfo(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\CallsInfo($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CallsInfo($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1581,14 +1581,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $id `id` returned by the [`calls.add`](/methods/calls.add) method.
-     *     @var string $users The list of users to add as participants in the Call. [Read more on how to specify users here](/apis/calls#users).
-     * }
+     * @var string $id `id` returned by the [`calls.add`](/methods/calls.add) method.
+     * @var string $users The list of users to add as participants in the Call. [Read more on how to specify users here](/apis/calls#users).
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `calls:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `calls:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1596,7 +1596,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function callsParticipantsAdd(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\CallsParticipantsAdd($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CallsParticipantsAdd($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1604,14 +1604,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $id `id` returned by the [`calls.add`](/methods/calls.add) method.
-     *     @var string $users The list of users to remove as participants in the Call. [Read more on how to specify users here](/apis/calls#users).
-     * }
+     * @var string $id `id` returned by the [`calls.add`](/methods/calls.add) method.
+     * @var string $users The list of users to remove as participants in the Call. [Read more on how to specify users here](/apis/calls#users).
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `calls:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `calls:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1619,7 +1619,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function callsParticipantsRemove(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\CallsParticipantsRemove($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CallsParticipantsRemove($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1627,16 +1627,16 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $desktop_app_join_url when supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL
-     *     @var string $id `id` returned by the [`calls.add`](/methods/calls.add) method.
-     *     @var string $join_url the URL required for a client to join the Call
-     *     @var string $title The name of the Call.
-     * }
+     * @var string $desktop_app_join_url when supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL
+     * @var string $id `id` returned by the [`calls.add`](/methods/calls.add) method.
+     * @var string $join_url the URL required for a client to join the Call
+     * @var string $title The name of the Call.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `calls:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `calls:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1644,7 +1644,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function callsUpdate(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\CallsUpdate($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CallsUpdate($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1652,15 +1652,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var bool $as_user Pass true to delete the message as the authed user with `chat:write:user` scope. [Bot users](/bot-users) in this context are considered authed users. If unused or false, the message will be deleted with `chat:write:bot` scope.
-     *     @var string $channel channel containing the message to be deleted
-     *     @var string $ts Timestamp of the message to be deleted.
-     * }
+     * @var bool   $as_user Pass true to delete the message as the authed user with `chat:write:user` scope. [Bot users](/bot-users) in this context are considered authed users. If unused or false, the message will be deleted with `chat:write:bot` scope.
+     * @var string $channel channel containing the message to be deleted
+     * @var string $ts Timestamp of the message to be deleted.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `chat:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `chat:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1668,7 +1668,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function chatDelete(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ChatDelete($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ChatDelete($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1676,15 +1676,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var bool $as_user Pass true to delete the message as the authed user with `chat:write:user` scope. [Bot users](/bot-users) in this context are considered authed users. If unused or false, the message will be deleted with `chat:write:bot` scope.
-     *     @var string $channel The channel the scheduled_message is posting to
-     *     @var string $scheduled_message_id `scheduled_message_id` returned from call to chat.scheduleMessage
-     * }
+     * @var bool   $as_user Pass true to delete the message as the authed user with `chat:write:user` scope. [Bot users](/bot-users) in this context are considered authed users. If unused or false, the message will be deleted with `chat:write:bot` scope.
+     * @var string $channel The channel the scheduled_message is posting to
+     * @var string $scheduled_message_id `scheduled_message_id` returned from call to chat.scheduleMessage
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `chat:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `chat:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1692,7 +1692,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function chatDeleteScheduledMessage(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ChatDeleteScheduledMessage($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ChatDeleteScheduledMessage($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1700,10 +1700,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel The ID of the conversation or channel containing the message
-     *     @var string $message_ts A message's `ts` value, uniquely identifying it within a channel
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $channel The ID of the conversation or channel containing the message
+     * @var string $message_ts A message's `ts` value, uniquely identifying it within a channel
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1711,7 +1711,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function chatGetPermalink(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ChatGetPermalink($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ChatGetPermalink($queryParameters), $fetch);
     }
 
     /**
@@ -1719,14 +1719,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.
-     *     @var string $text Text of the message to send.
-     * }
+     * @var string $channel Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.
+     * @var string $text Text of the message to send.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `chat:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `chat:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1734,7 +1734,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function chatMeMessage(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ChatMeMessage($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ChatMeMessage($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1742,24 +1742,24 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var bool $as_user Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
-     *     @var string $attachments a JSON-based array of structured attachments, presented as a URL-encoded string
-     *     @var string $blocks a JSON-based array of structured blocks, presented as a URL-encoded string
-     *     @var string $channel Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
-     *     @var string $icon_emoji Emoji to use as the icon for this message. Overrides `icon_url`. Must be used in conjunction with `as_user` set to `false`, otherwise ignored. See [authorship](#authorship) below.
-     *     @var string $icon_url URL to an image to use as the icon for this message. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below.
-     *     @var bool $link_names find and link channel names and usernames
-     *     @var string $parse Change how messages are treated. Defaults to `none`. See [below](#formatting).
-     *     @var string $text How this field works and whether it is required depends on other fields you use in your API call. [See below](#text_usage) for more detail.
-     *     @var string $thread_ts Provide another message's `ts` value to post this message in a thread. Avoid using a reply's `ts` value; use its parent's value instead. Ephemeral messages in threads are only shown if there is already an active thread.
-     *     @var string $user `id` of the user who will receive the ephemeral message. The user should be in the channel specified by the `channel` argument.
-     *     @var string $username Set your bot's user name. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below.
-     * }
+     * @var bool   $as_user Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
+     * @var string $attachments a JSON-based array of structured attachments, presented as a URL-encoded string
+     * @var string $blocks a JSON-based array of structured blocks, presented as a URL-encoded string
+     * @var string $channel Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
+     * @var string $icon_emoji Emoji to use as the icon for this message. Overrides `icon_url`. Must be used in conjunction with `as_user` set to `false`, otherwise ignored. See [authorship](#authorship) below.
+     * @var string $icon_url URL to an image to use as the icon for this message. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below.
+     * @var bool   $link_names find and link channel names and usernames
+     * @var string $parse Change how messages are treated. Defaults to `none`. See [below](#formatting).
+     * @var string $text How this field works and whether it is required depends on other fields you use in your API call. [See below](#text_usage) for more detail.
+     * @var string $thread_ts Provide another message's `ts` value to post this message in a thread. Avoid using a reply's `ts` value; use its parent's value instead. Ephemeral messages in threads are only shown if there is already an active thread.
+     * @var string $user `id` of the user who will receive the ephemeral message. The user should be in the channel specified by the `channel` argument.
+     * @var string $username Set your bot's user name. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `chat:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `chat:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1767,7 +1767,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function chatPostEphemeral(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ChatPostEphemeral($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ChatPostEphemeral($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1775,27 +1775,28 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var bool $as_user Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See [authorship](#authorship) below.
-     *     @var string $attachments a JSON-based array of structured attachments, presented as a URL-encoded string
-     *     @var string $blocks a JSON-based array of structured blocks, presented as a URL-encoded string
-     *     @var string $channel Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See [below](#channels) for more details.
-     *     @var string $icon_emoji Emoji to use as the icon for this message. Overrides `icon_url`. Must be used in conjunction with `as_user` set to `false`, otherwise ignored. See [authorship](#authorship) below.
-     *     @var string $icon_url URL to an image to use as the icon for this message. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below.
-     *     @var bool $link_names find and link channel names and usernames
-     *     @var bool $mrkdwn Disable Slack markup parsing by setting to `false`. Enabled by default.
-     *     @var string $parse Change how messages are treated. Defaults to `none`. See [below](#formatting).
-     *     @var bool $reply_broadcast Used in conjunction with `thread_ts` and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to `false`.
-     *     @var string $text How this field works and whether it is required depends on other fields you use in your API call. [See below](#text_usage) for more detail.
-     *     @var string $thread_ts Provide another message's `ts` value to make this message a reply. Avoid using a reply's `ts` value; use its parent instead.
-     *     @var bool $unfurl_links pass true to enable unfurling of primarily text-based content
-     *     @var bool $unfurl_media pass false to disable unfurling of media content
-     *     @var string $username Set your bot's user name. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below.
-     * }
+     * @var bool   $as_user Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See [authorship](#authorship) below.
+     * @var string $attachments a JSON-based array of structured attachments, presented as a URL-encoded string
+     * @var string $blocks a JSON-based array of structured blocks, presented as a URL-encoded string
+     * @var string $channel Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See [below](#channels) for more details.
+     * @var string $icon_emoji Emoji to use as the icon for this message. Overrides `icon_url`. Must be used in conjunction with `as_user` set to `false`, otherwise ignored. See [authorship](#authorship) below.
+     * @var string $icon_url URL to an image to use as the icon for this message. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below.
+     * @var bool   $link_names find and link channel names and usernames
+     * @var string $metadata JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
+     * @var bool   $mrkdwn Disable Slack markup parsing by setting to `false`. Enabled by default.
+     * @var string $parse Change how messages are treated. Defaults to `none`. See [below](#formatting).
+     * @var bool   $reply_broadcast Used in conjunction with `thread_ts` and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to `false`.
+     * @var string $text How this field works and whether it is required depends on other fields you use in your API call. [See below](#text_usage) for more detail.
+     * @var string $thread_ts Provide another message's `ts` value to make this message a reply. Avoid using a reply's `ts` value; use its parent instead.
+     * @var bool   $unfurl_links pass true to enable unfurling of primarily text-based content
+     * @var bool   $unfurl_media pass false to disable unfurling of media content
+     * @var string $username Set your bot's user name. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `chat:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `chat:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1803,7 +1804,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function chatPostMessage(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ChatPostMessage($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ChatPostMessage($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1811,24 +1812,24 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var bool $as_user Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See [chat.postMessage](chat.postMessage#authorship).
-     *     @var string $attachments a JSON-based array of structured attachments, presented as a URL-encoded string
-     *     @var string $blocks a JSON-based array of structured blocks, presented as a URL-encoded string
-     *     @var string $channel Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See [below](#channels) for more details.
-     *     @var bool $link_names find and link channel names and usernames
-     *     @var string $parse Change how messages are treated. Defaults to `none`. See [chat.postMessage](chat.postMessage#formatting).
-     *     @var int $post_at unix EPOCH timestamp of time in future to send the message
-     *     @var bool $reply_broadcast Used in conjunction with `thread_ts` and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to `false`.
-     *     @var string $text How this field works and whether it is required depends on other fields you use in your API call. [See below](#text_usage) for more detail.
-     *     @var string $thread_ts Provide another message's `ts` value to make this message a reply. Avoid using a reply's `ts` value; use its parent instead.
-     *     @var bool $unfurl_links pass true to enable unfurling of primarily text-based content
-     *     @var bool $unfurl_media Pass false to disable unfurling of media content.
-     * }
+     * @var bool   $as_user Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See [chat.postMessage](chat.postMessage#authorship).
+     * @var string $attachments a JSON-based array of structured attachments, presented as a URL-encoded string
+     * @var string $blocks a JSON-based array of structured blocks, presented as a URL-encoded string
+     * @var string $channel Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See [below](#channels) for more details.
+     * @var bool   $link_names find and link channel names and usernames
+     * @var string $parse Change how messages are treated. Defaults to `none`. See [chat.postMessage](chat.postMessage#formatting).
+     * @var int    $post_at unix EPOCH timestamp of time in future to send the message
+     * @var bool   $reply_broadcast Used in conjunction with `thread_ts` and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to `false`.
+     * @var string $text How this field works and whether it is required depends on other fields you use in your API call. [See below](#text_usage) for more detail.
+     * @var string $thread_ts Provide another message's `ts` value to make this message a reply. Avoid using a reply's `ts` value; use its parent instead.
+     * @var bool   $unfurl_links pass true to enable unfurling of primarily text-based content
+     * @var bool   $unfurl_media Pass false to disable unfurling of media content.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `chat:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `chat:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1836,7 +1837,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function chatScheduleMessage(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ChatScheduleMessage($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ChatScheduleMessage($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1844,17 +1845,17 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel The channel of the scheduled messages
-     *     @var string $cursor For pagination purposes, this is the `cursor` value returned from a previous call to `chat.scheduledmessages.list` indicating where you want to start this call from.
-     *     @var string $latest A UNIX timestamp of the latest value in the time range
-     *     @var int $limit maximum number of original entries to return
-     *     @var string $oldest A UNIX timestamp of the oldest value in the time range
-     * }
+     * @var string $channel The channel of the scheduled messages
+     * @var string $cursor For pagination purposes, this is the `cursor` value returned from a previous call to `chat.scheduledmessages.list` indicating where you want to start this call from.
+     * @var string $latest A UNIX timestamp of the latest value in the time range
+     * @var int    $limit maximum number of original entries to return
+     * @var string $oldest A UNIX timestamp of the oldest value in the time range
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1862,7 +1863,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function chatScheduledMessagesList(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ChatScheduledMessagesList($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ChatScheduledMessagesList($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1870,18 +1871,18 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel Channel ID of the message
-     *     @var string $ts timestamp of the message to add unfurl behavior to
-     *     @var string $unfurls URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments
-     *     @var string $user_auth_message Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior
-     *     @var bool $user_auth_required Set to `true` or `1` to indicate the user must install your Slack app to trigger unfurls for this domain
-     *     @var string $user_auth_url Send users to this custom URL where they will complete authentication in your app to fully trigger unfurling. Value should be properly URL-encoded.
-     * }
+     * @var string $channel Channel ID of the message
+     * @var string $ts timestamp of the message to add unfurl behavior to
+     * @var string $unfurls URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments
+     * @var string $user_auth_message Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior
+     * @var bool   $user_auth_required Set to `true` or `1` to indicate the user must install your Slack app to trigger unfurls for this domain
+     * @var string $user_auth_url Send users to this custom URL where they will complete authentication in your app to fully trigger unfurling. Value should be properly URL-encoded.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `links:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `links:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1889,7 +1890,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function chatUnfurl(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ChatUnfurl($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ChatUnfurl($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1897,20 +1898,20 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var bool $as_user Pass true to update the message as the authed user. [Bot users](/bot-users) in this context are considered authed users.
-     *     @var string $attachments A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting `text`. If you don't include this field, the message's previous `attachments` will be retained. To remove previous `attachments`, include an empty array for this field.
-     *     @var string $blocks A JSON-based array of [structured blocks](/block-kit/building), presented as a URL-encoded string. If you don't include this field, the message's previous `blocks` will be retained. To remove previous `blocks`, include an empty array for this field.
-     *     @var string $channel channel containing the message to be updated
-     *     @var string $link_names Find and link channel names and usernames. Defaults to `none`. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, `none`.
-     *     @var string $parse Change how messages are treated. Defaults to `client`, unlike `chat.postMessage`. Accepts either `none` or `full`. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, `client`.
-     *     @var string $text New text for the message, using the [default formatting rules](/reference/surfaces/formatting). It's not required when presenting `blocks` or `attachments`.
-     *     @var string $ts Timestamp of the message to be updated.
-     * }
+     * @var bool   $as_user Pass true to update the message as the authed user. [Bot users](/bot-users) in this context are considered authed users.
+     * @var string $attachments A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting `text`. If you don't include this field, the message's previous `attachments` will be retained. To remove previous `attachments`, include an empty array for this field.
+     * @var string $blocks A JSON-based array of [structured blocks](/block-kit/building), presented as a URL-encoded string. If you don't include this field, the message's previous `blocks` will be retained. To remove previous `blocks`, include an empty array for this field.
+     * @var string $channel channel containing the message to be updated
+     * @var string $link_names Find and link channel names and usernames. Defaults to `none`. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, `none`.
+     * @var string $parse Change how messages are treated. Defaults to `client`, unlike `chat.postMessage`. Accepts either `none` or `full`. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, `client`.
+     * @var string $text New text for the message, using the [default formatting rules](/reference/surfaces/formatting). It's not required when presenting `blocks` or `attachments`.
+     * @var string $ts Timestamp of the message to be updated.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `chat:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `chat:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1918,7 +1919,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function chatUpdate(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ChatUpdate($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ChatUpdate($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1926,13 +1927,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel ID of conversation to archive
-     * }
+     * @var string $channel ID of conversation to archive
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1940,7 +1941,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsArchive(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsArchive($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsArchive($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1948,13 +1949,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel Conversation to close.
-     * }
+     * @var string $channel Conversation to close.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1962,7 +1963,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsClose(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsClose($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsClose($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1970,14 +1971,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var bool $is_private Create a private channel instead of a public one
-     *     @var string $name Name of the public or private channel to create
-     * }
+     * @var bool   $is_private Create a private channel instead of a public one
+     * @var string $name Name of the public or private channel to create
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -1985,7 +1986,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsCreate(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsCreate($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsCreate($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -1993,14 +1994,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel conversation ID to fetch history for
-     *     @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-     *     @var bool $inclusive include messages with latest or oldest timestamp in results only when either timestamp is specified
-     *     @var string $latest end of time range of messages to include in results
-     *     @var int $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
-     *     @var string $oldest start of time range of messages to include in results
-     *     @var string $token Authentication token. Requires scope: `conversations:history`
-     * }
+     * @var string $channel conversation ID to fetch history for
+     * @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * @var bool   $include_all_metadata return all metadata associated with this message
+     * @var bool   $inclusive include messages with latest or oldest timestamp in results only when either timestamp is specified
+     * @var string $latest end of time range of messages to include in results
+     * @var int    $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
+     * @var string $oldest start of time range of messages to include in results
+     * @var string $token Authentication token. Requires scope: `conversations:history`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2008,7 +2010,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsHistory(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsHistory($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsHistory($queryParameters), $fetch);
     }
 
     /**
@@ -2016,11 +2018,11 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel Conversation ID to learn more about
-     *     @var bool $include_locale Set this to `true` to receive the locale for this conversation. Defaults to `false`
-     *     @var bool $include_num_members Set to `true` to include the member count for the specified conversation. Defaults to `false`
-     *     @var string $token Authentication token. Requires scope: `conversations:read`
-     * }
+     * @var string $channel Conversation ID to learn more about
+     * @var bool   $include_locale Set this to `true` to receive the locale for this conversation. Defaults to `false`
+     * @var bool   $include_num_members Set to `true` to include the member count for the specified conversation. Defaults to `false`
+     * @var string $token Authentication token. Requires scope: `conversations:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2028,7 +2030,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsInfo(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsInfo($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsInfo($queryParameters), $fetch);
     }
 
     /**
@@ -2036,14 +2038,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel the ID of the public or private channel to invite user(s) to
-     *     @var string $users A comma separated list of user IDs. Up to 1000 users may be listed.
-     * }
+     * @var string $channel the ID of the public or private channel to invite user(s) to
+     * @var string $users A comma separated list of user IDs. Up to 1000 users may be listed.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2051,7 +2053,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsInvite(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsInvite($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsInvite($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2059,13 +2061,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel ID of conversation to join
-     * }
+     * @var string $channel ID of conversation to join
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `channels:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `channels:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2073,7 +2075,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsJoin(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsJoin($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsJoin($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2081,14 +2083,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel ID of conversation to remove user from
-     *     @var string $user User ID to be removed.
-     * }
+     * @var string $channel ID of conversation to remove user from
+     * @var string $user User ID to be removed.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2096,7 +2098,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsKick(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsKick($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsKick($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2104,13 +2106,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel Conversation to leave
-     * }
+     * @var string $channel Conversation to leave
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2118,7 +2120,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsLeave(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsLeave($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsLeave($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2126,12 +2128,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-     *     @var bool $exclude_archived Set to `true` to exclude archived channels from the list
-     *     @var int $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
-     *     @var string $token Authentication token. Requires scope: `conversations:read`
-     *     @var string $types Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`
-     * }
+     * @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * @var bool   $exclude_archived Set to `true` to exclude archived channels from the list
+     * @var int    $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
+     * @var string $team_id Encoded team id to list channels in, required if token belongs to org-wide app
+     * @var string $token Authentication token. Requires scope: `conversations:read`
+     * @var string $types Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2139,7 +2142,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsList($queryParameters), $fetch);
     }
 
     /**
@@ -2147,14 +2150,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel channel or conversation to set the read cursor for
-     *     @var string $ts Unique identifier of message you want marked as most recently seen in this conversation.
-     * }
+     * @var string $channel channel or conversation to set the read cursor for
+     * @var string $ts Unique identifier of message you want marked as most recently seen in this conversation.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2162,7 +2165,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsMark(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsMark($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsMark($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2170,11 +2173,11 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel ID of the conversation to retrieve members for
-     *     @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-     *     @var int $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
-     *     @var string $token Authentication token. Requires scope: `conversations:read`
-     * }
+     * @var string $channel ID of the conversation to retrieve members for
+     * @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * @var int    $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
+     * @var string $token Authentication token. Requires scope: `conversations:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2182,7 +2185,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsMembers(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsMembers($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsMembers($queryParameters), $fetch);
     }
 
     /**
@@ -2190,15 +2193,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel Resume a conversation by supplying an `im` or `mpim`'s ID. Or provide the `users` field instead.
-     *     @var bool $return_im boolean, indicates you want the full IM channel definition in the response
-     *     @var string $users Comma separated lists of users. If only one user is included, this creates a 1:1 DM.  The ordering of the users is preserved whenever a multi-person direct message is returned. Supply a `channel` when not supplying `users`.
-     * }
+     * @var string $channel Resume a conversation by supplying an `im` or `mpim`'s ID. Or provide the `users` field instead.
+     * @var bool   $return_im boolean, indicates you want the full IM channel definition in the response
+     * @var string $users Comma separated lists of users. If only one user is included, this creates a 1:1 DM.  The ordering of the users is preserved whenever a multi-person direct message is returned. Supply a `channel` when not supplying `users`.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2206,7 +2209,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsOpen(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsOpen($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsOpen($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2214,14 +2217,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel ID of conversation to rename
-     *     @var string $name New name for conversation.
-     * }
+     * @var string $channel ID of conversation to rename
+     * @var string $name New name for conversation.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2229,7 +2232,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsRename(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsRename($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsRename($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2237,15 +2240,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel conversation ID to fetch thread from
-     *     @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-     *     @var bool $inclusive include messages with latest or oldest timestamp in results only when either timestamp is specified
-     *     @var string $latest end of time range of messages to include in results
-     *     @var int $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
-     *     @var string $oldest start of time range of messages to include in results
-     *     @var string $token Authentication token. Requires scope: `conversations:history`
-     *     @var string $ts Unique identifier of a thread's parent message. `ts` must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by `ts` will return - it is just an ordinary, unthreaded message.
-     * }
+     * @var string $channel conversation ID to fetch thread from
+     * @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * @var bool   $inclusive include messages with latest or oldest timestamp in results only when either timestamp is specified
+     * @var string $latest end of time range of messages to include in results
+     * @var int    $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
+     * @var string $oldest start of time range of messages to include in results
+     * @var string $token Authentication token. Requires scope: `conversations:history`
+     * @var string $ts Unique identifier of a thread's parent message. `ts` must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by `ts` will return - it is just an ordinary, unthreaded message.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2253,7 +2256,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsReplies(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsReplies($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsReplies($queryParameters), $fetch);
     }
 
     /**
@@ -2261,14 +2264,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel Conversation to set the purpose of
-     *     @var string $purpose A new, specialer purpose
-     * }
+     * @var string $channel Conversation to set the purpose of
+     * @var string $purpose A new, specialer purpose
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2276,7 +2279,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsSetPurpose(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsSetPurpose($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsSetPurpose($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2284,14 +2287,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel Conversation to set the topic of
-     *     @var string $topic The new topic string. Does not support formatting or linkification.
-     * }
+     * @var string $channel Conversation to set the topic of
+     * @var string $topic The new topic string. Does not support formatting or linkification.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2299,7 +2302,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsSetTopic(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsSetTopic($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsSetTopic($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2307,13 +2310,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel ID of conversation to unarchive
-     * }
+     * @var string $channel ID of conversation to unarchive
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2321,7 +2324,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function conversationsUnarchive(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ConversationsUnarchive($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ConversationsUnarchive($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2329,14 +2332,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $dialog The dialog definition. This must be a JSON-encoded string.
-     *     @var string $trigger_id Exchange a trigger to post to the user.
-     * }
+     * @var string $dialog The dialog definition. This must be a JSON-encoded string.
+     * @var string $trigger_id Exchange a trigger to post to the user.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2344,7 +2347,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function dialogOpen(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\DialogOpen($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\DialogOpen($queryParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2352,8 +2355,8 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `dnd:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `dnd:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2361,7 +2364,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function dndEndDnd(array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\DndEndDnd($headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\DndEndDnd($headerParameters), $fetch);
     }
 
     /**
@@ -2369,8 +2372,8 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `dnd:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `dnd:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2378,7 +2381,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function dndEndSnooze(array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\DndEndSnooze($headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\DndEndSnooze($headerParameters), $fetch);
     }
 
     /**
@@ -2386,9 +2389,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `dnd:read`
-     *     @var string $user User to fetch status for (defaults to current user)
-     * }
+     * @var string $token Authentication token. Requires scope: `dnd:read`
+     * @var string $user User to fetch status for (defaults to current user)
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2396,7 +2399,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function dndInfo(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\DndInfo($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\DndInfo($queryParameters), $fetch);
     }
 
     /**
@@ -2404,9 +2407,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $num_minutes number of minutes, from now, to snooze until
-     *     @var string $token Authentication token. Requires scope: `dnd:write`
-     * }
+     * @var string $num_minutes number of minutes, from now, to snooze until
+     * @var string $token Authentication token. Requires scope: `dnd:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2414,7 +2417,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function dndSetSnooze(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\DndSetSnooze($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\DndSetSnooze($formParameters), $fetch);
     }
 
     /**
@@ -2422,9 +2425,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `dnd:read`
-     *     @var string $users Comma-separated list of users to fetch Do Not Disturb status for
-     * }
+     * @var string $token Authentication token. Requires scope: `dnd:read`
+     * @var string $users Comma-separated list of users to fetch Do Not Disturb status for
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2432,7 +2435,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function dndTeamInfo(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\DndTeamInfo($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\DndTeamInfo($queryParameters), $fetch);
     }
 
     /**
@@ -2440,8 +2443,8 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `emoji:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `emoji:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2449,7 +2452,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function emojiList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\EmojiList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\EmojiList($queryParameters), $fetch);
     }
 
     /**
@@ -2457,14 +2460,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $file file to delete a comment from
-     *     @var string $id The comment to delete.
-     * }
+     * @var string $file file to delete a comment from
+     * @var string $id The comment to delete.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `files:write:user`
-     * }
+     * @var string $token Authentication token. Requires scope: `files:write:user`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2472,7 +2475,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function filesCommentsDelete(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\FilesCommentsDelete($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\FilesCommentsDelete($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2480,13 +2483,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $file ID of file to delete.
-     * }
+     * @var string $file ID of file to delete.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `files:write:user`
-     * }
+     * @var string $token Authentication token. Requires scope: `files:write:user`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2494,7 +2497,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function filesDelete(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\FilesDelete($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\FilesDelete($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2502,13 +2505,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $count
-     *     @var string $cursor Parameter for pagination. File comments are paginated for a single file. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection of comments. See [pagination](/docs/pagination) for more details.
-     *     @var string $file specify a file by providing its ID
-     *     @var int $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
-     *     @var string $page
-     *     @var string $token Authentication token. Requires scope: `files:read`
-     * }
+     * @var string $count
+     * @var string $cursor Parameter for pagination. File comments are paginated for a single file. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection of comments. See [pagination](/docs/pagination) for more details.
+     * @var string $file specify a file by providing its ID
+     * @var int    $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
+     * @var string $page
+     * @var string $token Authentication token. Requires scope: `files:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2516,7 +2519,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function filesInfo(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\FilesInfo($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\FilesInfo($queryParameters), $fetch);
     }
 
     /**
@@ -2524,16 +2527,16 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel filter files appearing in a specific channel, indicated by its ID
-     *     @var string $count
-     *     @var string $page
-     *     @var bool $show_files_hidden_by_limit show truncated file info for files hidden due to being too old, and the team who owns the file being over the file limit
-     *     @var string $token Authentication token. Requires scope: `files:read`
-     *     @var string $ts_from filter files created after this timestamp (inclusive)
-     *     @var string $ts_to filter files created before this timestamp (inclusive)
-     *     @var string $types Filter files by type ([see below](#file_types)). You can pass multiple values in the types argument, like `types=spaces,snippets`.The default value is `all`, which does not filter the list.
-     *     @var string $user Filter files created by a single user.
-     * }
+     * @var string $channel filter files appearing in a specific channel, indicated by its ID
+     * @var string $count
+     * @var string $page
+     * @var bool   $show_files_hidden_by_limit show truncated file info for files hidden due to being too old, and the team who owns the file being over the file limit
+     * @var string $token Authentication token. Requires scope: `files:read`
+     * @var string $ts_from filter files created after this timestamp (inclusive)
+     * @var string $ts_to filter files created before this timestamp (inclusive)
+     * @var string $types Filter files by type ([see below](#file_types)). You can pass multiple values in the types argument, like `types=spaces,snippets`.The default value is `all`, which does not filter the list.
+     * @var string $user Filter files created by a single user.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2541,7 +2544,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function filesList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\FilesList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\FilesList($queryParameters), $fetch);
     }
 
     /**
@@ -2549,14 +2552,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $external_id creator defined GUID for the file
-     *     @var string $external_url URL of the remote file
-     *     @var string $filetype type of file
-     *     @var string $indexable_file_contents A text file (txt, pdf, doc, etc.) containing textual search terms that are used to improve discovery of the remote file.
-     *     @var string $preview_image preview of the document via `multipart/form-data`
-     *     @var string $title title of the file being shared
-     *     @var string $token Authentication token. Requires scope: `remote_files:write`
-     * }
+     * @var string $external_id creator defined GUID for the file
+     * @var string $external_url URL of the remote file
+     * @var string $filetype type of file
+     * @var string $indexable_file_contents A text file (txt, pdf, doc, etc.) containing textual search terms that are used to improve discovery of the remote file.
+     * @var string $preview_image preview of the document via `multipart/form-data`
+     * @var string $title title of the file being shared
+     * @var string $token Authentication token. Requires scope: `remote_files:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2564,7 +2567,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function filesRemoteAdd(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\FilesRemoteAdd($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\FilesRemoteAdd($formParameters), $fetch);
     }
 
     /**
@@ -2572,10 +2575,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $external_id creator defined GUID for the file
-     *     @var string $file specify a file by providing its ID
-     *     @var string $token Authentication token. Requires scope: `remote_files:read`
-     * }
+     * @var string $external_id creator defined GUID for the file
+     * @var string $file specify a file by providing its ID
+     * @var string $token Authentication token. Requires scope: `remote_files:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2583,7 +2586,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function filesRemoteInfo(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\FilesRemoteInfo($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\FilesRemoteInfo($queryParameters), $fetch);
     }
 
     /**
@@ -2591,13 +2594,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel filter files appearing in a specific channel, indicated by its ID
-     *     @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-     *     @var int $limit the maximum number of items to return
-     *     @var string $token Authentication token. Requires scope: `remote_files:read`
-     *     @var string $ts_from filter files created after this timestamp (inclusive)
-     *     @var string $ts_to Filter files created before this timestamp (inclusive).
-     * }
+     * @var string $channel filter files appearing in a specific channel, indicated by its ID
+     * @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * @var int    $limit the maximum number of items to return
+     * @var string $token Authentication token. Requires scope: `remote_files:read`
+     * @var string $ts_from filter files created after this timestamp (inclusive)
+     * @var string $ts_to Filter files created before this timestamp (inclusive).
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2605,7 +2608,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function filesRemoteList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\FilesRemoteList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\FilesRemoteList($queryParameters), $fetch);
     }
 
     /**
@@ -2613,10 +2616,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $external_id creator defined GUID for the file
-     *     @var string $file specify a file by providing its ID
-     *     @var string $token Authentication token. Requires scope: `remote_files:write`
-     * }
+     * @var string $external_id creator defined GUID for the file
+     * @var string $file specify a file by providing its ID
+     * @var string $token Authentication token. Requires scope: `remote_files:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2624,7 +2627,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function filesRemoteRemove(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\FilesRemoteRemove($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\FilesRemoteRemove($formParameters), $fetch);
     }
 
     /**
@@ -2632,11 +2635,11 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channels comma-separated list of channel IDs where the file will be shared
-     *     @var string $external_id The globally unique identifier (GUID) for the file, as set by the app registering the file with Slack.  Either this field or `file` or both are required.
-     *     @var string $file Specify a file registered with Slack by providing its ID. Either this field or `external_id` or both are required.
-     *     @var string $token Authentication token. Requires scope: `remote_files:share`
-     * }
+     * @var string $channels comma-separated list of channel IDs where the file will be shared
+     * @var string $external_id The globally unique identifier (GUID) for the file, as set by the app registering the file with Slack.  Either this field or `file` or both are required.
+     * @var string $file Specify a file registered with Slack by providing its ID. Either this field or `external_id` or both are required.
+     * @var string $token Authentication token. Requires scope: `remote_files:share`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2644,7 +2647,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function filesRemoteShare(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\FilesRemoteShare($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\FilesRemoteShare($queryParameters), $fetch);
     }
 
     /**
@@ -2652,15 +2655,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $external_id creator defined GUID for the file
-     *     @var string $external_url URL of the remote file
-     *     @var string $file specify a file by providing its ID
-     *     @var string $filetype type of file
-     *     @var string $indexable_file_contents file containing contents that can be used to improve searchability for the remote file
-     *     @var string $preview_image preview of the document via `multipart/form-data`
-     *     @var string $title title of the file being shared
-     *     @var string $token Authentication token. Requires scope: `remote_files:write`
-     * }
+     * @var string $external_id creator defined GUID for the file
+     * @var string $external_url URL of the remote file
+     * @var string $file specify a file by providing its ID
+     * @var string $filetype type of file
+     * @var string $indexable_file_contents file containing contents that can be used to improve searchability for the remote file
+     * @var string $preview_image preview of the document via `multipart/form-data`
+     * @var string $title title of the file being shared
+     * @var string $token Authentication token. Requires scope: `remote_files:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2668,7 +2671,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function filesRemoteUpdate(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\FilesRemoteUpdate($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\FilesRemoteUpdate($formParameters), $fetch);
     }
 
     /**
@@ -2676,13 +2679,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $file File to revoke
-     * }
+     * @var string $file File to revoke
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `files:write:user`
-     * }
+     * @var string $token Authentication token. Requires scope: `files:write:user`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2690,7 +2693,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function filesRevokePublicURL(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\FilesRevokePublicURL($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\FilesRevokePublicURL($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2698,13 +2701,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $file File to share
-     * }
+     * @var string $file File to share
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `files:write:user`
-     * }
+     * @var string $token Authentication token. Requires scope: `files:write:user`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2712,7 +2715,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function filesSharedPublicURL(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\FilesSharedPublicURL($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\FilesSharedPublicURL($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2720,16 +2723,16 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channels comma-separated list of channel names or IDs where the file will be shared
-     *     @var string $content File contents via a POST variable. If omitting this parameter, you must provide a `file`.
-     *     @var string|resource|\Psr\Http\Message\StreamInterface $file File contents via `multipart/form-data`. If omitting this parameter, you must submit `content`.
-     *     @var string $filename filename of file
-     *     @var string $filetype a [file type](/types/file#file_types) identifier
-     *     @var string $initial_comment the message text introducing the file in specified `channels`
-     *     @var string $thread_ts Provide another message's `ts` value to upload this file as a reply. Never use a reply's `ts` value; use its parent instead.
-     *     @var string $title title of file
-     *     @var string $token Authentication token. Requires scope: `files:write:user`
-     * }
+     * @var string                                            $channels comma-separated list of channel names or IDs where the file will be shared
+     * @var string                                            $content File contents via a POST variable. If omitting this parameter, you must provide a `file`.
+     * @var string|resource|\Psr\Http\Message\StreamInterface $file File contents via `multipart/form-data`. If omitting this parameter, you must submit `content`.
+     * @var string                                            $filename filename of file
+     * @var string                                            $filetype a [file type](/types/file#file_types) identifier
+     * @var string                                            $initial_comment the message text introducing the file in specified `channels`
+     * @var string                                            $thread_ts Provide another message's `ts` value to upload this file as a reply. Never use a reply's `ts` value; use its parent instead.
+     * @var string                                            $title title of file
+     * @var string                                            $token Authentication token. Requires scope: `files:write:user`
+     *                                                        }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2737,7 +2740,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function filesUpload(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\FilesUpload($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\FilesUpload($formParameters), $fetch);
     }
 
     /**
@@ -2745,11 +2748,11 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $team_id Specify team_id starts with `T` in case of Org Token
-     *     @var bool $to_old Specify `true` to convert `W` global user IDs to workspace-specific `U` IDs. Defaults to `false`.
-     *     @var string $token Authentication token. Requires scope: `tokens.basic`
-     *     @var string $users A comma-separated list of user ids, up to 400 per request
-     * }
+     * @var string $team_id Specify team_id starts with `T` in case of Org Token
+     * @var bool   $to_old Specify `true` to convert `W` global user IDs to workspace-specific `U` IDs. Defaults to `false`.
+     * @var string $token Authentication token. Requires scope: `tokens.basic`
+     * @var string $users A comma-separated list of user ids, up to 400 per request
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2757,7 +2760,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function migrationExchange(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\MigrationExchange($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\MigrationExchange($queryParameters), $fetch);
     }
 
     /**
@@ -2765,12 +2768,12 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $client_id issued when you created your application
-     *     @var string $client_secret issued when you created your application
-     *     @var string $code the `code` param returned via the OAuth callback
-     *     @var string $redirect_uri this must match the originally submitted URI (if one was sent)
-     *     @var bool $single_channel Request the user to add your app only to a single channel. Only valid with a [legacy workspace app](https://api.slack.com/legacy-workspace-apps).
-     * }
+     * @var string $client_id issued when you created your application
+     * @var string $client_secret issued when you created your application
+     * @var string $code the `code` param returned via the OAuth callback
+     * @var string $redirect_uri this must match the originally submitted URI (if one was sent)
+     * @var bool   $single_channel Request the user to add your app only to a single channel. Only valid with a [legacy workspace app](https://api.slack.com/legacy-workspace-apps).
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2778,7 +2781,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function oauthAccess(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\OauthAccess($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\OauthAccess($queryParameters), $fetch);
     }
 
     /**
@@ -2786,12 +2789,12 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $client_id issued when you created your application
-     *     @var string $client_secret issued when you created your application
-     *     @var string $code the `code` param returned via the OAuth callback
-     *     @var string $redirect_uri this must match the originally submitted URI (if one was sent)
-     *     @var bool $single_channel Request the user to add your app only to a single channel.
-     * }
+     * @var string $client_id issued when you created your application
+     * @var string $client_secret issued when you created your application
+     * @var string $code the `code` param returned via the OAuth callback
+     * @var string $redirect_uri this must match the originally submitted URI (if one was sent)
+     * @var bool   $single_channel Request the user to add your app only to a single channel.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2799,7 +2802,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function oauthToken(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\OauthToken($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\OauthToken($queryParameters), $fetch);
     }
 
     /**
@@ -2807,11 +2810,11 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $client_id issued when you created your application
-     *     @var string $client_secret issued when you created your application
-     *     @var string $code the `code` param returned via the OAuth callback
-     *     @var string $redirect_uri This must match the originally submitted URI (if one was sent).
-     * }
+     * @var string $client_id issued when you created your application
+     * @var string $client_secret issued when you created your application
+     * @var string $code the `code` param returned via the OAuth callback
+     * @var string $redirect_uri This must match the originally submitted URI (if one was sent).
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2819,7 +2822,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function oauthV2Access(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\OauthV2Access($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\OauthV2Access($queryParameters), $fetch);
     }
 
     /**
@@ -2827,14 +2830,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel channel to pin the item in
-     *     @var string $timestamp Timestamp of the message to pin.
-     * }
+     * @var string $channel channel to pin the item in
+     * @var string $timestamp Timestamp of the message to pin.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `pins:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `pins:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2842,7 +2845,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function pinsAdd(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\PinsAdd($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PinsAdd($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2850,9 +2853,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel channel to get pinned items for
-     *     @var string $token Authentication token. Requires scope: `pins:read`
-     * }
+     * @var string $channel channel to get pinned items for
+     * @var string $token Authentication token. Requires scope: `pins:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2860,7 +2863,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function pinsList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\PinsList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PinsList($queryParameters), $fetch);
     }
 
     /**
@@ -2868,14 +2871,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel channel where the item is pinned to
-     *     @var string $timestamp Timestamp of the message to un-pin.
-     * }
+     * @var string $channel channel where the item is pinned to
+     * @var string $timestamp Timestamp of the message to un-pin.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `pins:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `pins:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2883,7 +2886,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function pinsRemove(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\PinsRemove($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PinsRemove($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2891,15 +2894,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel channel where the message to add reaction to was posted
-     *     @var string $name reaction (emoji) name
-     *     @var string $timestamp Timestamp of the message to add reaction to.
-     * }
+     * @var string $channel channel where the message to add reaction to was posted
+     * @var string $name reaction (emoji) name
+     * @var string $timestamp Timestamp of the message to add reaction to.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `reactions:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `reactions:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2907,7 +2910,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function reactionsAdd(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ReactionsAdd($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ReactionsAdd($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2915,13 +2918,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel channel where the message to get reactions for was posted
-     *     @var string $file file to get reactions for
-     *     @var string $file_comment file comment to get reactions for
-     *     @var bool $full if true always return the complete reaction list
-     *     @var string $timestamp timestamp of the message to get reactions for
-     *     @var string $token Authentication token. Requires scope: `reactions:read`
-     * }
+     * @var string $channel channel where the message to get reactions for was posted
+     * @var string $file file to get reactions for
+     * @var string $file_comment file comment to get reactions for
+     * @var bool   $full if true always return the complete reaction list
+     * @var string $timestamp timestamp of the message to get reactions for
+     * @var string $token Authentication token. Requires scope: `reactions:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2929,7 +2932,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function reactionsGet(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ReactionsGet($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ReactionsGet($queryParameters), $fetch);
     }
 
     /**
@@ -2937,14 +2940,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var int $count
-     *     @var string $cursor Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See [pagination](/docs/pagination) for more details.
-     *     @var bool $full if true always return the complete reaction list
-     *     @var int $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
-     *     @var int $page
-     *     @var string $token Authentication token. Requires scope: `reactions:read`
-     *     @var string $user Show reactions made by this user. Defaults to the authed user.
-     * }
+     * @var int    $count
+     * @var string $cursor Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See [pagination](/docs/pagination) for more details.
+     * @var bool   $full if true always return the complete reaction list
+     * @var int    $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
+     * @var int    $page
+     * @var string $token Authentication token. Requires scope: `reactions:read`
+     * @var string $user Show reactions made by this user. Defaults to the authed user.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2952,7 +2955,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function reactionsList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ReactionsList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ReactionsList($queryParameters), $fetch);
     }
 
     /**
@@ -2960,17 +2963,17 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel channel where the message to remove reaction from was posted
-     *     @var string $file file to remove reaction from
-     *     @var string $file_comment file comment to remove reaction from
-     *     @var string $name reaction (emoji) name
-     *     @var string $timestamp Timestamp of the message to remove reaction from.
-     * }
+     * @var string $channel channel where the message to remove reaction from was posted
+     * @var string $file file to remove reaction from
+     * @var string $file_comment file comment to remove reaction from
+     * @var string $name reaction (emoji) name
+     * @var string $timestamp Timestamp of the message to remove reaction from.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `reactions:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `reactions:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -2978,7 +2981,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function reactionsRemove(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ReactionsRemove($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ReactionsRemove($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -2986,15 +2989,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $text The content of the reminder
-     *     @var string $time When this reminder should happen: the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday")
-     *     @var string $user The user who will receive the reminder. If no user is specified, the reminder will go to user who created it.
-     * }
+     * @var string $text The content of the reminder
+     * @var string $time When this reminder should happen: the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday")
+     * @var string $user The user who will receive the reminder. If no user is specified, the reminder will go to user who created it.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `reminders:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `reminders:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3002,7 +3005,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function remindersAdd(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\RemindersAdd($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\RemindersAdd($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3010,13 +3013,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $reminder The ID of the reminder to be marked as complete
-     * }
+     * @var string $reminder The ID of the reminder to be marked as complete
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `reminders:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `reminders:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3024,7 +3027,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function remindersComplete(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\RemindersComplete($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\RemindersComplete($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3032,13 +3035,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $reminder The ID of the reminder
-     * }
+     * @var string $reminder The ID of the reminder
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `reminders:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `reminders:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3046,7 +3049,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function remindersDelete(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\RemindersDelete($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\RemindersDelete($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3054,9 +3057,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $reminder The ID of the reminder
-     *     @var string $token Authentication token. Requires scope: `reminders:read`
-     * }
+     * @var string $reminder The ID of the reminder
+     * @var string $token Authentication token. Requires scope: `reminders:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3064,7 +3067,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function remindersInfo(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\RemindersInfo($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\RemindersInfo($queryParameters), $fetch);
     }
 
     /**
@@ -3072,8 +3075,8 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `reminders:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `reminders:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3081,7 +3084,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function remindersList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\RemindersList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\RemindersList($queryParameters), $fetch);
     }
 
     /**
@@ -3089,10 +3092,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var bool $batch_presence_aware Batch presence deliveries via subscription. Enabling changes the shape of `presence_change` events. See [batch presence](/docs/presence-and-status#batching).
-     *     @var bool $presence_sub Only deliver presence events when requested by subscription. See [presence subscriptions](/docs/presence-and-status#subscriptions).
-     *     @var string $token Authentication token. Requires scope: `rtm:stream`
-     * }
+     * @var bool   $batch_presence_aware Batch presence deliveries via subscription. Enabling changes the shape of `presence_change` events. See [batch presence](/docs/presence-and-status#batching).
+     * @var bool   $presence_sub Only deliver presence events when requested by subscription. See [presence subscriptions](/docs/presence-and-status#subscriptions).
+     * @var string $token Authentication token. Requires scope: `rtm:stream`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3100,7 +3103,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function rtmConnect(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\RtmConnect($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\RtmConnect($queryParameters), $fetch);
     }
 
     /**
@@ -3108,14 +3111,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var int $count Pass the number of results you want per "page". Maximum of `100`.
-     *     @var bool $highlight pass a value of `true` to enable query highlight markers (see below)
-     *     @var int $page
-     *     @var string $query search query
-     *     @var string $sort return matches sorted by either `score` or `timestamp`
-     *     @var string $sort_dir change sort direction to ascending (`asc`) or descending (`desc`)
-     *     @var string $token Authentication token. Requires scope: `search:read`
-     * }
+     * @var int    $count Pass the number of results you want per "page". Maximum of `100`.
+     * @var bool   $highlight pass a value of `true` to enable query highlight markers (see below)
+     * @var int    $page
+     * @var string $query search query
+     * @var string $sort return matches sorted by either `score` or `timestamp`
+     * @var string $sort_dir change sort direction to ascending (`asc`) or descending (`desc`)
+     * @var string $token Authentication token. Requires scope: `search:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3123,7 +3126,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function searchMessages(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\SearchMessages($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\SearchMessages($queryParameters), $fetch);
     }
 
     /**
@@ -3131,16 +3134,16 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel channel to add star to, or channel where the message to add star to was posted (used with `timestamp`)
-     *     @var string $file file to add star to
-     *     @var string $file_comment file comment to add star to
-     *     @var string $timestamp Timestamp of the message to add star to.
-     * }
+     * @var string $channel channel to add star to, or channel where the message to add star to was posted (used with `timestamp`)
+     * @var string $file file to add star to
+     * @var string $file_comment file comment to add star to
+     * @var string $timestamp Timestamp of the message to add star to.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `stars:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `stars:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3148,7 +3151,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function starsAdd(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\StarsAdd($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\StarsAdd($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3156,12 +3159,12 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $count
-     *     @var string $cursor Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See [pagination](/docs/pagination) for more details.
-     *     @var int $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
-     *     @var string $page
-     *     @var string $token Authentication token. Requires scope: `stars:read`
-     * }
+     * @var string $count
+     * @var string $cursor Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. See [pagination](/docs/pagination) for more details.
+     * @var int    $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached.
+     * @var string $page
+     * @var string $token Authentication token. Requires scope: `stars:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3169,7 +3172,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function starsList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\StarsList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\StarsList($queryParameters), $fetch);
     }
 
     /**
@@ -3177,16 +3180,16 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channel channel to remove star from, or channel where the message to remove star from was posted (used with `timestamp`)
-     *     @var string $file file to remove star from
-     *     @var string $file_comment file comment to remove star from
-     *     @var string $timestamp Timestamp of the message to remove star from.
-     * }
+     * @var string $channel channel to remove star from, or channel where the message to remove star from was posted (used with `timestamp`)
+     * @var string $file file to remove star from
+     * @var string $file_comment file comment to remove star from
+     * @var string $timestamp Timestamp of the message to remove star from.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `stars:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `stars:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3194,7 +3197,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function starsRemove(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\StarsRemove($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\StarsRemove($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3202,11 +3205,11 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $before end of time range of logs to include in results (inclusive)
-     *     @var string $count
-     *     @var string $page
-     *     @var string $token Authentication token. Requires scope: `admin`
-     * }
+     * @var string $before end of time range of logs to include in results (inclusive)
+     * @var string $count
+     * @var string $page
+     * @var string $token Authentication token. Requires scope: `admin`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3214,7 +3217,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function teamAccessLogs(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\TeamAccessLogs($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\TeamAccessLogs($queryParameters), $fetch);
     }
 
     /**
@@ -3222,9 +3225,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin`
-     *     @var string $user A user to retrieve the billable information for. Defaults to all users.
-     * }
+     * @var string $token Authentication token. Requires scope: `admin`
+     * @var string $user A user to retrieve the billable information for. Defaults to all users.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3232,7 +3235,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function teamBillableInfo(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\TeamBillableInfo($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\TeamBillableInfo($queryParameters), $fetch);
     }
 
     /**
@@ -3240,9 +3243,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $team Team to get info on, if omitted, will return information about the current team. Will only return team that the authenticated token is allowed to see through external shared channels
-     *     @var string $token Authentication token. Requires scope: `team:read`
-     * }
+     * @var string $team Team to get info on, if omitted, will return information about the current team. Will only return team that the authenticated token is allowed to see through external shared channels
+     * @var string $token Authentication token. Requires scope: `team:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3250,7 +3253,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function teamInfo(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\TeamInfo($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\TeamInfo($queryParameters), $fetch);
     }
 
     /**
@@ -3258,14 +3261,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $app_id Filter logs to this Slack app. Defaults to all logs.
-     *     @var string $change_type Filter logs with this change type. Defaults to all logs.
-     *     @var string $count
-     *     @var string $page
-     *     @var string $service_id Filter logs to this service. Defaults to all logs.
-     *     @var string $token Authentication token. Requires scope: `admin`
-     *     @var string $user Filter logs generated by this user’s actions. Defaults to all logs.
-     * }
+     * @var string $app_id Filter logs to this Slack app. Defaults to all logs.
+     * @var string $change_type Filter logs with this change type. Defaults to all logs.
+     * @var string $count
+     * @var string $page
+     * @var string $service_id Filter logs to this service. Defaults to all logs.
+     * @var string $token Authentication token. Requires scope: `admin`
+     * @var string $user Filter logs generated by this user’s actions. Defaults to all logs.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3273,7 +3276,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function teamIntegrationLogs(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\TeamIntegrationLogs($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\TeamIntegrationLogs($queryParameters), $fetch);
     }
 
     /**
@@ -3281,9 +3284,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `users.profile:read`
-     *     @var string $visibility Filter by visibility.
-     * }
+     * @var string $token Authentication token. Requires scope: `users.profile:read`
+     * @var string $visibility Filter by visibility.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3291,7 +3294,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function teamProfileGet(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\TeamProfileGet($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\TeamProfileGet($queryParameters), $fetch);
     }
 
     /**
@@ -3299,17 +3302,17 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channels a comma separated string of encoded channel IDs for which the User Group uses as a default
-     *     @var string $description a short description of the User Group
-     *     @var string $handle A mention handle. Must be unique among channels, users and User Groups.
-     *     @var bool $include_count include the number of users in each User Group
-     *     @var string $name A name for the User Group. Must be unique among User Groups.
-     * }
+     * @var string $channels a comma separated string of encoded channel IDs for which the User Group uses as a default
+     * @var string $description a short description of the User Group
+     * @var string $handle A mention handle. Must be unique among channels, users and User Groups.
+     * @var bool   $include_count include the number of users in each User Group
+     * @var string $name A name for the User Group. Must be unique among User Groups.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `usergroups:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `usergroups:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3317,7 +3320,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usergroupsCreate(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsergroupsCreate($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsergroupsCreate($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3325,14 +3328,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var bool $include_count include the number of users in the User Group
-     *     @var string $usergroup The encoded ID of the User Group to disable.
-     * }
+     * @var bool   $include_count include the number of users in the User Group
+     * @var string $usergroup The encoded ID of the User Group to disable.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `usergroups:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `usergroups:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3340,7 +3343,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usergroupsDisable(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsergroupsDisable($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsergroupsDisable($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3348,14 +3351,14 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var bool $include_count include the number of users in the User Group
-     *     @var string $usergroup The encoded ID of the User Group to enable.
-     * }
+     * @var bool   $include_count include the number of users in the User Group
+     * @var string $usergroup The encoded ID of the User Group to enable.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `usergroups:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `usergroups:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3363,7 +3366,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usergroupsEnable(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsergroupsEnable($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsergroupsEnable($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3371,11 +3374,12 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var bool $include_count include the number of users in each User Group
-     *     @var bool $include_disabled include disabled User Groups
-     *     @var bool $include_users include the list of users for each User Group
-     *     @var string $token Authentication token. Requires scope: `usergroups:read`
-     * }
+     * @var bool   $include_count include the number of users in each User Group
+     * @var bool   $include_disabled include disabled User Groups
+     * @var bool   $include_users include the list of users for each User Group
+     * @var string $team_id Encoded team id to list user groups in, required if org token is used
+     * @var string $token Authentication token. Requires scope: `usergroups:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3383,7 +3387,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usergroupsList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsergroupsList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsergroupsList($queryParameters), $fetch);
     }
 
     /**
@@ -3391,18 +3395,18 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $channels a comma separated string of encoded channel IDs for which the User Group uses as a default
-     *     @var string $description a short description of the User Group
-     *     @var string $handle A mention handle. Must be unique among channels, users and User Groups.
-     *     @var bool $include_count include the number of users in the User Group
-     *     @var string $name A name for the User Group. Must be unique among User Groups.
-     *     @var string $usergroup The encoded ID of the User Group to update.
-     * }
+     * @var string $channels a comma separated string of encoded channel IDs for which the User Group uses as a default
+     * @var string $description a short description of the User Group
+     * @var string $handle A mention handle. Must be unique among channels, users and User Groups.
+     * @var bool   $include_count include the number of users in the User Group
+     * @var string $name A name for the User Group. Must be unique among User Groups.
+     * @var string $usergroup The encoded ID of the User Group to update.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `usergroups:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `usergroups:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3410,7 +3414,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usergroupsUpdate(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsergroupsUpdate($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsergroupsUpdate($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3418,10 +3422,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var bool $include_disabled allow results that involve disabled User Groups
-     *     @var string $token Authentication token. Requires scope: `usergroups:read`
-     *     @var string $usergroup The encoded ID of the User Group to read.
-     * }
+     * @var bool   $include_disabled allow results that involve disabled User Groups
+     * @var string $token Authentication token. Requires scope: `usergroups:read`
+     * @var string $usergroup The encoded ID of the User Group to read.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3429,7 +3433,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usergroupsUsersList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsergroupsUsersList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsergroupsUsersList($queryParameters), $fetch);
     }
 
     /**
@@ -3437,15 +3441,15 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var bool $include_count include the number of users in the User Group
-     *     @var string $usergroup the encoded ID of the User Group to update
-     *     @var string $users A comma separated string of encoded user IDs that represent the entire list of users for the User Group.
-     * }
+     * @var bool   $include_count include the number of users in the User Group
+     * @var string $usergroup the encoded ID of the User Group to update
+     * @var string $users A comma separated string of encoded user IDs that represent the entire list of users for the User Group.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `usergroups:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `usergroups:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3453,7 +3457,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usergroupsUsersUpdate(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsergroupsUsersUpdate($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsergroupsUsersUpdate($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3461,13 +3465,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-     *     @var bool $exclude_archived Set to `true` to exclude archived channels from the list
-     *     @var int $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
-     *     @var string $token Authentication token. Requires scope: `conversations:read`
-     *     @var string $types Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`
-     *     @var string $user Browse conversations by a specific user ID's membership. Non-public channels are restricted to those where the calling user shares membership.
-     * }
+     * @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * @var bool   $exclude_archived Set to `true` to exclude archived channels from the list
+     * @var int    $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
+     * @var string $token Authentication token. Requires scope: `conversations:read`
+     * @var string $types Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`
+     * @var string $user Browse conversations by a specific user ID's membership. Non-public channels are restricted to those where the calling user shares membership.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3475,7 +3479,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usersConversations(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsersConversations($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsersConversations($queryParameters), $fetch);
     }
 
     /**
@@ -3483,8 +3487,8 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `users.profile:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `users.profile:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3492,7 +3496,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usersDeletePhoto(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsersDeletePhoto($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsersDeletePhoto($formParameters), $fetch);
     }
 
     /**
@@ -3500,9 +3504,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `users:read`
-     *     @var string $user User to get presence info on. Defaults to the authed user.
-     * }
+     * @var string $token Authentication token. Requires scope: `users:read`
+     * @var string $user User to get presence info on. Defaults to the authed user.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3510,7 +3514,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usersGetPresence(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsersGetPresence($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsersGetPresence($queryParameters), $fetch);
     }
 
     /**
@@ -3518,8 +3522,8 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `identity.basic`
-     * }
+     * @var string $token Authentication token. Requires scope: `identity.basic`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3527,7 +3531,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usersIdentity(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsersIdentity($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsersIdentity($queryParameters), $fetch);
     }
 
     /**
@@ -3535,10 +3539,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var bool $include_locale Set this to `true` to receive the locale for this user. Defaults to `false`
-     *     @var string $token Authentication token. Requires scope: `users:read`
-     *     @var string $user User to get info on
-     * }
+     * @var bool   $include_locale Set this to `true` to receive the locale for this user. Defaults to `false`
+     * @var string $token Authentication token. Requires scope: `users:read`
+     * @var string $user User to get info on
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3546,7 +3550,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usersInfo(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsersInfo($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsersInfo($queryParameters), $fetch);
     }
 
     /**
@@ -3554,11 +3558,12 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-     *     @var bool $include_locale Set this to `true` to receive the locale for users. Defaults to `false`
-     *     @var int $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. Providing no `limit` value will result in Slack attempting to deliver you the entire result set. If the collection is too large you may experience `limit_required` or HTTP 500 errors.
-     *     @var string $token Authentication token. Requires scope: `users:read`
-     * }
+     * @var string $cursor Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     * @var bool   $include_locale Set this to `true` to receive the locale for users. Defaults to `false`
+     * @var int    $limit The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. Providing no `limit` value will result in Slack attempting to deliver you the entire result set. If the collection is too large you may experience `limit_required` or HTTP 500 errors.
+     * @var string $team_id Encoded team id to list users in, required if org token is used
+     * @var string $token Authentication token. Requires scope: `users:read`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3566,7 +3571,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usersList(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsersList($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsersList($queryParameters), $fetch);
     }
 
     /**
@@ -3574,9 +3579,9 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $email An email address belonging to a user in the workspace
-     *     @var string $token Authentication token. Requires scope: `users:read.email`
-     * }
+     * @var string $email An email address belonging to a user in the workspace
+     * @var string $token Authentication token. Requires scope: `users:read.email`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3584,7 +3589,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usersLookupByEmail(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsersLookupByEmail($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsersLookupByEmail($queryParameters), $fetch);
     }
 
     /**
@@ -3592,10 +3597,10 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $queryParameters {
      *
-     *     @var bool $include_labels Include labels for each ID in custom profile fields
-     *     @var string $token Authentication token. Requires scope: `users.profile:read`
-     *     @var string $user User to retrieve profile info for
-     * }
+     * @var bool   $include_labels Include labels for each ID in custom profile fields
+     * @var string $token Authentication token. Requires scope: `users.profile:read`
+     * @var string $user User to retrieve profile info for
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3603,7 +3608,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usersProfileGet(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsersProfileGet($queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsersProfileGet($queryParameters), $fetch);
     }
 
     /**
@@ -3611,16 +3616,16 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $name Name of a single key to set. Usable only if `profile` is not passed.
-     *     @var string $profile Collection of key:value pairs presented as a URL-encoded JSON hash. At most 50 fields may be set. Each field name is limited to 255 characters.
-     *     @var string $user ID of user to change. This argument may only be specified by team admins on paid teams.
-     *     @var string $value Value to set a single key to. Usable only if `profile` is not passed.
-     * }
+     * @var string $name Name of a single key to set. Usable only if `profile` is not passed.
+     * @var string $profile Collection of key:value pairs presented as a URL-encoded JSON hash. At most 50 fields may be set. Each field name is limited to 255 characters.
+     * @var string $user ID of user to change. This argument may only be specified by team admins on paid teams.
+     * @var string $value Value to set a single key to. Usable only if `profile` is not passed.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `users.profile:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `users.profile:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3628,7 +3633,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usersProfileSet(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsersProfileSet($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsersProfileSet($formParameters, $headerParameters), $fetch);
     }
 
     /**
@@ -3636,8 +3641,8 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `users:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3645,7 +3650,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usersSetActive(array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsersSetActive($headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsersSetActive($headerParameters), $fetch);
     }
 
     /**
@@ -3653,12 +3658,12 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $crop_w Width/height of crop box (always square)
-     *     @var string $crop_x X coordinate of top-left corner of crop box
-     *     @var string $crop_y Y coordinate of top-left corner of crop box
-     *     @var string $image file contents via `multipart/form-data`
-     *     @var string $token Authentication token. Requires scope: `users.profile:write`
-     * }
+     * @var string $crop_w Width/height of crop box (always square)
+     * @var string $crop_x X coordinate of top-left corner of crop box
+     * @var string $crop_y Y coordinate of top-left corner of crop box
+     * @var string $image file contents via `multipart/form-data`
+     * @var string $token Authentication token. Requires scope: `users.profile:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3666,7 +3671,7 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usersSetPhoto(array $formParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsersSetPhoto($formParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsersSetPhoto($formParameters), $fetch);
     }
 
     /**
@@ -3674,13 +3679,13 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      *
      * @param array $formParameters {
      *
-     *     @var string $presence Either `auto` or `away`
-     * }
+     * @var string $presence Either `auto` or `away`
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `users:write`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
@@ -3688,182 +3693,182 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
      */
     public function usersSetPresence(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\UsersSetPresence($formParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\UsersSetPresence($formParameters, $headerParameters), $fetch);
     }
 
     /**
      * Open a view for a user.
      *
-     * @param array $queryParameters {
+     * @param array $formParameters {
      *
-     *     @var string $trigger_id exchange a trigger to post to the user
-     *     @var string $view A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
-     * }
+     * @var string $trigger_id exchange a trigger to post to the user
+     * @var string $view A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \JoliCode\Slack\Api\Model\ViewsOpenGetResponse200|\JoliCode\Slack\Api\Model\ViewsOpenGetResponsedefault|\Psr\Http\Message\ResponseInterface|null
+     * @return \JoliCode\Slack\Api\Model\ViewsOpenPostResponse200|\JoliCode\Slack\Api\Model\ViewsOpenPostResponsedefault|\Psr\Http\Message\ResponseInterface|null
      */
-    public function viewsOpen(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function viewsOpen(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ViewsOpen($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ViewsOpen($formParameters, $headerParameters), $fetch);
     }
 
     /**
      * Publish a static view for a User.
      *
-     * @param array $queryParameters {
+     * @param array $formParameters {
      *
-     *     @var string $hash a string that represents view state to protect against possible race conditions
-     *     @var string $user_id `id` of the user you want publish a view to
-     *     @var string $view A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
-     * }
+     * @var string $hash a string that represents view state to protect against possible race conditions
+     * @var string $user_id `id` of the user you want publish a view to
+     * @var string $view A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \JoliCode\Slack\Api\Model\ViewsPublishGetResponse200|\JoliCode\Slack\Api\Model\ViewsPublishGetResponsedefault|\Psr\Http\Message\ResponseInterface|null
+     * @return \JoliCode\Slack\Api\Model\ViewsPublishPostResponse200|\JoliCode\Slack\Api\Model\ViewsPublishPostResponsedefault|\Psr\Http\Message\ResponseInterface|null
      */
-    public function viewsPublish(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function viewsPublish(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ViewsPublish($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ViewsPublish($formParameters, $headerParameters), $fetch);
     }
 
     /**
      * Push a view onto the stack of a root view.
      *
-     * @param array $queryParameters {
+     * @param array $formParameters {
      *
-     *     @var string $trigger_id exchange a trigger to post to the user
-     *     @var string $view A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
-     * }
+     * @var string $trigger_id exchange a trigger to post to the user
+     * @var string $view A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \JoliCode\Slack\Api\Model\ViewsPushGetResponse200|\JoliCode\Slack\Api\Model\ViewsPushGetResponsedefault|\Psr\Http\Message\ResponseInterface|null
+     * @return \JoliCode\Slack\Api\Model\ViewsPushPostResponse200|\JoliCode\Slack\Api\Model\ViewsPushPostResponsedefault|\Psr\Http\Message\ResponseInterface|null
      */
-    public function viewsPush(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function viewsPush(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ViewsPush($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ViewsPush($formParameters, $headerParameters), $fetch);
     }
 
     /**
      * Update an existing view.
      *
-     * @param array $queryParameters {
+     * @param array $formParameters {
      *
-     *     @var string $external_id A unique identifier of the view set by the developer. Must be unique for all views on a team. Max length of 255 characters. Either `view_id` or `external_id` is required.
-     *     @var string $hash a string that represents view state to protect against possible race conditions
-     *     @var string $view A [view object](/reference/surfaces/views). This must be a JSON-encoded string.
-     *     @var string $view_id A unique identifier of the view to be updated. Either `view_id` or `external_id` is required.
-     * }
+     * @var string $external_id A unique identifier of the view set by the developer. Must be unique for all views on a team. Max length of 255 characters. Either `view_id` or `external_id` is required.
+     * @var string $hash a string that represents view state to protect against possible race conditions
+     * @var string $view A [view object](/reference/surfaces/views). This must be a JSON-encoded string.
+     * @var string $view_id A unique identifier of the view to be updated. Either `view_id` or `external_id` is required.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \JoliCode\Slack\Api\Model\ViewsUpdateGetResponse200|\JoliCode\Slack\Api\Model\ViewsUpdateGetResponsedefault|\Psr\Http\Message\ResponseInterface|null
+     * @return \JoliCode\Slack\Api\Model\ViewsUpdatePostResponse200|\JoliCode\Slack\Api\Model\ViewsUpdatePostResponsedefault|\Psr\Http\Message\ResponseInterface|null
      */
-    public function viewsUpdate(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function viewsUpdate(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\ViewsUpdate($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ViewsUpdate($formParameters, $headerParameters), $fetch);
     }
 
     /**
      * Indicate that an app's step in a workflow completed execution.
      *
-     * @param array $queryParameters {
+     * @param array $formParameters {
      *
-     *     @var string $outputs Key-value object of outputs from your step. Keys of this object reflect the configured `key` properties of your [`outputs`](/reference/workflows/workflow_step#output) array from your `workflow_step` object.
-     *     @var string $workflow_step_execute_id Context identifier that maps to the correct workflow step execution.
-     * }
+     * @var string $outputs Key-value object of outputs from your step. Keys of this object reflect the configured `key` properties of your [`outputs`](/reference/workflows/workflow_step#output) array from your `workflow_step` object.
+     * @var string $workflow_step_execute_id Context identifier that maps to the correct workflow step execution.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `workflow.steps:execute`
-     * }
+     * @var string $token Authentication token. Requires scope: `workflow.steps:execute`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \JoliCode\Slack\Api\Model\WorkflowsStepCompletedGetResponse200|\JoliCode\Slack\Api\Model\WorkflowsStepCompletedGetResponsedefault|\Psr\Http\Message\ResponseInterface|null
+     * @return \JoliCode\Slack\Api\Model\WorkflowsStepCompletedPostResponse200|\JoliCode\Slack\Api\Model\WorkflowsStepCompletedPostResponsedefault|\Psr\Http\Message\ResponseInterface|null
      */
-    public function workflowsStepCompleted(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function workflowsStepCompleted(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\WorkflowsStepCompleted($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\WorkflowsStepCompleted($formParameters, $headerParameters), $fetch);
     }
 
     /**
      * Indicate that an app's step in a workflow failed to execute.
      *
-     * @param array $queryParameters {
+     * @param array $formParameters {
      *
-     *     @var string $error a JSON-based object with a `message` property that should contain a human readable error message
-     *     @var string $workflow_step_execute_id Context identifier that maps to the correct workflow step execution.
-     * }
+     * @var string $error a JSON-based object with a `message` property that should contain a human readable error message
+     * @var string $workflow_step_execute_id Context identifier that maps to the correct workflow step execution.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `workflow.steps:execute`
-     * }
+     * @var string $token Authentication token. Requires scope: `workflow.steps:execute`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \JoliCode\Slack\Api\Model\WorkflowsStepFailedGetResponse200|\JoliCode\Slack\Api\Model\WorkflowsStepFailedGetResponsedefault|\Psr\Http\Message\ResponseInterface|null
+     * @return \JoliCode\Slack\Api\Model\WorkflowsStepFailedPostResponse200|\JoliCode\Slack\Api\Model\WorkflowsStepFailedPostResponsedefault|\Psr\Http\Message\ResponseInterface|null
      */
-    public function workflowsStepFailed(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function workflowsStepFailed(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\WorkflowsStepFailed($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\WorkflowsStepFailed($formParameters, $headerParameters), $fetch);
     }
 
     /**
      * Update the configuration for a workflow extension step.
      *
-     * @param array $queryParameters {
+     * @param array $formParameters {
      *
-     *     @var string $inputs A JSON key-value map of inputs required from a user during configuration. This is the data your app expects to receive when the workflow step starts. **Please note**: the embedded variable format is set and replaced by the workflow system. You cannot create custom variables that will be replaced at runtime. [Read more about variables in workflow steps here](/workflows/steps#variables).
-     *     @var string $outputs An JSON array of output objects used during step execution. This is the data your app agrees to provide when your workflow step was executed.
-     *     @var string $step_image_url an optional field that can be used to override app image that is shown in the Workflow Builder
-     *     @var string $step_name an optional field that can be used to override the step name that is shown in the Workflow Builder
-     *     @var string $workflow_step_edit_id A context identifier provided with `view_submission` payloads used to call back to `workflows.updateStep`.
-     * }
+     * @var string $inputs A JSON key-value map of inputs required from a user during configuration. This is the data your app expects to receive when the workflow step starts. **Please note**: the embedded variable format is set and replaced by the workflow system. You cannot create custom variables that will be replaced at runtime. [Read more about variables in workflow steps here](/workflows/steps#variables).
+     * @var string $outputs An JSON array of output objects used during step execution. This is the data your app agrees to provide when your workflow step was executed.
+     * @var string $step_image_url an optional field that can be used to override app image that is shown in the Workflow Builder
+     * @var string $step_name an optional field that can be used to override the step name that is shown in the Workflow Builder
+     * @var string $workflow_step_edit_id A context identifier provided with `view_submission` payloads used to call back to `workflows.updateStep`.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `workflow.steps:execute`
-     * }
+     * @var string $token Authentication token. Requires scope: `workflow.steps:execute`
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \JoliCode\Slack\Api\Model\WorkflowsUpdateStepGetResponse200|\JoliCode\Slack\Api\Model\WorkflowsUpdateStepGetResponsedefault|\Psr\Http\Message\ResponseInterface|null
+     * @return \JoliCode\Slack\Api\Model\WorkflowsUpdateStepPostResponse200|\JoliCode\Slack\Api\Model\WorkflowsUpdateStepPostResponsedefault|\Psr\Http\Message\ResponseInterface|null
      */
-    public function workflowsUpdateStep(array $queryParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
+    public function workflowsUpdateStep(array $formParameters = [], array $headerParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \JoliCode\Slack\Api\Endpoint\WorkflowsUpdateStep($queryParameters, $headerParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\WorkflowsUpdateStep($formParameters, $headerParameters), $fetch);
     }
 
-    public static function create($httpClient = null, array $additionalPlugins = [])
+    public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
     {
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://slack.com/api');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://slack.com/api');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             $plugins[] = new \Http\Client\Common\Plugin\AddPathPlugin($uri);
             if (\count($additionalPlugins) > 0) {
@@ -3873,7 +3878,11 @@ class Client extends \JoliCode\Slack\Api\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $serializer = new \Symfony\Component\Serializer\Serializer([new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \JoliCode\Slack\Api\Normalizer\JaneObjectNormalizer()], [new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode(['json_decode_associative' => true]))]);
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
+        if (\count($additionalNormalizers) > 0) {
+            $normalizers = array_merge($normalizers, $additionalNormalizers);
+        }
+        $serializer = new \Symfony\Component\Serializer\Serializer($normalizers, [new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode(['json_decode_associative' => true]))]);
 
         return new static($httpClient, $requestFactory, $serializer, $streamFactory);
     }

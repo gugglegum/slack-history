@@ -22,14 +22,14 @@ class AdminUsersSessionInvalidate extends \JoliCode\Slack\Api\Runtime\Client\Bas
      *
      * @param array $formParameters {
      *
-     *     @var int $session_id
-     *     @var string $team_id ID of the team that the session belongs to
-     * }
+     * @var int    $session_id
+     * @var string $team_id ID of the team that the session belongs to
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.users:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -68,8 +68,8 @@ class AdminUsersSessionInvalidate extends \JoliCode\Slack\Api\Runtime\Client\Bas
         $optionsResolver->setDefined(['session_id', 'team_id']);
         $optionsResolver->setRequired(['session_id', 'team_id']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('session_id', ['int']);
-        $optionsResolver->setAllowedTypes('team_id', ['string']);
+        $optionsResolver->addAllowedTypes('session_id', ['int']);
+        $optionsResolver->addAllowedTypes('team_id', ['string']);
 
         return $optionsResolver;
     }
@@ -80,18 +80,18 @@ class AdminUsersSessionInvalidate extends \JoliCode\Slack\Api\Runtime\Client\Bas
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AdminUsersSessionInvalidatePostResponse200|\JoliCode\Slack\Api\Model\AdminUsersSessionInvalidatePostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AdminUsersSessionInvalidatePostResponse200', 'json');
         }

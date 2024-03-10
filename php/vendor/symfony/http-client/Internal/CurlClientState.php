@@ -25,6 +25,7 @@ final class CurlClientState extends ClientState
 {
     public ?\CurlMultiHandle $handle;
     public ?\CurlShareHandle $share;
+    public bool $performing = false;
 
     /** @var PushedResponse[] */
     public array $pushedResponses = [];
@@ -38,7 +39,7 @@ final class CurlClientState extends ClientState
 
     public function __construct(int $maxHostConnections, int $maxPendingPushes)
     {
-        self::$curlVersion = self::$curlVersion ?? curl_version();
+        self::$curlVersion ??= curl_version();
 
         $this->handle = curl_multi_init();
         $this->dnsCache = new DnsCache();
@@ -74,15 +75,13 @@ final class CurlClientState extends ClientState
         $multi->handlesActivity = &$this->handlesActivity;
         $multi->openHandles = &$this->openHandles;
 
-        curl_multi_setopt($this->handle, \CURLMOPT_PUSHFUNCTION, static function ($parent, $pushed, array $requestHeaders) use ($multi, $maxPendingPushes) {
-            return $multi->handlePush($parent, $pushed, $requestHeaders, $maxPendingPushes);
-        });
+        curl_multi_setopt($this->handle, \CURLMOPT_PUSHFUNCTION, static fn ($parent, $pushed, array $requestHeaders) => $multi->handlePush($parent, $pushed, $requestHeaders, $maxPendingPushes));
     }
 
-    public function reset()
+    public function reset(): void
     {
         foreach ($this->pushedResponses as $url => $response) {
-            $this->logger && $this->logger->debug(sprintf('Unused pushed response: "%s"', $url));
+            $this->logger?->debug(sprintf('Unused pushed response: "%s"', $url));
             curl_multi_remove_handle($this->handle, $response->handle);
             curl_close($response->handle);
         }
@@ -96,7 +95,7 @@ final class CurlClientState extends ClientState
         curl_share_setopt($this->share, \CURLSHOPT_SHARE, \CURL_LOCK_DATA_DNS);
         curl_share_setopt($this->share, \CURLSHOPT_SHARE, \CURL_LOCK_DATA_SSL_SESSION);
 
-        if (\defined('CURL_LOCK_DATA_CONNECT') && \PHP_VERSION_ID >= 80000) {
+        if (\defined('CURL_LOCK_DATA_CONNECT')) {
             curl_share_setopt($this->share, \CURLSHOPT_SHARE, \CURL_LOCK_DATA_CONNECT);
         }
     }
@@ -113,7 +112,7 @@ final class CurlClientState extends ClientState
         }
 
         if (!isset($headers[':method']) || !isset($headers[':scheme']) || !isset($headers[':authority']) || !isset($headers[':path'])) {
-            $this->logger && $this->logger->debug(sprintf('Rejecting pushed response from "%s": pushed headers are invalid', $origin));
+            $this->logger?->debug(sprintf('Rejecting pushed response from "%s": pushed headers are invalid', $origin));
 
             return \CURL_PUSH_DENY;
         }
@@ -124,7 +123,7 @@ final class CurlClientState extends ClientState
         // but this is a MUST in the HTTP/2 RFC; let's restrict pushes to the original host,
         // ignoring domains mentioned as alt-name in the certificate for now (same as curl).
         if (!str_starts_with($origin, $url.'/')) {
-            $this->logger && $this->logger->debug(sprintf('Rejecting pushed response from "%s": server is not authoritative for "%s"', $origin, $url));
+            $this->logger?->debug(sprintf('Rejecting pushed response from "%s": server is not authoritative for "%s"', $origin, $url));
 
             return \CURL_PUSH_DENY;
         }
@@ -132,11 +131,11 @@ final class CurlClientState extends ClientState
         if ($maxPendingPushes <= \count($this->pushedResponses)) {
             $fifoUrl = key($this->pushedResponses);
             unset($this->pushedResponses[$fifoUrl]);
-            $this->logger && $this->logger->debug(sprintf('Evicting oldest pushed response: "%s"', $fifoUrl));
+            $this->logger?->debug(sprintf('Evicting oldest pushed response: "%s"', $fifoUrl));
         }
 
         $url .= $headers[':path'][0];
-        $this->logger && $this->logger->debug(sprintf('Queueing pushed response: "%s"', $url));
+        $this->logger?->debug(sprintf('Queueing pushed response: "%s"', $url));
 
         $this->pushedResponses[$url] = new PushedResponse(new CurlResponse($this, $pushed), $headers, $this->openHandles[(int) $parent][1] ?? [], $pushed);
 

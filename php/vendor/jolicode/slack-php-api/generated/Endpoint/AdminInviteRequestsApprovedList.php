@@ -22,15 +22,15 @@ class AdminInviteRequestsApprovedList extends \JoliCode\Slack\Api\Runtime\Client
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Value of the `next_cursor` field sent as part of the previous API response
-     *     @var int $limit The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive
-     *     @var string $team_id ID for the workspace where the invite requests were made.
-     * }
+     * @var string $cursor Value of the `next_cursor` field sent as part of the previous API response
+     * @var int    $limit The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive
+     * @var string $team_id ID for the workspace where the invite requests were made.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.invites:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.invites:read`
+     *             }
      */
     public function __construct(array $queryParameters = [], array $headerParameters = [])
     {
@@ -69,9 +69,9 @@ class AdminInviteRequestsApprovedList extends \JoliCode\Slack\Api\Runtime\Client
         $optionsResolver->setDefined(['cursor', 'limit', 'team_id']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('cursor', ['string']);
-        $optionsResolver->setAllowedTypes('limit', ['int']);
-        $optionsResolver->setAllowedTypes('team_id', ['string']);
+        $optionsResolver->addAllowedTypes('cursor', ['string']);
+        $optionsResolver->addAllowedTypes('limit', ['int']);
+        $optionsResolver->addAllowedTypes('team_id', ['string']);
 
         return $optionsResolver;
     }
@@ -82,18 +82,18 @@ class AdminInviteRequestsApprovedList extends \JoliCode\Slack\Api\Runtime\Client
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AdminInviteRequestsApprovedListGetResponse200|\JoliCode\Slack\Api\Model\AdminInviteRequestsApprovedListGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AdminInviteRequestsApprovedListGetResponse200', 'json');
         }

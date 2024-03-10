@@ -22,14 +22,14 @@ class ConversationsSetTopic extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpo
      *
      * @param array $formParameters {
      *
-     *     @var string $channel Conversation to set the topic of
-     *     @var string $topic The new topic string. Does not support formatting or linkification.
-     * }
+     * @var string $channel Conversation to set the topic of
+     * @var string $topic The new topic string. Does not support formatting or linkification.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -68,8 +68,8 @@ class ConversationsSetTopic extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpo
         $optionsResolver->setDefined(['channel', 'topic']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel', ['string']);
-        $optionsResolver->setAllowedTypes('topic', ['string']);
+        $optionsResolver->addAllowedTypes('channel', ['string']);
+        $optionsResolver->addAllowedTypes('topic', ['string']);
 
         return $optionsResolver;
     }
@@ -80,18 +80,18 @@ class ConversationsSetTopic extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpo
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\ConversationsSetTopicPostResponse200|\JoliCode\Slack\Api\Model\ConversationsSetTopicPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\ConversationsSetTopicPostResponse200', 'json');
         }

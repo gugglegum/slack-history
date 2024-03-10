@@ -22,14 +22,14 @@ class AdminInviteRequestsDeny extends \JoliCode\Slack\Api\Runtime\Client\BaseEnd
      *
      * @param array $formParameters {
      *
-     *     @var string $invite_request_id ID of the request to invite
-     *     @var string $team_id ID for the workspace where the invite request was made.
-     * }
+     * @var string $invite_request_id ID of the request to invite
+     * @var string $team_id ID for the workspace where the invite request was made.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.invites:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.invites:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -68,8 +68,8 @@ class AdminInviteRequestsDeny extends \JoliCode\Slack\Api\Runtime\Client\BaseEnd
         $optionsResolver->setDefined(['invite_request_id', 'team_id']);
         $optionsResolver->setRequired(['invite_request_id']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('invite_request_id', ['string']);
-        $optionsResolver->setAllowedTypes('team_id', ['string']);
+        $optionsResolver->addAllowedTypes('invite_request_id', ['string']);
+        $optionsResolver->addAllowedTypes('team_id', ['string']);
 
         return $optionsResolver;
     }
@@ -80,18 +80,18 @@ class AdminInviteRequestsDeny extends \JoliCode\Slack\Api\Runtime\Client\BaseEnd
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AdminInviteRequestsDenyPostResponse200|\JoliCode\Slack\Api\Model\AdminInviteRequestsDenyPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AdminInviteRequestsDenyPostResponse200', 'json');
         }

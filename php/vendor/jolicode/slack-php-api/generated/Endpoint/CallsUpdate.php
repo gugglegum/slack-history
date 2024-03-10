@@ -22,16 +22,16 @@ class CallsUpdate extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implem
      *
      * @param array $formParameters {
      *
-     *     @var string $desktop_app_join_url when supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL
-     *     @var string $id `id` returned by the [`calls.add`](/methods/calls.add) method.
-     *     @var string $join_url the URL required for a client to join the Call
-     *     @var string $title The name of the Call.
-     * }
+     * @var string $desktop_app_join_url when supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL
+     * @var string $id `id` returned by the [`calls.add`](/methods/calls.add) method.
+     * @var string $join_url the URL required for a client to join the Call
+     * @var string $title The name of the Call.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `calls:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `calls:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -70,10 +70,10 @@ class CallsUpdate extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implem
         $optionsResolver->setDefined(['desktop_app_join_url', 'id', 'join_url', 'title']);
         $optionsResolver->setRequired(['id']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('desktop_app_join_url', ['string']);
-        $optionsResolver->setAllowedTypes('id', ['string']);
-        $optionsResolver->setAllowedTypes('join_url', ['string']);
-        $optionsResolver->setAllowedTypes('title', ['string']);
+        $optionsResolver->addAllowedTypes('desktop_app_join_url', ['string']);
+        $optionsResolver->addAllowedTypes('id', ['string']);
+        $optionsResolver->addAllowedTypes('join_url', ['string']);
+        $optionsResolver->addAllowedTypes('title', ['string']);
 
         return $optionsResolver;
     }
@@ -84,18 +84,18 @@ class CallsUpdate extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implem
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\CallsUpdatePostResponse200|\JoliCode\Slack\Api\Model\CallsUpdatePostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\CallsUpdatePostResponse200', 'json');
         }

@@ -22,17 +22,17 @@ class AdminUsersAssign extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_ids comma separated values of channel IDs to add user in the new workspace
-     *     @var bool $is_restricted true if user should be added to the workspace as a guest
-     *     @var bool $is_ultra_restricted true if user should be added to the workspace as a single-channel guest
-     *     @var string $team_id the ID (`T1234`) of the workspace
-     *     @var string $user_id The ID of the user to add to the workspace.
-     * }
+     * @var string $channel_ids comma separated values of channel IDs to add user in the new workspace
+     * @var bool   $is_restricted true if user should be added to the workspace as a guest
+     * @var bool   $is_ultra_restricted true if user should be added to the workspace as a single-channel guest
+     * @var string $team_id the ID (`T1234`) of the workspace
+     * @var string $user_id The ID of the user to add to the workspace.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.users:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -71,11 +71,11 @@ class AdminUsersAssign extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
         $optionsResolver->setDefined(['channel_ids', 'is_restricted', 'is_ultra_restricted', 'team_id', 'user_id']);
         $optionsResolver->setRequired(['team_id', 'user_id']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel_ids', ['string']);
-        $optionsResolver->setAllowedTypes('is_restricted', ['bool']);
-        $optionsResolver->setAllowedTypes('is_ultra_restricted', ['bool']);
-        $optionsResolver->setAllowedTypes('team_id', ['string']);
-        $optionsResolver->setAllowedTypes('user_id', ['string']);
+        $optionsResolver->addAllowedTypes('channel_ids', ['string']);
+        $optionsResolver->addAllowedTypes('is_restricted', ['bool']);
+        $optionsResolver->addAllowedTypes('is_ultra_restricted', ['bool']);
+        $optionsResolver->addAllowedTypes('team_id', ['string']);
+        $optionsResolver->addAllowedTypes('user_id', ['string']);
 
         return $optionsResolver;
     }
@@ -86,18 +86,18 @@ class AdminUsersAssign extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AdminUsersAssignPostResponse200|\JoliCode\Slack\Api\Model\AdminUsersAssignPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AdminUsersAssignPostResponse200', 'json');
         }

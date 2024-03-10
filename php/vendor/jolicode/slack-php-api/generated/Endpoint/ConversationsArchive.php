@@ -22,13 +22,13 @@ class ConversationsArchive extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoi
      *
      * @param array $formParameters {
      *
-     *     @var string $channel ID of conversation to archive
-     * }
+     * @var string $channel ID of conversation to archive
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -67,7 +67,7 @@ class ConversationsArchive extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoi
         $optionsResolver->setDefined(['channel']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel', ['string']);
+        $optionsResolver->addAllowedTypes('channel', ['string']);
 
         return $optionsResolver;
     }
@@ -78,18 +78,18 @@ class ConversationsArchive extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoi
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\ConversationsArchivePostResponse200|\JoliCode\Slack\Api\Model\ConversationsArchivePostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\ConversationsArchivePostResponse200', 'json');
         }

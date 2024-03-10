@@ -22,8 +22,8 @@ class DndEndSnooze extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint imple
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `dnd:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `dnd:write`
+     *             }
      */
     public function __construct(array $headerParameters = [])
     {
@@ -61,18 +61,18 @@ class DndEndSnooze extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint imple
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\DndEndSnoozePostResponse200|\JoliCode\Slack\Api\Model\DndEndSnoozePostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\DndEndSnoozePostResponse200', 'json');
         }

@@ -22,16 +22,16 @@ class StarsAdd extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implement
      *
      * @param array $formParameters {
      *
-     *     @var string $channel channel to add star to, or channel where the message to add star to was posted (used with `timestamp`)
-     *     @var string $file file to add star to
-     *     @var string $file_comment file comment to add star to
-     *     @var string $timestamp Timestamp of the message to add star to.
-     * }
+     * @var string $channel channel to add star to, or channel where the message to add star to was posted (used with `timestamp`)
+     * @var string $file file to add star to
+     * @var string $file_comment file comment to add star to
+     * @var string $timestamp Timestamp of the message to add star to.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `stars:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `stars:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -70,10 +70,10 @@ class StarsAdd extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implement
         $optionsResolver->setDefined(['channel', 'file', 'file_comment', 'timestamp']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel', ['string']);
-        $optionsResolver->setAllowedTypes('file', ['string']);
-        $optionsResolver->setAllowedTypes('file_comment', ['string']);
-        $optionsResolver->setAllowedTypes('timestamp', ['string']);
+        $optionsResolver->addAllowedTypes('channel', ['string']);
+        $optionsResolver->addAllowedTypes('file', ['string']);
+        $optionsResolver->addAllowedTypes('file_comment', ['string']);
+        $optionsResolver->addAllowedTypes('timestamp', ['string']);
 
         return $optionsResolver;
     }
@@ -84,18 +84,18 @@ class StarsAdd extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implement
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\StarsAddPostResponse200|\JoliCode\Slack\Api\Model\StarsAddPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\StarsAddPostResponse200', 'json');
         }

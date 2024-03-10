@@ -22,14 +22,14 @@ class AdminConversationsInvite extends \JoliCode\Slack\Api\Runtime\Client\BaseEn
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_id the channel that the users will be invited to
-     *     @var string $user_ids The users to invite.
-     * }
+     * @var string $channel_id the channel that the users will be invited to
+     * @var string $user_ids The users to invite.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -68,8 +68,8 @@ class AdminConversationsInvite extends \JoliCode\Slack\Api\Runtime\Client\BaseEn
         $optionsResolver->setDefined(['channel_id', 'user_ids']);
         $optionsResolver->setRequired(['channel_id', 'user_ids']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel_id', ['string']);
-        $optionsResolver->setAllowedTypes('user_ids', ['string']);
+        $optionsResolver->addAllowedTypes('channel_id', ['string']);
+        $optionsResolver->addAllowedTypes('user_ids', ['string']);
 
         return $optionsResolver;
     }
@@ -80,18 +80,18 @@ class AdminConversationsInvite extends \JoliCode\Slack\Api\Runtime\Client\BaseEn
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AdminConversationsInvitePostResponse200|\JoliCode\Slack\Api\Model\AdminConversationsInvitePostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AdminConversationsInvitePostResponse200', 'json');
         }

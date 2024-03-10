@@ -22,15 +22,15 @@ class AppsEventAuthorizationsList extends \JoliCode\Slack\Api\Runtime\Client\Bas
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor
-     *     @var string $event_context
-     *     @var int $limit
-     * }
+     * @var string $cursor
+     * @var string $event_context
+     * @var int    $limit
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `authorizations:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `authorizations:read`
+     *             }
      */
     public function __construct(array $queryParameters = [], array $headerParameters = [])
     {
@@ -69,9 +69,9 @@ class AppsEventAuthorizationsList extends \JoliCode\Slack\Api\Runtime\Client\Bas
         $optionsResolver->setDefined(['cursor', 'event_context', 'limit']);
         $optionsResolver->setRequired(['event_context']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('cursor', ['string']);
-        $optionsResolver->setAllowedTypes('event_context', ['string']);
-        $optionsResolver->setAllowedTypes('limit', ['int']);
+        $optionsResolver->addAllowedTypes('cursor', ['string']);
+        $optionsResolver->addAllowedTypes('event_context', ['string']);
+        $optionsResolver->addAllowedTypes('limit', ['int']);
 
         return $optionsResolver;
     }
@@ -82,18 +82,18 @@ class AppsEventAuthorizationsList extends \JoliCode\Slack\Api\Runtime\Client\Bas
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AppsEventAuthorizationsListGetResponse200|\JoliCode\Slack\Api\Model\AppsEventAuthorizationsListGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AppsEventAuthorizationsListGetResponse200', 'json');
         }

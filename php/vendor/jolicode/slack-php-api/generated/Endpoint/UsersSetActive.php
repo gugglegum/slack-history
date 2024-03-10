@@ -22,8 +22,8 @@ class UsersSetActive extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint imp
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `users:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `users:write`
+     *             }
      */
     public function __construct(array $headerParameters = [])
     {
@@ -61,18 +61,18 @@ class UsersSetActive extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint imp
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\UsersSetActivePostResponse200|\JoliCode\Slack\Api\Model\UsersSetActivePostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\UsersSetActivePostResponse200', 'json');
         }

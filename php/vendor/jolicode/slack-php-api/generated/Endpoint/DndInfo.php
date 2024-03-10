@@ -22,9 +22,9 @@ class DndInfo extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implements
      *
      * @param array $queryParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `dnd:read`
-     *     @var string $user User to fetch status for (defaults to current user)
-     * }
+     * @var string $token Authentication token. Requires scope: `dnd:read`
+     * @var string $user User to fetch status for (defaults to current user)
+     *             }
      */
     public function __construct(array $queryParameters = [])
     {
@@ -62,19 +62,19 @@ class DndInfo extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implements
         $optionsResolver->setDefined(['token', 'user']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
-        $optionsResolver->setAllowedTypes('user', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('user', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\DndInfoGetResponse200|\JoliCode\Slack\Api\Model\DndInfoGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\DndInfoGetResponse200', 'json');
         }

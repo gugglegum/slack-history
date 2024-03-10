@@ -35,18 +35,18 @@ class MessageIterator implements Iterator
         $this->stmt->bindValue('conversation_id', $conversationId);
     }
 
-    public function current()
+    public function current(): mixed
     {
         return $this->current;
     }
 
-    public function next()
+    public function next(): void
     {
         $this->current = $this->stmt->fetch(PDO::FETCH_ASSOC);
         $this->key++;
     }
 
-    public function key()
+    public function key(): mixed
     {
         return $this->key;
     }
@@ -56,7 +56,7 @@ class MessageIterator implements Iterator
         return $this->current !== false;
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->stmt->execute();
         $this->key = -1;

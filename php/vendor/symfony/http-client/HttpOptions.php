@@ -32,7 +32,7 @@ class HttpOptions
     /**
      * @return $this
      */
-    public function setAuthBasic(string $user, string $password = ''): static
+    public function setAuthBasic(string $user, #[\SensitiveParameter] string $password = ''): static
     {
         $this->options['auth_basic'] = $user;
 
@@ -46,7 +46,7 @@ class HttpOptions
     /**
      * @return $this
      */
-    public function setAuthBearer(string $token): static
+    public function setAuthBearer(#[\SensitiveParameter] string $token): static
     {
         $this->options['auth_bearer'] = $token;
 
@@ -131,6 +131,16 @@ class HttpOptions
     public function setBaseUri(string $uri): static
     {
         $this->options['base_uri'] = $uri;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setVars(array $vars): static
+    {
+        $this->options['vars'] = $vars;
 
         return $this;
     }

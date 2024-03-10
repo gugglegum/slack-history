@@ -22,14 +22,14 @@ class PinsRemove extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impleme
      *
      * @param array $formParameters {
      *
-     *     @var string $channel channel where the item is pinned to
-     *     @var string $timestamp Timestamp of the message to un-pin.
-     * }
+     * @var string $channel channel where the item is pinned to
+     * @var string $timestamp Timestamp of the message to un-pin.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `pins:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `pins:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -68,8 +68,8 @@ class PinsRemove extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impleme
         $optionsResolver->setDefined(['channel', 'timestamp']);
         $optionsResolver->setRequired(['channel']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel', ['string']);
-        $optionsResolver->setAllowedTypes('timestamp', ['string']);
+        $optionsResolver->addAllowedTypes('channel', ['string']);
+        $optionsResolver->addAllowedTypes('timestamp', ['string']);
 
         return $optionsResolver;
     }
@@ -80,18 +80,18 @@ class PinsRemove extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impleme
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\PinsRemovePostResponse200|\JoliCode\Slack\Api\Model\PinsRemovePostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\PinsRemovePostResponse200', 'json');
         }

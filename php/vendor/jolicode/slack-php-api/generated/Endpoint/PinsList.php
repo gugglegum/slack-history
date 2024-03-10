@@ -22,9 +22,9 @@ class PinsList extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implement
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel channel to get pinned items for
-     *     @var string $token Authentication token. Requires scope: `pins:read`
-     * }
+     * @var string $channel channel to get pinned items for
+     * @var string $token Authentication token. Requires scope: `pins:read`
+     *             }
      */
     public function __construct(array $queryParameters = [])
     {
@@ -62,19 +62,19 @@ class PinsList extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implement
         $optionsResolver->setDefined(['channel', 'token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel', ['string']);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('channel', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\PinsListGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return json_decode($body);
         }

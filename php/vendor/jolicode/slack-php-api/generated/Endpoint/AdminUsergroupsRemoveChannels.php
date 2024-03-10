@@ -22,14 +22,14 @@ class AdminUsergroupsRemoveChannels extends \JoliCode\Slack\Api\Runtime\Client\B
      *
      * @param array $formParameters {
      *
-     *     @var string $channel_ids Comma-separated string of channel IDs
-     *     @var string $usergroup_id ID of the IDP Group
-     * }
+     * @var string $channel_ids Comma-separated string of channel IDs
+     * @var string $usergroup_id ID of the IDP Group
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.usergroups:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.usergroups:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -68,8 +68,8 @@ class AdminUsergroupsRemoveChannels extends \JoliCode\Slack\Api\Runtime\Client\B
         $optionsResolver->setDefined(['channel_ids', 'usergroup_id']);
         $optionsResolver->setRequired(['channel_ids', 'usergroup_id']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel_ids', ['string']);
-        $optionsResolver->setAllowedTypes('usergroup_id', ['string']);
+        $optionsResolver->addAllowedTypes('channel_ids', ['string']);
+        $optionsResolver->addAllowedTypes('usergroup_id', ['string']);
 
         return $optionsResolver;
     }
@@ -80,18 +80,18 @@ class AdminUsergroupsRemoveChannels extends \JoliCode\Slack\Api\Runtime\Client\B
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AdminUsergroupsRemoveChannelsPostResponse200|\JoliCode\Slack\Api\Model\AdminUsergroupsRemoveChannelsPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AdminUsergroupsRemoveChannelsPostResponse200', 'json');
         }

@@ -22,11 +22,11 @@ class ConversationsInfo extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint 
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel Conversation ID to learn more about
-     *     @var bool $include_locale Set this to `true` to receive the locale for this conversation. Defaults to `false`
-     *     @var bool $include_num_members Set to `true` to include the member count for the specified conversation. Defaults to `false`
-     *     @var string $token Authentication token. Requires scope: `conversations:read`
-     * }
+     * @var string $channel Conversation ID to learn more about
+     * @var bool   $include_locale Set this to `true` to receive the locale for this conversation. Defaults to `false`
+     * @var bool   $include_num_members Set to `true` to include the member count for the specified conversation. Defaults to `false`
+     * @var string $token Authentication token. Requires scope: `conversations:read`
+     *             }
      */
     public function __construct(array $queryParameters = [])
     {
@@ -64,21 +64,21 @@ class ConversationsInfo extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint 
         $optionsResolver->setDefined(['channel', 'include_locale', 'include_num_members', 'token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel', ['string']);
-        $optionsResolver->setAllowedTypes('include_locale', ['bool']);
-        $optionsResolver->setAllowedTypes('include_num_members', ['bool']);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('channel', ['string']);
+        $optionsResolver->addAllowedTypes('include_locale', ['bool']);
+        $optionsResolver->addAllowedTypes('include_num_members', ['bool']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\ConversationsInfoGetResponse200|\JoliCode\Slack\Api\Model\ConversationsInfoGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\ConversationsInfoGetResponse200', 'json');
         }

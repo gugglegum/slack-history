@@ -22,15 +22,15 @@ class AdminConversationsGetTeams extends \JoliCode\Slack\Api\Runtime\Client\Base
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel_id the channel to determine connected workspaces within the organization for
-     *     @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
-     *     @var int $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-     * }
+     * @var string $channel_id the channel to determine connected workspaces within the organization for
+     * @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * @var int    $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.conversations:read`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.conversations:read`
+     *             }
      */
     public function __construct(array $queryParameters = [], array $headerParameters = [])
     {
@@ -69,9 +69,9 @@ class AdminConversationsGetTeams extends \JoliCode\Slack\Api\Runtime\Client\Base
         $optionsResolver->setDefined(['channel_id', 'cursor', 'limit']);
         $optionsResolver->setRequired(['channel_id']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel_id', ['string']);
-        $optionsResolver->setAllowedTypes('cursor', ['string']);
-        $optionsResolver->setAllowedTypes('limit', ['int']);
+        $optionsResolver->addAllowedTypes('channel_id', ['string']);
+        $optionsResolver->addAllowedTypes('cursor', ['string']);
+        $optionsResolver->addAllowedTypes('limit', ['int']);
 
         return $optionsResolver;
     }
@@ -82,18 +82,18 @@ class AdminConversationsGetTeams extends \JoliCode\Slack\Api\Runtime\Client\Base
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AdminConversationsGetTeamsGetResponse200|\JoliCode\Slack\Api\Model\AdminConversationsGetTeamsGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AdminConversationsGetTeamsGetResponse200', 'json');
         }

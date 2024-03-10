@@ -22,10 +22,10 @@ class ChatGetPermalink extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel The ID of the conversation or channel containing the message
-     *     @var string $message_ts A message's `ts` value, uniquely identifying it within a channel
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $channel The ID of the conversation or channel containing the message
+     * @var string $message_ts A message's `ts` value, uniquely identifying it within a channel
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      */
     public function __construct(array $queryParameters = [])
     {
@@ -63,20 +63,20 @@ class ChatGetPermalink extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
         $optionsResolver->setDefined(['channel', 'message_ts', 'token']);
         $optionsResolver->setRequired(['channel', 'message_ts']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel', ['string']);
-        $optionsResolver->setAllowedTypes('message_ts', ['string']);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('channel', ['string']);
+        $optionsResolver->addAllowedTypes('message_ts', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\ChatGetPermalinkGetResponse200|\JoliCode\Slack\Api\Model\ChatGetPermalinkGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\ChatGetPermalinkGetResponse200', 'json');
         }

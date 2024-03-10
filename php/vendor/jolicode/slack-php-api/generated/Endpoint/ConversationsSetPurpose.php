@@ -22,14 +22,14 @@ class ConversationsSetPurpose extends \JoliCode\Slack\Api\Runtime\Client\BaseEnd
      *
      * @param array $formParameters {
      *
-     *     @var string $channel Conversation to set the purpose of
-     *     @var string $purpose A new, specialer purpose
-     * }
+     * @var string $channel Conversation to set the purpose of
+     * @var string $purpose A new, specialer purpose
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `conversations:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `conversations:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -68,8 +68,8 @@ class ConversationsSetPurpose extends \JoliCode\Slack\Api\Runtime\Client\BaseEnd
         $optionsResolver->setDefined(['channel', 'purpose']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel', ['string']);
-        $optionsResolver->setAllowedTypes('purpose', ['string']);
+        $optionsResolver->addAllowedTypes('channel', ['string']);
+        $optionsResolver->addAllowedTypes('purpose', ['string']);
 
         return $optionsResolver;
     }
@@ -80,18 +80,18 @@ class ConversationsSetPurpose extends \JoliCode\Slack\Api\Runtime\Client\BaseEnd
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\ConversationsSetPurposePostResponse200|\JoliCode\Slack\Api\Model\ConversationsSetPurposePostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\ConversationsSetPurposePostResponse200', 'json');
         }

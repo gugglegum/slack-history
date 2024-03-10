@@ -22,18 +22,18 @@ class ChatUnfurl extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impleme
      *
      * @param array $formParameters {
      *
-     *     @var string $channel Channel ID of the message
-     *     @var string $ts timestamp of the message to add unfurl behavior to
-     *     @var string $unfurls URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments
-     *     @var string $user_auth_message Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior
-     *     @var bool $user_auth_required Set to `true` or `1` to indicate the user must install your Slack app to trigger unfurls for this domain
-     *     @var string $user_auth_url Send users to this custom URL where they will complete authentication in your app to fully trigger unfurling. Value should be properly URL-encoded.
-     * }
+     * @var string $channel Channel ID of the message
+     * @var string $ts timestamp of the message to add unfurl behavior to
+     * @var string $unfurls URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments
+     * @var string $user_auth_message Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior
+     * @var bool   $user_auth_required Set to `true` or `1` to indicate the user must install your Slack app to trigger unfurls for this domain
+     * @var string $user_auth_url Send users to this custom URL where they will complete authentication in your app to fully trigger unfurling. Value should be properly URL-encoded.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `links:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `links:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -72,12 +72,12 @@ class ChatUnfurl extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impleme
         $optionsResolver->setDefined(['channel', 'ts', 'unfurls', 'user_auth_message', 'user_auth_required', 'user_auth_url']);
         $optionsResolver->setRequired(['channel', 'ts']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel', ['string']);
-        $optionsResolver->setAllowedTypes('ts', ['string']);
-        $optionsResolver->setAllowedTypes('unfurls', ['string']);
-        $optionsResolver->setAllowedTypes('user_auth_message', ['string']);
-        $optionsResolver->setAllowedTypes('user_auth_required', ['bool']);
-        $optionsResolver->setAllowedTypes('user_auth_url', ['string']);
+        $optionsResolver->addAllowedTypes('channel', ['string']);
+        $optionsResolver->addAllowedTypes('ts', ['string']);
+        $optionsResolver->addAllowedTypes('unfurls', ['string']);
+        $optionsResolver->addAllowedTypes('user_auth_message', ['string']);
+        $optionsResolver->addAllowedTypes('user_auth_required', ['bool']);
+        $optionsResolver->addAllowedTypes('user_auth_url', ['string']);
 
         return $optionsResolver;
     }
@@ -88,18 +88,18 @@ class ChatUnfurl extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impleme
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\ChatUnfurlPostResponse200|\JoliCode\Slack\Api\Model\ChatUnfurlPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\ChatUnfurlPostResponse200', 'json');
         }

@@ -22,10 +22,10 @@ class UsersInfo extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implemen
      *
      * @param array $queryParameters {
      *
-     *     @var bool $include_locale Set this to `true` to receive the locale for this user. Defaults to `false`
-     *     @var string $token Authentication token. Requires scope: `users:read`
-     *     @var string $user User to get info on
-     * }
+     * @var bool   $include_locale Set this to `true` to receive the locale for this user. Defaults to `false`
+     * @var string $token Authentication token. Requires scope: `users:read`
+     * @var string $user User to get info on
+     *             }
      */
     public function __construct(array $queryParameters = [])
     {
@@ -63,20 +63,20 @@ class UsersInfo extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implemen
         $optionsResolver->setDefined(['include_locale', 'token', 'user']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('include_locale', ['bool']);
-        $optionsResolver->setAllowedTypes('token', ['string']);
-        $optionsResolver->setAllowedTypes('user', ['string']);
+        $optionsResolver->addAllowedTypes('include_locale', ['bool']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('user', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\UsersInfoGetResponse200|\JoliCode\Slack\Api\Model\UsersInfoGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\UsersInfoGetResponse200', 'json');
         }

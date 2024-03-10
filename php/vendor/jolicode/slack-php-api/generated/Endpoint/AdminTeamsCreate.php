@@ -22,16 +22,16 @@ class AdminTeamsCreate extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
      *
      * @param array $formParameters {
      *
-     *     @var string $team_description description for the team
-     *     @var string $team_discoverability Who can join the team. A team's discoverability can be `open`, `closed`, `invite_only`, or `unlisted`.
-     *     @var string $team_domain team domain (for example, slacksoftballteam)
-     *     @var string $team_name Team name (for example, Slack Softball Team).
-     * }
+     * @var string $team_description description for the team
+     * @var string $team_discoverability Who can join the team. A team's discoverability can be `open`, `closed`, `invite_only`, or `unlisted`.
+     * @var string $team_domain team domain (for example, slacksoftballteam)
+     * @var string $team_name Team name (for example, Slack Softball Team).
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `admin.teams:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `admin.teams:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -70,10 +70,10 @@ class AdminTeamsCreate extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
         $optionsResolver->setDefined(['team_description', 'team_discoverability', 'team_domain', 'team_name']);
         $optionsResolver->setRequired(['team_domain', 'team_name']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('team_description', ['string']);
-        $optionsResolver->setAllowedTypes('team_discoverability', ['string']);
-        $optionsResolver->setAllowedTypes('team_domain', ['string']);
-        $optionsResolver->setAllowedTypes('team_name', ['string']);
+        $optionsResolver->addAllowedTypes('team_description', ['string']);
+        $optionsResolver->addAllowedTypes('team_discoverability', ['string']);
+        $optionsResolver->addAllowedTypes('team_domain', ['string']);
+        $optionsResolver->addAllowedTypes('team_name', ['string']);
 
         return $optionsResolver;
     }
@@ -84,18 +84,18 @@ class AdminTeamsCreate extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint i
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AdminTeamsCreatePostResponse200|\JoliCode\Slack\Api\Model\AdminTeamsCreatePostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AdminTeamsCreatePostResponse200', 'json');
         }

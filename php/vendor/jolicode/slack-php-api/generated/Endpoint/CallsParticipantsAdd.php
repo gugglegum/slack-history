@@ -22,14 +22,14 @@ class CallsParticipantsAdd extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoi
      *
      * @param array $formParameters {
      *
-     *     @var string $id `id` returned by the [`calls.add`](/methods/calls.add) method.
-     *     @var string $users The list of users to add as participants in the Call. [Read more on how to specify users here](/apis/calls#users).
-     * }
+     * @var string $id `id` returned by the [`calls.add`](/methods/calls.add) method.
+     * @var string $users The list of users to add as participants in the Call. [Read more on how to specify users here](/apis/calls#users).
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `calls:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `calls:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -68,8 +68,8 @@ class CallsParticipantsAdd extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoi
         $optionsResolver->setDefined(['id', 'users']);
         $optionsResolver->setRequired(['id', 'users']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('id', ['string']);
-        $optionsResolver->setAllowedTypes('users', ['string']);
+        $optionsResolver->addAllowedTypes('id', ['string']);
+        $optionsResolver->addAllowedTypes('users', ['string']);
 
         return $optionsResolver;
     }
@@ -80,18 +80,18 @@ class CallsParticipantsAdd extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoi
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\CallsParticipantsAddPostResponse200|\JoliCode\Slack\Api\Model\CallsParticipantsAddPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\CallsParticipantsAddPostResponse200', 'json');
         }

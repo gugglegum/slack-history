@@ -22,13 +22,13 @@ class ReactionsGet extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint imple
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel channel where the message to get reactions for was posted
-     *     @var string $file file to get reactions for
-     *     @var string $file_comment file comment to get reactions for
-     *     @var bool $full if true always return the complete reaction list
-     *     @var string $timestamp timestamp of the message to get reactions for
-     *     @var string $token Authentication token. Requires scope: `reactions:read`
-     * }
+     * @var string $channel channel where the message to get reactions for was posted
+     * @var string $file file to get reactions for
+     * @var string $file_comment file comment to get reactions for
+     * @var bool   $full if true always return the complete reaction list
+     * @var string $timestamp timestamp of the message to get reactions for
+     * @var string $token Authentication token. Requires scope: `reactions:read`
+     *             }
      */
     public function __construct(array $queryParameters = [])
     {
@@ -66,23 +66,23 @@ class ReactionsGet extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint imple
         $optionsResolver->setDefined(['channel', 'file', 'file_comment', 'full', 'timestamp', 'token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel', ['string']);
-        $optionsResolver->setAllowedTypes('file', ['string']);
-        $optionsResolver->setAllowedTypes('file_comment', ['string']);
-        $optionsResolver->setAllowedTypes('full', ['bool']);
-        $optionsResolver->setAllowedTypes('timestamp', ['string']);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('channel', ['string']);
+        $optionsResolver->addAllowedTypes('file', ['string']);
+        $optionsResolver->addAllowedTypes('file_comment', ['string']);
+        $optionsResolver->addAllowedTypes('full', ['bool']);
+        $optionsResolver->addAllowedTypes('timestamp', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\ReactionsGetGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return json_decode($body);
         }

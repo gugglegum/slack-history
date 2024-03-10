@@ -22,15 +22,15 @@ class RemindersAdd extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint imple
      *
      * @param array $formParameters {
      *
-     *     @var string $text The content of the reminder
-     *     @var string $time When this reminder should happen: the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday")
-     *     @var string $user The user who will receive the reminder. If no user is specified, the reminder will go to user who created it.
-     * }
+     * @var string $text The content of the reminder
+     * @var string $time When this reminder should happen: the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. "in 15 minutes," or "every Thursday")
+     * @var string $user The user who will receive the reminder. If no user is specified, the reminder will go to user who created it.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `reminders:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `reminders:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -69,9 +69,9 @@ class RemindersAdd extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint imple
         $optionsResolver->setDefined(['text', 'time', 'user']);
         $optionsResolver->setRequired(['text', 'time']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('text', ['string']);
-        $optionsResolver->setAllowedTypes('time', ['string']);
-        $optionsResolver->setAllowedTypes('user', ['string']);
+        $optionsResolver->addAllowedTypes('text', ['string']);
+        $optionsResolver->addAllowedTypes('time', ['string']);
+        $optionsResolver->addAllowedTypes('user', ['string']);
 
         return $optionsResolver;
     }
@@ -82,18 +82,18 @@ class RemindersAdd extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint imple
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\RemindersAddPostResponse200|\JoliCode\Slack\Api\Model\RemindersAddPostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\RemindersAddPostResponse200', 'json');
         }

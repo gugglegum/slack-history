@@ -16,6 +16,10 @@ namespace JoliCode\Slack\Api\Model;
 class MigrationExchangeGetResponse200 extends \ArrayObject
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+    /**
      * @var string|null
      */
     protected $enterpriseId;
@@ -32,9 +36,14 @@ class MigrationExchangeGetResponse200 extends \ArrayObject
      */
     protected $teamId;
     /**
-     * @var mixed[]|null
+     * @var array<string, mixed>|null
      */
     protected $userIdMap;
+
+    public function isInitialized($property): bool
+    {
+        return \array_key_exists($property, $this->initialized);
+    }
 
     public function getEnterpriseId(): ?string
     {
@@ -43,6 +52,7 @@ class MigrationExchangeGetResponse200 extends \ArrayObject
 
     public function setEnterpriseId(?string $enterpriseId): self
     {
+        $this->initialized['enterpriseId'] = true;
         $this->enterpriseId = $enterpriseId;
 
         return $this;
@@ -61,6 +71,7 @@ class MigrationExchangeGetResponse200 extends \ArrayObject
      */
     public function setInvalidUserIds(?array $invalidUserIds): self
     {
+        $this->initialized['invalidUserIds'] = true;
         $this->invalidUserIds = $invalidUserIds;
 
         return $this;
@@ -73,6 +84,7 @@ class MigrationExchangeGetResponse200 extends \ArrayObject
 
     public function setOk(?bool $ok): self
     {
+        $this->initialized['ok'] = true;
         $this->ok = $ok;
 
         return $this;
@@ -85,13 +97,14 @@ class MigrationExchangeGetResponse200 extends \ArrayObject
 
     public function setTeamId(?string $teamId): self
     {
+        $this->initialized['teamId'] = true;
         $this->teamId = $teamId;
 
         return $this;
     }
 
     /**
-     * @return mixed[]|null
+     * @return array<string, mixed>|null
      */
     public function getUserIdMap(): ?iterable
     {
@@ -99,10 +112,11 @@ class MigrationExchangeGetResponse200 extends \ArrayObject
     }
 
     /**
-     * @param mixed[]|null $userIdMap
+     * @param array<string, mixed>|null $userIdMap
      */
     public function setUserIdMap(?iterable $userIdMap): self
     {
+        $this->initialized['userIdMap'] = true;
         $this->userIdMap = $userIdMap;
 
         return $this;

@@ -22,17 +22,17 @@ class ChatScheduledMessagesList extends \JoliCode\Slack\Api\Runtime\Client\BaseE
      *
      * @param array $queryParameters {
      *
-     *     @var string $channel The channel of the scheduled messages
-     *     @var string $cursor For pagination purposes, this is the `cursor` value returned from a previous call to `chat.scheduledmessages.list` indicating where you want to start this call from.
-     *     @var string $latest A UNIX timestamp of the latest value in the time range
-     *     @var int $limit maximum number of original entries to return
-     *     @var string $oldest A UNIX timestamp of the oldest value in the time range
-     * }
+     * @var string $channel The channel of the scheduled messages
+     * @var string $cursor For pagination purposes, this is the `cursor` value returned from a previous call to `chat.scheduledmessages.list` indicating where you want to start this call from.
+     * @var string $latest A UNIX timestamp of the latest value in the time range
+     * @var int    $limit maximum number of original entries to return
+     * @var string $oldest A UNIX timestamp of the oldest value in the time range
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `none`
-     * }
+     * @var string $token Authentication token. Requires scope: `none`
+     *             }
      */
     public function __construct(array $queryParameters = [], array $headerParameters = [])
     {
@@ -71,11 +71,11 @@ class ChatScheduledMessagesList extends \JoliCode\Slack\Api\Runtime\Client\BaseE
         $optionsResolver->setDefined(['channel', 'cursor', 'latest', 'limit', 'oldest']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel', ['string']);
-        $optionsResolver->setAllowedTypes('cursor', ['string']);
-        $optionsResolver->setAllowedTypes('latest', ['string']);
-        $optionsResolver->setAllowedTypes('limit', ['int']);
-        $optionsResolver->setAllowedTypes('oldest', ['string']);
+        $optionsResolver->addAllowedTypes('channel', ['string']);
+        $optionsResolver->addAllowedTypes('cursor', ['string']);
+        $optionsResolver->addAllowedTypes('latest', ['string']);
+        $optionsResolver->addAllowedTypes('limit', ['int']);
+        $optionsResolver->addAllowedTypes('oldest', ['string']);
 
         return $optionsResolver;
     }
@@ -86,18 +86,18 @@ class ChatScheduledMessagesList extends \JoliCode\Slack\Api\Runtime\Client\BaseE
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\ChatScheduledMessagesListGetResponse200|\JoliCode\Slack\Api\Model\ChatScheduledMessagesListGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\ChatScheduledMessagesListGetResponse200', 'json');
         }

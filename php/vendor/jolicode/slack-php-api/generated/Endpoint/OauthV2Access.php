@@ -22,11 +22,11 @@ class OauthV2Access extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impl
      *
      * @param array $queryParameters {
      *
-     *     @var string $client_id issued when you created your application
-     *     @var string $client_secret issued when you created your application
-     *     @var string $code the `code` param returned via the OAuth callback
-     *     @var string $redirect_uri This must match the originally submitted URI (if one was sent).
-     * }
+     * @var string $client_id issued when you created your application
+     * @var string $client_secret issued when you created your application
+     * @var string $code the `code` param returned via the OAuth callback
+     * @var string $redirect_uri This must match the originally submitted URI (if one was sent).
+     *             }
      */
     public function __construct(array $queryParameters = [])
     {
@@ -64,21 +64,21 @@ class OauthV2Access extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impl
         $optionsResolver->setDefined(['client_id', 'client_secret', 'code', 'redirect_uri']);
         $optionsResolver->setRequired(['code']);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('client_id', ['string']);
-        $optionsResolver->setAllowedTypes('client_secret', ['string']);
-        $optionsResolver->setAllowedTypes('code', ['string']);
-        $optionsResolver->setAllowedTypes('redirect_uri', ['string']);
+        $optionsResolver->addAllowedTypes('client_id', ['string']);
+        $optionsResolver->addAllowedTypes('client_secret', ['string']);
+        $optionsResolver->addAllowedTypes('code', ['string']);
+        $optionsResolver->addAllowedTypes('redirect_uri', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\OauthV2AccessGetResponse200|\JoliCode\Slack\Api\Model\OauthV2AccessGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\OauthV2AccessGetResponse200', 'json');
         }

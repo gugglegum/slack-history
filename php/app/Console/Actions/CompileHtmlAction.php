@@ -39,6 +39,8 @@ class CompileHtmlAction extends AbstractAction
      */
     public function __invoke()
     {
+        echo "Start compiling HTML files\n\n";
+
         if (!is_dir($this->htmlDir)) {
             mkdir($this->htmlDir, 0700);
         }

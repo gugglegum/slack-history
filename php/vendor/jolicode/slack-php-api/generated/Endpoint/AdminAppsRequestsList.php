@@ -22,11 +22,11 @@ class AdminAppsRequestsList extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpo
      *
      * @param array $queryParameters {
      *
-     *     @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
-     *     @var int $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-     *     @var string $team_id
-     *     @var string $token Authentication token. Requires scope: `admin.apps:read`
-     * }
+     * @var string $cursor Set `cursor` to `next_cursor` returned by the previous call to list items in the next page
+     * @var int    $limit The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+     * @var string $team_id
+     * @var string $token Authentication token. Requires scope: `admin.apps:read`
+     *             }
      */
     public function __construct(array $queryParameters = [])
     {
@@ -64,21 +64,21 @@ class AdminAppsRequestsList extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpo
         $optionsResolver->setDefined(['cursor', 'limit', 'team_id', 'token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('cursor', ['string']);
-        $optionsResolver->setAllowedTypes('limit', ['int']);
-        $optionsResolver->setAllowedTypes('team_id', ['string']);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('cursor', ['string']);
+        $optionsResolver->addAllowedTypes('limit', ['int']);
+        $optionsResolver->addAllowedTypes('team_id', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\AdminAppsRequestsListGetResponse200|\JoliCode\Slack\Api\Model\AdminAppsRequestsListGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\AdminAppsRequestsListGetResponse200', 'json');
         }

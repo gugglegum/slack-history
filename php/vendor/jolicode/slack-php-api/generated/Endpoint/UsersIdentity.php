@@ -22,8 +22,8 @@ class UsersIdentity extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impl
      *
      * @param array $queryParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `identity.basic`
-     * }
+     * @var string $token Authentication token. Requires scope: `identity.basic`
+     *             }
      */
     public function __construct(array $queryParameters = [])
     {
@@ -61,18 +61,18 @@ class UsersIdentity extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint impl
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\UsersIdentityGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return json_decode($body);
         }

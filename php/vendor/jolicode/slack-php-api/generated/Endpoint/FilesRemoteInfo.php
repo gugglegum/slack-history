@@ -22,10 +22,10 @@ class FilesRemoteInfo extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint im
      *
      * @param array $queryParameters {
      *
-     *     @var string $external_id creator defined GUID for the file
-     *     @var string $file specify a file by providing its ID
-     *     @var string $token Authentication token. Requires scope: `remote_files:read`
-     * }
+     * @var string $external_id creator defined GUID for the file
+     * @var string $file specify a file by providing its ID
+     * @var string $token Authentication token. Requires scope: `remote_files:read`
+     *             }
      */
     public function __construct(array $queryParameters = [])
     {
@@ -63,20 +63,20 @@ class FilesRemoteInfo extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint im
         $optionsResolver->setDefined(['external_id', 'file', 'token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('external_id', ['string']);
-        $optionsResolver->setAllowedTypes('file', ['string']);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('external_id', ['string']);
+        $optionsResolver->addAllowedTypes('file', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\FilesRemoteInfoGetResponse200|\JoliCode\Slack\Api\Model\FilesRemoteInfoGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\FilesRemoteInfoGetResponse200', 'json');
         }

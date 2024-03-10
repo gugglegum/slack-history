@@ -22,11 +22,11 @@ class TeamAccessLogs extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint imp
      *
      * @param array $queryParameters {
      *
-     *     @var string $before end of time range of logs to include in results (inclusive)
-     *     @var string $count
-     *     @var string $page
-     *     @var string $token Authentication token. Requires scope: `admin`
-     * }
+     * @var string $before end of time range of logs to include in results (inclusive)
+     * @var string $count
+     * @var string $page
+     * @var string $token Authentication token. Requires scope: `admin`
+     *             }
      */
     public function __construct(array $queryParameters = [])
     {
@@ -64,21 +64,21 @@ class TeamAccessLogs extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint imp
         $optionsResolver->setDefined(['before', 'count', 'page', 'token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('before', ['string']);
-        $optionsResolver->setAllowedTypes('count', ['string']);
-        $optionsResolver->setAllowedTypes('page', ['string']);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('before', ['string']);
+        $optionsResolver->addAllowedTypes('count', ['string']);
+        $optionsResolver->addAllowedTypes('page', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\TeamAccessLogsGetResponse200|\JoliCode\Slack\Api\Model\TeamAccessLogsGetResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\TeamAccessLogsGetResponse200', 'json');
         }

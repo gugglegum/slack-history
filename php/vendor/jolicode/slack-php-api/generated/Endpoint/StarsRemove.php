@@ -22,16 +22,16 @@ class StarsRemove extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implem
      *
      * @param array $formParameters {
      *
-     *     @var string $channel channel to remove star from, or channel where the message to remove star from was posted (used with `timestamp`)
-     *     @var string $file file to remove star from
-     *     @var string $file_comment file comment to remove star from
-     *     @var string $timestamp Timestamp of the message to remove star from.
-     * }
+     * @var string $channel channel to remove star from, or channel where the message to remove star from was posted (used with `timestamp`)
+     * @var string $file file to remove star from
+     * @var string $file_comment file comment to remove star from
+     * @var string $timestamp Timestamp of the message to remove star from.
+     *             }
      *
      * @param array $headerParameters {
      *
-     *     @var string $token Authentication token. Requires scope: `stars:write`
-     * }
+     * @var string $token Authentication token. Requires scope: `stars:write`
+     *             }
      */
     public function __construct(array $formParameters = [], array $headerParameters = [])
     {
@@ -70,10 +70,10 @@ class StarsRemove extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implem
         $optionsResolver->setDefined(['channel', 'file', 'file_comment', 'timestamp']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('channel', ['string']);
-        $optionsResolver->setAllowedTypes('file', ['string']);
-        $optionsResolver->setAllowedTypes('file_comment', ['string']);
-        $optionsResolver->setAllowedTypes('timestamp', ['string']);
+        $optionsResolver->addAllowedTypes('channel', ['string']);
+        $optionsResolver->addAllowedTypes('file', ['string']);
+        $optionsResolver->addAllowedTypes('file_comment', ['string']);
+        $optionsResolver->addAllowedTypes('timestamp', ['string']);
 
         return $optionsResolver;
     }
@@ -84,18 +84,18 @@ class StarsRemove extends \JoliCode\Slack\Api\Runtime\Client\BaseEndpoint implem
         $optionsResolver->setDefined(['token']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('token', ['string']);
+        $optionsResolver->addAllowedTypes('token', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \JoliCode\Slack\Api\Model\StarsRemovePostResponse200|\JoliCode\Slack\Api\Model\StarsRemovePostResponsedefault|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return $serializer->deserialize($body, 'JoliCode\\Slack\\Api\\Model\\StarsRemovePostResponse200', 'json');
         }
