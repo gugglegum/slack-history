@@ -1,0 +1,26 @@
+{
+    "name": "luracast/config",
+    "description": "lazy load configuration data from php files returning associative arrays",
+    "minimum-stability": "stable",
+    "license": "LGPL-2.0-only",
+    "authors": [
+        {
+            "name": "Luracast",
+            "email": "arul@luracast.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Luracast\\Config\\": "src/Luracast"
+        }
+    },
+    "config": {
+        "bin-dir": "./"
+    }
+}

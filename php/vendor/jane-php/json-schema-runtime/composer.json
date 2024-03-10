@@ -1,0 +1,49 @@
+{
+    "name": "jane-php/json-schema-runtime",
+    "type": "library",
+    "description": "Jane runtime Library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joel Wurtz",
+            "email": "jwurtz@jolicode.com"
+        },
+        {
+            "name": "Baptiste Leduc",
+            "email": "baptiste.leduc@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Jane\\Component\\JsonSchemaRuntime\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "require": {
+        "php": "^8.0",
+        "ext-json": "*",
+        "league/uri": "^6.7.2 || ^7.4",
+        "php-jsonpointer/php-jsonpointer": "^3.0 || ^4.0",
+        "symfony/serializer": "^5.4 || ^6.4 || ^7.0",
+        "symfony/yaml": "^5.4 || ^6.4 || ^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    },
+    "conflict": {
+        "symfony/framework-bundle": "5.1.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-next": "7-dev"
+        }
+    },
+    "config": {
+        "process-timeout": 1800,
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
