@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Console\Actions;
+namespace App\Console\Commands;
 
 use App\Helpers\ConfigHelper;
 use App\Helpers\SqliteDbHelper;
@@ -18,7 +18,7 @@ use JoliCode\Slack\Api\Model\ObjsUser;
 use JoliCode\Slack\Api\Model\ObjsUserProfile;
 use Throwable;
 
-class FetchHistoryAction extends AbstractAction
+class FetchHistoryCommand extends AbstractCommand
 {
     const SLACK_DELAY = 250;
     private SqliteDbHelper $sqliteDbHelper;
@@ -64,13 +64,14 @@ class FetchHistoryAction extends AbstractAction
     /**
      * @throws Throwable
      */
-    public function __invoke(): void
+    public function __invoke(): ?int
     {
         echo "Start fetching message history\n\n";
         $this->fetchUsers();
         $this->fetchConversations();
         echo "\nTotal {$this->totalMessagesAdded} new messages of {$this->totalMessagesFetched} messages fetched\n";
         echo "Well done!\n";
+        return 0;
     }
 
     /**

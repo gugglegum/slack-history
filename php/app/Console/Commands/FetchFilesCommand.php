@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Console\Actions;
+namespace App\Console\Commands;
 
 use App\Helpers\SqliteDbHelper;
 use App\ResourceManager;
@@ -10,7 +10,7 @@ use Exception;
 use gugglegum\RetryHelper\RetryHelper;
 use Throwable;
 
-class FetchFilesAction extends AbstractAction
+class FetchFilesCommand extends AbstractCommand
 {
     const DOWNLOAD_DELAY = 100; // Delay (ms) after each downloaded file
 
@@ -58,7 +58,7 @@ class FetchFilesAction extends AbstractAction
     /**
      * @throws Throwable
      */
-    public function __invoke(): void
+    public function __invoke(): ?int
     {
         echo "Start downloading files\n\n";
 
@@ -131,6 +131,7 @@ class FetchFilesAction extends AbstractAction
         echo "    Downloaded: {$this->summary['downloaded']}\n";
         echo "    Already exists: {$this->summary['exists']}\n";
         echo "    Total files: {$this->summary['total']}\n";
+        return 0;
     }
 
     private function getLocalFile(array $file, string $filesDir, string $suffix = ''): string

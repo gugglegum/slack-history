@@ -1,12 +1,11 @@
 <?php
 
-declare(strict_types = 1);
-
-namespace App\Console\Actions;
+declare(strict_types=1);
+namespace App\Console\Commands;
 
 use App\ResourceManager;
 
-abstract class AbstractAction
+abstract class AbstractCommand
 {
     protected ResourceManager $resourceManager;
 
@@ -15,5 +14,5 @@ abstract class AbstractAction
         $this->resourceManager = $resourceManager;
     }
 
-    abstract public function __invoke();
+    abstract public function __invoke(): ?int;
 }

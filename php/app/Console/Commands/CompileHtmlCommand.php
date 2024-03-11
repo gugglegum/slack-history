@@ -2,12 +2,12 @@
 
 declare(strict_types = 1);
 
-namespace App\Console\Actions;
+namespace App\Console\Commands;
 
 use App\Iterators\MessageIterator;
 use App\ResourceManager;
 
-class CompileHtmlAction extends AbstractAction
+class CompileHtmlCommand extends AbstractCommand
 {
     private \Aura\Sql\ExtendedPdo $pdo;
     private \Aura\SqlQuery\QueryFactory $queryFactory;
@@ -34,10 +34,10 @@ class CompileHtmlAction extends AbstractAction
     }
 
     /**
-     * @return void
+     * @return int|null
      * @throws \Exception
      */
-    public function __invoke()
+    public function __invoke(): ?int
     {
         echo "Start compiling HTML files\n\n";
 
@@ -81,6 +81,7 @@ class CompileHtmlAction extends AbstractAction
         }
 
         echo "Well done!\n";
+        return 0;
     }
 
     /**
